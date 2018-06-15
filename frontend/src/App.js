@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Table from '/components/table.jsx'
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <p className="App-intro">
           New boilerplate? I think so.
         </p>
+        <Table />
       </div>
     );
   }
