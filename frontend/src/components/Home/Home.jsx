@@ -3,7 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
 import TestContent from './TestContent/TestContent'
 import './Home.css'
-import { Nav, NavItem, NavLink, Button, Navbar } from 'reactstrap';
+import { Nav, NavItem, NavLink, Button, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
 
 export default class Home extends Component {
 	constructor(props) {
