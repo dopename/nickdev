@@ -44,7 +44,7 @@ class TopNav extends Component {
 			<ul className="list-inline text-center">
 				<li className="list-inline-item mx-2"><Link to="/home">Home</Link></li>
 				<li className="list-inline-item mx-2">/</li>
-				{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2"><Link to={'/login/'}>Login</Link></li> }
+				{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2">Login</li> }
 			</ul>
 		)
 	}
