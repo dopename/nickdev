@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import LoginPage from './LoginPage/LoginPage'
 import './Home.css'
 
 export default class Home extends Component {
