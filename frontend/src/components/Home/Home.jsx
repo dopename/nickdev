@@ -40,7 +40,7 @@ export default class Home extends Component {
 		.then(json => {
 		  console.log(json);
 		  localStorage.setItem('token', json.token);
-		  this.setState({loginPage:true});
+		  this.setState({loginPage:false});
 		})
 	}
 
@@ -51,7 +51,7 @@ export default class Home extends Component {
 	render() {
 		return(
 			<div className="container-fluid">
-				<TopNav handleLogout={this.handleLogout} toggleLoginPage={this.toggleLoginPage} />
+				<TopNav handleLogout={this.handleLogout} logged_in={this.state.logged_in} toggleLoginPage={this.toggleLoginPage} />
 				<Content loginPage={this.state.loginPage} handleLogin={this.handleLogin} />
 			</div>
 		)
