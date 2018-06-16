@@ -15,5 +15,8 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 
-class UserAPIView(APIView):
+class UserAPIView(generics.ListAPIView):
 	serializer = UserSerializer
+
+	def get_queryset(self):
+		return CustomUser.objects.all()
