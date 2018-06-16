@@ -61,10 +61,6 @@ export default class Home extends Component {
 class TopNav extends Component {
 	constructor(props){
 		super(props)
-
-		this.state = {
-			logged_in:this.props.logged_in,
-		}
 	}
 
 	render() {
@@ -74,7 +70,7 @@ class TopNav extends Component {
 					<ul className="list-inline text-center">
 						<li className="list-inline-item mx-2">Home</li>
 						<li className="list-inline-item mx-2">/</li>
-						{this.state.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2" onClick={() => this.props.toggleLoginPage()}>Login</li> }
+						{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2" onClick={() => this.props.toggleLoginPage()}>Login</li> }
 					</ul>
 				</div>
 			</div>
