@@ -1,6 +1,7 @@
 from rest_framework import generics, mixins, status, permissions
 from django.contrib.auth.models import User
 from main.models import CustomUser
+from .serializers  import *
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from rest_framework.response import Response
@@ -14,4 +15,5 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 
-UserListView()
+class UserAPIView(APIView):
+	serializer = UserSerializer
