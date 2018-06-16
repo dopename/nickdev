@@ -3,6 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
 import TestContent from './TestContent/TestContent'
 import './Home.css'
+import { Nav, NavItem, NavLink } from 'reactstrap';
 
 export default class Home extends Component {
 	constructor(props) {
@@ -55,6 +56,17 @@ export default class Home extends Component {
 				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
 					<div className="col-lg-2">
+						<Nav veritcal>
+							<NavItem>
+								<NavLink href="#">Home</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="#">Test</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="#">Uh idk</NavLink>
+							</NavItem>
+						</Nav>
 					</div>
 					<div className="col-lg-8">
 						{this.state.activePage === 'home' ? <HomeContent /> : null}
