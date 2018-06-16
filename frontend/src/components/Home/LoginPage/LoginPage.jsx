@@ -66,4 +66,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginForm;
+export default LoginPage;
