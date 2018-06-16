@@ -55,16 +55,16 @@ export default class Home extends Component {
 			<div className="container-fluid">
 				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
-					<div className="col-lg-2 text-left">
+					<div className="col-lg-2">
 						<Nav vertical>
 							<NavItem>
-								<Button outline className="btn-block" color="info" size="lg">Home</Button>
+								<Button outline className="btn-block text-left" color="info" size="lg">Home</Button>
 							</NavItem>
 							<NavItem>
-								<Button outline className="btn-block" color="info" size="lg">Test</Button>
+								<Button outline className="btn-block text-left" color="info" size="lg">Test</Button>
 							</NavItem>
 							<NavItem>
-								<Button outline className="btn-block" color="info" size="lg">Uhh Test</Button>
+								<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
 							</NavItem>
 						</Nav>
 					</div>
