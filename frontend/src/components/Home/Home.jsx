@@ -59,8 +59,17 @@ export default class Home extends Component {
 		return(
 			<div className="container-fluid">
 				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} toggleLoginPage={this.toggleLoginPage} />
-				{this.state.activePage === 'home' ? <HomeContent loginPage={this.state.loginPage} handleLogin={this.handleLogin} /> : null}
-				{this.state.activePage === 'test' ? <TestContent /> : null}
+				<div className="row my-3">
+					<div className="col-lg-2">
+					</div>
+					<div className="col-lg-8">
+						{this.state.activePage === 'home' ? <HomeContent loginPage={this.state.loginPage} handleLogin={this.handleLogin} /> : null}
+						{this.state.activePage === 'test' ? <TestContent /> : null}
+						{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+					</div>
+					<div className="col-lg-2">
+					</div>
+				</div>
 			</div>
 		)
 	}
@@ -80,7 +89,7 @@ class TopNav extends Component {
 						<li className="list-inline-item mx-2">/</li>
 						<li className="list-inline-item mx-2" onClick={() => this.props.changePage('test')}>Test</li>
 						<li className="list-inline-item mx-2">/</li>
-						{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2" onClick={() => this.props.toggleLoginPage()}>Login</li> }
+						{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2" onClick={() => this.props.changePage('login')}>Login</li> }
 					</ul>
 				</div>
 			</div>
@@ -101,20 +110,8 @@ class HomeContent extends Component {
 					</div>
 			)
 
-		if (this.props.loginPage) {
-			contentBody = <LoginPage handleLogin={this.props.handleLogin} />
-		}
-
 		return (
-			<div className="row my-3">
-				<div className="col-lg-2">
-				</div>
-				<div className="col-lg-8">
-					{contentBody}
-				</div>
-				<div className="col-lg-2">
-				</div>
-			</div>
+			{contentBody}
 		)
 	}
 }
