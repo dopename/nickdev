@@ -25,10 +25,8 @@ export default class Home extends Component {
 	render() {
 		return(
 			<div className="container-fluid">
-				<div className="row">
 					<TopNav />
 					<Content />
-				</div>
 			</div>
 		)
 	}
@@ -41,11 +39,15 @@ class TopNav extends Component {
 
 	render() {
 		return (
-			<ul className="list-inline text-center">
-				<li className="list-inline-item mx-2">Home</li>
-				<li className="list-inline-item mx-2">/</li>
-				{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2">Login</li> }
-			</ul>
+			<div className="row">
+				<div className="col-12 text-center">
+					<ul className="list-inline text-center">
+						<li className="list-inline-item mx-2">Home</li>
+						<li className="list-inline-item mx-2">/</li>
+						{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2">Login</li> }
+					</ul>
+				</div>
+			</div>
 		)
 	}
 }
