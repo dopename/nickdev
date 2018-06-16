@@ -56,7 +56,7 @@ export default class Home extends Component {
 				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
 					<div className="col-lg-2">
-						<Nav veritcal>
+						<Nav vertical>
 							<NavItem>
 								<NavLink href="#">Home</NavLink>
 							</NavItem>
