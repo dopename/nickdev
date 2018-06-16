@@ -7,5 +7,5 @@ class UserSerializer(serializers.ModelSerializer):
 		model = CustomUser
 		fields = [
 			'pk',
-			'username'
+			'user.username'
 		]
