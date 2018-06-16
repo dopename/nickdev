@@ -155,9 +155,9 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# JWT_AUTH = {
-#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'sc.utils.my_jwt_response_handler',
-#     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-#     'JWT_ALLOW_REFRESH':True,
-#     #'JWT_AUTH_COOKIE': 'user'
-# }
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'nickdev.utils.my_jwt_response_handler',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_ALLOW_REFRESH':True,
+    #'JWT_AUTH_COOKIE': 'user'
+}
