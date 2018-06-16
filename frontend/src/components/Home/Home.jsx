@@ -29,7 +29,7 @@ export default class Home extends Component {
 
 	handleLogin(e, data) {
 		e.preventDefault();
-		fetch('https://www.nickstestdev.com/token-auth/', {
+		fetch('https://www.nicksdevenv.com/token-auth/', {
 		  method:'POST',
 		  headers: {
 			'Content-Type': 'application/json'
