@@ -3,7 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
 import TestContent from './TestContent/TestContent'
 import './Home.css'
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Button } from 'reactstrap';
 
 export default class Home extends Component {
 	constructor(props) {
@@ -55,16 +55,16 @@ export default class Home extends Component {
 			<div className="container-fluid">
 				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
-					<div className="col-lg-2">
+					<div className="col-lg-2 text-left">
 						<Nav vertical>
 							<NavItem>
-								<NavLink href="#">Home</NavLink>
+								<Button outline color="info" size="lg">Home</Button>
 							</NavItem>
 							<NavItem>
-								<NavLink href="#">Test</NavLink>
+								<Button outline color="info" size="lg">Test</Button>
 							</NavItem>
 							<NavItem>
-								<NavLink href="#">Uh idk</NavLink>
+								<Button outline color="info" size="lg">Uhh Test</Button>
 							</NavItem>
 						</Nav>
 					</div>
