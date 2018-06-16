@@ -13,11 +13,13 @@ export default class Home extends Component {
 			logged_in:localStorage.getItem('token') ? true : false,
 			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
 			activePage:'home',
+			collapsed:false,
 		}
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.changePage = this.changePage.bind(this);
+		this.toggleNavbar = this.toggleNavbar.bind(this);
 	}
 
 	componentDidMount() {
@@ -48,6 +50,10 @@ export default class Home extends Component {
 
 	changePage(page) {
 		this.setState({activePage:page});
+	}
+
+	toggleNavbar() {
+		this.setState({collapsed:!this.state.collapsed});
 	}
 
 	render() {
@@ -91,7 +97,7 @@ class TopNav extends Component {
 			<div>
 				<Navbar color="info" expand="lg">
 					<NavbarBrand href="/">NDE</NavbarBrand>
-					<NavbarToggler />
+					<NavbarToggler onClick={() => this.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.state.collapsed} navbar>
 						<Nav navbar>
 							<NavItem>
