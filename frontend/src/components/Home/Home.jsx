@@ -25,7 +25,7 @@ export default class Home extends Component {
 
 	handleLogout(e) {
 		localStorage.removeItem('token');
-		this.setState({logged_in:false});
+		this.setState({activePage:'home',logged_in:false});
 	}
 
 	handleLogin(e, data) {
