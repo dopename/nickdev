@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
-import TestConent from './TestConent/TestConent'
+import TestConent from './TestContent/TestContent'
 import './Home.css'
 
 export default class Home extends Component {
