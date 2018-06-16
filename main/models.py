@@ -4,6 +4,6 @@ import os
 
 from rest_framework.reverse import reverse as api_reverse
 
-class CUstomUser(models.Model):
+class CustomUser(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 # Create your models here.
