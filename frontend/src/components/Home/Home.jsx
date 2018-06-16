@@ -40,7 +40,7 @@ export default class Home extends Component {
 		.then(json => {
 		  console.log(json);
 		  localStorage.setItem('token', json.token);
-		  this.setState({loginPage:false});
+		  this.setState({loginPage:false, logged_in:true});
 		})
 	}
 
