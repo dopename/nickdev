@@ -16,7 +16,6 @@ export default class Home extends Component {
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
-		this.toggleLoginPage = this.toggleLoginPage.bind(this);
 		this.changePage = this.changePage.bind(this);
 	}
 
