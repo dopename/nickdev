@@ -11,7 +11,6 @@ export default class Home extends Component {
 		this.state = {
 			logged_in:localStorage.getItem('token') ? true : false,
 			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
-			loginPage:false,
 			activePage:'home',
 		}
 
@@ -43,12 +42,8 @@ export default class Home extends Component {
 		.then(json => {
 		  console.log(json);
 		  localStorage.setItem('token', json.token);
-		  this.setState({loginPage:false, logged_in:true});
+		  this.setState({activePage:'home', logged_in:true});
 		})
-	}
-
-	toggleLoginPage() {
-		this.setState({loginPage:!this.state.loginPage});
 	}
 
 	changePage(page) {
@@ -58,12 +53,12 @@ export default class Home extends Component {
 	render() {
 		return(
 			<div className="container-fluid">
-				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} toggleLoginPage={this.toggleLoginPage} />
+				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
 					<div className="col-lg-2">
 					</div>
 					<div className="col-lg-8">
-						{this.state.activePage === 'home' ? <HomeContent loginPage={this.state.loginPage} handleLogin={this.handleLogin} /> : null}
+						{this.state.activePage === 'home' ? <HomeContent /> : null}
 						{this.state.activePage === 'test' ? <TestContent /> : null}
 						{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
 					</div>
