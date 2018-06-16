@@ -111,7 +111,9 @@ class HomeContent extends Component {
 			)
 
 		return (
-			{contentBody}
+			<div>
+				{contentBody}
+			</div>
 		)
 	}
 }
