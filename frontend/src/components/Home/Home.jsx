@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
+import TestConent from './TestConent/TestConent'
 import './Home.css'
 
 export default class Home extends Component {
@@ -11,11 +12,13 @@ export default class Home extends Component {
 			logged_in:localStorage.getItem('token') ? true : false,
 			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
 			loginPage:false,
+			activePage:'home',
 		}
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.toggleLoginPage = this.toggleLoginPage.bind(this);
+		this.changePage = this.changePage.bind(this);
 	}
 
 	componentDidMount() {
@@ -48,11 +51,16 @@ export default class Home extends Component {
 		this.setState({loginPage:!this.state.loginPage});
 	}
 
+	changePage(page) {
+		this.setState({activePage:page});
+	}
+
 	render() {
 		return(
 			<div className="container-fluid">
-				<TopNav handleLogout={this.handleLogout} logged_in={this.state.logged_in} toggleLoginPage={this.toggleLoginPage} />
-				<Content loginPage={this.state.loginPage} handleLogin={this.handleLogin} />
+				<TopNav changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} toggleLoginPage={this.toggleLoginPage} />
+				{this.state.activePage === 'home' ? <HomeContent loginPage={this.state.loginPage} handleLogin={this.handleLogin} /> : null}
+				{this.state.activePage === 'test' ? <TestContent /> : null}
 			</div>
 		)
 	}
@@ -68,7 +76,9 @@ class TopNav extends Component {
 			<div className="row">
 				<div className="col-12 text-center">
 					<ul className="list-inline text-center">
-						<li className="list-inline-item mx-2">Home</li>
+						<li className="list-inline-item mx-2" onClick={() => this.props.changePage('home')}>Home</li>
+						<li className="list-inline-item mx-2">/</li>
+						<li className="list-inline-item mx-2" onClick={() => this.props.changePage('test')}>Test</li>
 						<li className="list-inline-item mx-2">/</li>
 						{this.props.logged_in ? <li className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</li> : <li className="list-inline-item mx-2" onClick={() => this.props.toggleLoginPage()}>Login</li> }
 					</ul>
@@ -78,7 +88,7 @@ class TopNav extends Component {
 	}
 }
 
-class Content extends Component {
+class HomeContent extends Component {
 	constructor(props) {
 		super(props)
 	}
