@@ -21,6 +21,7 @@ export default class Home extends Component {
 		this.handleLogin = this.handleLogin.bind(this);
 		this.changePage = this.changePage.bind(this);
 		this.toggleNavbar = this.toggleNavbar.bind(this);
+		this.toggleSideNav = this.toggleSideNav.bind(this);
 	}
 
 	componentDidMount() {
