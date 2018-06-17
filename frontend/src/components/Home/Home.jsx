@@ -104,7 +104,7 @@ class TopNav extends Component {
 			           <span class="icon-bar"></span>
 			           <span class="icon-bar"></span>
 			           <span class="icon-bar"></span>
-					<NavbarToggler>
+					</NavbarToggler>
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
