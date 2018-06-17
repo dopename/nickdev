@@ -88,15 +88,13 @@ export default class Home extends Component {
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
 					<div className="row my-1">
-						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
+						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 small-sidebar"}>
 							{!this.state.mobile ? sideNav : null}
 						</div>
-						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-10"}>
+						<div className={this.state.sideNav ? "col-lg-10" : "col-lg-11 content-small-sidebar"}>
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
 							{this.state.activePage === 'test' ? <TestContent /> : null}
 							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
-						</div>
-						<div className={this.state.sideNav ? "col-lg-2" : "col-lg-1"}>
 						</div>
 					</div>
 				</div>

@@ -17,3 +17,11 @@
 .pointer-hand {
 	cursor:pointer;
 }
+
+.small-sidebar {
+	max-width:4.333333%!important;
+}
+
+.content-small-sidebar {
+	max-width:95.666666%!important;
+}
