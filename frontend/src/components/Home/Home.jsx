@@ -72,13 +72,13 @@ export default class Home extends Component {
 						<h3>{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h3>
 						<hr/>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p>Home <i className='fa fa-home'></i></p> : <i className='fa fa-home'></i>}</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home'></i>}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? "Test" : "T"}</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Test <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt'></i>}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" color="info" size="lg">{this.state.sideNav ? "About" : "A"}</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward'></i>}</Button>
 						</NavItem>
 					</Nav>
 			)
