@@ -65,6 +65,10 @@ export default class Home extends Component {
 						<div className="col-lg-2 px-0">
 							<Nav vertical>
 								<NavItem>
+									<Button outline className="btn-block text-center" onClick={() => this.props.changePage('home')} color="info" size="lg">Toggle Sidebar</Button>
+								</NavItem>
+								<hr />
+								<NavItem>
 									<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">Home</Button>
 								</NavItem>
 								<NavItem>
@@ -75,12 +79,12 @@ export default class Home extends Component {
 								</NavItem>
 							</Nav>
 						</div>
-						<div className="col-lg-10 contentBody">
-							<div className="col-lg-12">
-								{this.state.activePage === 'home' ? <HomeContent /> : null}
-								{this.state.activePage === 'test' ? <TestContent /> : null}
-								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
-							</div>
+						<div className="col-lg-8">
+							{this.state.activePage === 'home' ? <HomeContent /> : null}
+							{this.state.activePage === 'test' ? <TestContent /> : null}
+							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+						</div>
+						<div className="col-lg-2">
 						</div>
 					</div>
 				</div>
