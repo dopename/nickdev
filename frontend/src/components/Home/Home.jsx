@@ -69,7 +69,7 @@ export default class Home extends Component {
 						<NavItem className="text-center">
 							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color={this.state.sideNav ? "danger" : "success"}><i class={this.state.sideNav ? "fa fa-arrow-left" : "fa fa-arrow-right"}></i></Button>
 						</NavItem>
-						<hr/>
+						<hr></hr>
 						<NavItem>
 							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? "Home" : "H"}</Button>
 						</NavItem>
@@ -86,7 +86,7 @@ export default class Home extends Component {
 			<div>
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
-					<div className="row">
+					<div className="row my-1">
 						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
 							{!this.state.mobile ? sideNav : null}
 						</div>
@@ -119,13 +119,13 @@ class TopNav extends Component {
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<h3 className="mx-2 white-text" onClick={() => this.props.changePage('home')}>Home</h3>
+								<h3 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('home')}>Home</h3>
 							</NavItem>
 							<NavItem>
-								<h3 className="mx-2 white-text" onClick={() => this.props.changePage('test')}>Test</h3>
+								<h3 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('test')}>Test</h3>
 							</NavItem>
 							<NavItem>
-								{this.props.logged_in ? <h3 className="list-inline-item mx-2 white-text" onClick={e => this.props.handleLogout(e)}>Logout</h3> : <h3 className="list-inline-item mx-2 white-text" onClick={() => this.props.changePage('login')}>Login</h3> }
+								{this.props.logged_in ? <h3 className="list-inline-item mx-2 white-text pointer-hand" onClick={e => this.props.handleLogout(e)}>Logout</h3> : <h3 className="list-inline-item mx-2 white-text" onClick={() => this.props.changePage('login')}>Login</h3> }
 							</NavItem>
 						</Nav>
 					</Collapse>

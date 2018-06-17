@@ -13,3 +13,7 @@
 .hidden-left-sidebar {
 	max-width:120px;
 }
+
+.pointer-hand {
+	cursor:pointer;
+}
