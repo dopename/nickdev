@@ -65,17 +65,17 @@ export default class Home extends Component {
 		let sideNav = (
 					<Nav vertical>
 						<NavItem className="text-center">
-							<Button outline className="text-center" onClick={() => this.props.changePage('home')} color="info" size="lg">Toggle Sidebar</Button>
+							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color="primary">Toggle</Button>
 						</NavItem>
 						<hr />
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">Home</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">{this.props.sideNav ? "Home" : "H"}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">Test</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">{this.props.sideNav ? "Test" : "T"}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
+							<Button outline className="btn-block text-left" color="info" size="lg">{this.props.sideNav ? "About" : "A"}</Button>
 						</NavItem>
 					</Nav>
 			)
@@ -85,10 +85,10 @@ export default class Home extends Component {
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-lg-2 px-0">
+						<div className={this.props.sideNav ? "col-lg-2 px-0" : "col-lg-1"}>
 							{sideNav}
 						</div>
-						<div className="col-lg-8">
+						<div className={this.props.sideNav ? "col-lg-8" : "col-lg-9"}>
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
 							{this.state.activePage === 'test' ? <TestContent /> : null}
 							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
