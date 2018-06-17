@@ -62,7 +62,7 @@ export default class Home extends Component {
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
 					<div className="row my-3">
-						<div className="col-lg-2">
+						<div className="col-lg-2 px-0">
 							<Nav vertical>
 								<NavItem>
 									<Button outline className="btn-block text-left" color="info" size="lg">Home</Button>
