@@ -67,9 +67,9 @@ export default class Home extends Component {
 		let sideNav = (
 					<Nav vertical>
 						<NavItem className="text-center">
-							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color={this.state.sideNav ? "success" : "danger"}><i class={this.state.sideNav ? "fa fa-arrow-left" : "fa fa-arrow-right"}></i></Button>
+							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color={this.state.sideNav ? "danger" : "success"}><i class={this.state.sideNav ? "fa fa-arrow-left" : "fa fa-arrow-right"}></i></Button>
 						</NavItem>
-						<hr />
+						<hr/>
 						<NavItem>
 							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? "Home" : "H"}</Button>
 						</NavItem>
