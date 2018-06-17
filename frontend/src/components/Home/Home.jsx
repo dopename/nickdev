@@ -90,12 +90,10 @@ export default class Home extends Component {
 						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
 							{!this.state.mobile ? sideNav : null}
 						</div>
-						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-9"}>
+						<div className={this.state.sideNav ? "col-lg-10" : "col-lg-11"}>
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
 							{this.state.activePage === 'test' ? <TestContent /> : null}
 							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
-						</div>
-						<div className="col-lg-2">
 						</div>
 					</div>
 				</div>
