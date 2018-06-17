@@ -15,6 +15,7 @@ export default class Home extends Component {
 			activePage:'home',
 			collapsed:true,
 			sideNav:true,
+			mobile:window.screen.width > 540 ? false : true,
 		}
 
 		this.handleLogout = this.handleLogout.bind(this);
@@ -86,8 +87,8 @@ export default class Home extends Component {
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
 					<div className="row">
-						<div className={this.state.sideNav ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
-							{sideNav}
+						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
+							{!this.state.mobile ? {sideNav} : null}
 						</div>
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-9"}>
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
