@@ -2,6 +2,14 @@
 	color:black;
 }
 
-.mr-neg-75 {
-	margin-right:-70px;
+.white-text {
+	color:white;
+}
+
+.left-sidebar {
+
+}
+
+.hidden-left-sidebar {
+	max-width:120px;
 }
