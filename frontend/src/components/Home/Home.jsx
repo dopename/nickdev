@@ -75,12 +75,12 @@ export default class Home extends Component {
 								</NavItem>
 							</Nav>
 						</div>
-						<div className="col-lg-8">
-							{this.state.activePage === 'home' ? <HomeContent /> : null}
-							{this.state.activePage === 'test' ? <TestContent /> : null}
-							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
-						</div>
-						<div className="col-lg-2">
+						<div className="col-lg-10 contentBody">
+							<div className="col-lg-12">
+								{this.state.activePage === 'home' ? <HomeContent /> : null}
+								{this.state.activePage === 'test' ? <TestContent /> : null}
+								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -100,11 +100,7 @@ class TopNav extends Component {
 			<div>
 				<Navbar color="secondary" expand="lg">
 					<NavbarBrand className="black-text" href="/"><h3>NDE</h3></NavbarBrand>
-					<NavbarToggler className="black-text" onClick={() => this.props.toggleNavbar()} className="mr-2">
-			           <span class="icon-bar"></span>
-			           <span class="icon-bar"></span>
-			           <span class="icon-bar"></span>
-					</NavbarToggler>
+					<NavbarToggler className="black-text" onClick={() => this.props.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
