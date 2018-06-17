@@ -69,8 +69,7 @@ export default class Home extends Component {
 						<NavItem className="text-center">
 							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color={this.state.sideNav ? "danger" : "success"}><i class={this.state.sideNav ? "fa fa-arrow-left" : "fa fa-arrow-right"}></i></Button>
 						</NavItem>
-						<h3>{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h3>
-						<hr/>
+						<h3 className="mb-1">{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h3>
 						<NavItem>
 							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home'></i>}</Button>
 						</NavItem>
