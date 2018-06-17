@@ -58,31 +58,34 @@ export default class Home extends Component {
 
 	render() {
 		return(
-			<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
-			<div className="container-fluid">
-				<div className="row my-3">
-					<div className="col-lg-2">
-						<Nav vertical>
-							<NavItem>
-								<Button outline className="btn-block text-left" color="info" size="lg">Home</Button>
-							</NavItem>
-							<NavItem>
-								<Button outline className="btn-block text-left" color="info" size="lg">Test</Button>
-							</NavItem>
-							<NavItem>
-								<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
-							</NavItem>
-						</Nav>
-					</div>
-					<div className="col-lg-8">
-						{this.state.activePage === 'home' ? <HomeContent /> : null}
-						{this.state.activePage === 'test' ? <TestContent /> : null}
-						{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
-					</div>
-					<div className="col-lg-2">
+			<div>
+				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
+				<div className="container-fluid">
+					<div className="row my-3">
+						<div className="col-lg-2">
+							<Nav vertical>
+								<NavItem>
+									<Button outline className="btn-block text-left" color="info" size="lg">Home</Button>
+								</NavItem>
+								<NavItem>
+									<Button outline className="btn-block text-left" color="info" size="lg">Test</Button>
+								</NavItem>
+								<NavItem>
+									<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
+								</NavItem>
+							</Nav>
+						</div>
+						<div className="col-lg-8">
+							{this.state.activePage === 'home' ? <HomeContent /> : null}
+							{this.state.activePage === 'test' ? <TestContent /> : null}
+							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+						</div>
+						<div className="col-lg-2">
+						</div>
 					</div>
 				</div>
 			</div>
+
 		)
 	}
 }
