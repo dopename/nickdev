@@ -69,13 +69,13 @@ export default class Home extends Component {
 						</NavItem>
 						<hr />
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">{this.props.sideNav ? "Home" : "H"}</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? "Home" : "H"}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">{this.props.sideNav ? "Test" : "T"}</Button>
+							<Button outline className="btn-block text-left" onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? "Test" : "T"}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" color="info" size="lg">{this.props.sideNav ? "About" : "A"}</Button>
+							<Button outline className="btn-block text-left" color="info" size="lg">{this.state.sideNav ? "About" : "A"}</Button>
 						</NavItem>
 					</Nav>
 			)
