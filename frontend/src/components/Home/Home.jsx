@@ -99,7 +99,7 @@ class TopNav extends Component {
 		return (
 			<div>
 				<Navbar color="secondary" expand="lg">
-					<NavbarBrand href="/"><h3>NDE</h3></NavbarBrand>
+					<NavbarBrand className="black-text" href="/"><h3>NDE</h3></NavbarBrand>
 					<NavbarToggler onClick={() => this.props.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
