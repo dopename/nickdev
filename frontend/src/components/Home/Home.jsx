@@ -13,7 +13,7 @@ export default class Home extends Component {
 			logged_in:localStorage.getItem('token') ? true : false,
 			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
 			activePage:'home',
-			collapsed:false,
+			collapsed:true,
 		}
 
 		this.handleLogout = this.handleLogout.bind(this);
@@ -100,7 +100,7 @@ class TopNav extends Component {
 			<div>
 				<Navbar color="secondary" expand="lg">
 					<NavbarBrand className="black-text" href="/"><h3>NDE</h3></NavbarBrand>
-					<NavbarToggler onClick={() => this.props.toggleNavbar()} className="mr-2" />
+					<NavbarToggler className="black-text" onClick={() => this.props.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
