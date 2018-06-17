@@ -88,7 +88,7 @@ export default class Home extends Component {
 				<div className="container-fluid">
 					<div className="row">
 						<div className={this.state.sideNav && !this.state.mobile ? "col-lg-2 px-0" : "col-lg-1 px-0 mr-neg-75"}>
-							{!this.state.mobile ? {sideNav} : null}
+							{!this.state.mobile ? sideNav : null}
 						</div>
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-9"}>
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
