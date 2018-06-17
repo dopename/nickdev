@@ -104,10 +104,10 @@ class TopNav extends Component {
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<h3 onClick={() => this.props.changePage('home')}>Home</h3>
+								<h3 className="mx-2" onClick={() => this.props.changePage('home')}>Home</h3>
 							</NavItem>
 							<NavItem>
-								<h3 onClick={() => this.props.changePage('test')}>Test</h3>
+								<h3 className="mx-2" onClick={() => this.props.changePage('test')}>Test</h3>
 							</NavItem>
 							<NavItem>
 								{this.props.logged_in ? <h3 className="list-inline-item mx-2" onClick={e => this.props.handleLogout(e)}>Logout</h3> : <h3 className="list-inline-item mx-2" onClick={() => this.props.changePage('login')}>Login</h3> }
