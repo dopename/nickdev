@@ -67,7 +67,7 @@ export default class Home extends Component {
 		let sideNav = (
 					<Nav vertical>
 						<NavItem className="text-center">
-							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color="primary">Toggle</Button>
+							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color="primary"><i class="fa fa-arrows-h"></i></Button>
 						</NavItem>
 						<hr />
 						<NavItem>
