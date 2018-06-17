@@ -58,8 +58,8 @@ export default class Home extends Component {
 
 	render() {
 		return(
+			<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 			<div className="container-fluid">
-				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="row my-3">
 					<div className="col-lg-2">
 						<Nav vertical>
@@ -99,7 +99,7 @@ class TopNav extends Component {
 					<NavbarBrand href="/">NDE</NavbarBrand>
 					<NavbarToggler onClick={() => this.props.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.props.collapsed} navbar>
-						<Nav navbar>
+						<Nav className="ml-auto" navbar>
 							<NavItem>
 								<h3 onClick={() => this.props.changePage('home')}>Home</h3>
 							</NavItem>
