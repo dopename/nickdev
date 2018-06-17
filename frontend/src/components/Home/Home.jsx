@@ -61,14 +61,14 @@ export default class Home extends Component {
 			<div>
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
-					<div className="row my-3">
+					<div className="row">
 						<div className="col-lg-2 px-0">
 							<Nav vertical>
 								<NavItem>
-									<Button outline className="btn-block text-left" color="info" size="lg">Home</Button>
+									<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">Home</Button>
 								</NavItem>
 								<NavItem>
-									<Button outline className="btn-block text-left" color="info" size="lg">Test</Button>
+									<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">Test</Button>
 								</NavItem>
 								<NavItem>
 									<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
