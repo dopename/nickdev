@@ -14,6 +14,7 @@ export default class Home extends Component {
 			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
 			activePage:'home',
 			collapsed:true,
+			sideNav:true,
 		}
 
 		this.handleLogout = this.handleLogout.bind(this);
@@ -56,28 +57,36 @@ export default class Home extends Component {
 		this.setState({collapsed:!this.state.collapsed});
 	}
 
+	toggleSideNav() {
+		this.setState({sideNav:!this.state.sideNav});
+	}
+
 	render() {
+		let sideNav = (
+					<Nav vertical>
+						<NavItem className="text-center">
+							<Button outline className="text-center" onClick={() => this.props.changePage('home')} color="info" size="lg">Toggle Sidebar</Button>
+						</NavItem>
+						<hr />
+						<NavItem>
+							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">Home</Button>
+						</NavItem>
+						<NavItem>
+							<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">Test</Button>
+						</NavItem>
+						<NavItem>
+							<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
+						</NavItem>
+					</Nav>
+			)
+
 		return(
 			<div>
 				<TopNav collapsed={this.state.collapsed} toggleNavbar={this.toggleNavbar} changePage={this.changePage} handleLogout={this.handleLogout} logged_in={this.state.logged_in} />
 				<div className="container-fluid">
 					<div className="row">
 						<div className="col-lg-2 px-0">
-							<Nav vertical>
-								<NavItem>
-									<Button outline className="btn-block text-center" onClick={() => this.props.changePage('home')} color="info" size="lg">Toggle Sidebar</Button>
-								</NavItem>
-								<hr />
-								<NavItem>
-									<Button outline className="btn-block text-left" onClick={() => this.props.changePage('home')} color="info" size="lg">Home</Button>
-								</NavItem>
-								<NavItem>
-									<Button outline className="btn-block text-left" onClick={() => this.props.changePage('test')} color="info" size="lg">Test</Button>
-								</NavItem>
-								<NavItem>
-									<Button outline className="btn-block text-left" color="info" size="lg">Uhh Test</Button>
-								</NavItem>
-							</Nav>
+							{sideNav}
 						</div>
 						<div className="col-lg-8">
 							{this.state.activePage === 'home' ? <HomeContent /> : null}
