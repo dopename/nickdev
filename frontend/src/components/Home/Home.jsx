@@ -100,7 +100,11 @@ class TopNav extends Component {
 			<div>
 				<Navbar color="secondary" expand="lg">
 					<NavbarBrand className="black-text" href="/"><h3>NDE</h3></NavbarBrand>
-					<NavbarToggler className="black-text" onClick={() => this.props.toggleNavbar()} className="mr-2" />
+					<NavbarToggler className="black-text" onClick={() => this.props.toggleNavbar()} className="mr-2">
+			           <span class="icon-bar"></span>
+			           <span class="icon-bar"></span>
+			           <span class="icon-bar"></span>
+					<NavbarToggler>
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
