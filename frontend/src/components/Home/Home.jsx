@@ -113,7 +113,7 @@ class TopNav extends Component {
 	render() {
 		return (
 			<div>
-				<Navbar dark expand="lg">
+				<Navbar color="dark" dark expand="lg">
 					<NavbarBrand className="black-text" href="/"><h3>NDE</h3></NavbarBrand>
 					<NavbarToggler onClick={() => this.props.toggleNavbar()} className="mr-2" />
 					<Collapse isOpen={!this.props.collapsed} navbar>
