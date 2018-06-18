@@ -74,21 +74,25 @@ export default class UserList extends Component {
 		var renderList = [];
 
 		this.state.user_list.map((ul) => {
-			renderList.push(<li key={ul.pk} onClick={() => this.toggleActiveList(ul.pk)} className={this.state.activeList === ul.pk ? "list-group-item active" : "list-group-item"}>{ul.list_title}</li>);
+			renderList.push(<li key={ul.pk} onClick={() => this.toggleActiveList(ul.pk)} className={this.state.activeList === ul.pk ? "list-group-item pointer-hand active" : "list-group-item pointer-hand"}>{ul.list_title}</li>);
 		});
 
 		return (
-			<div className="row">
-				<div className="col-lg-6">
-					<h3>Existing Lists</h3>
-					<ul className="list-group">
-						{renderList}
-					</ul>
-				</div>
-				<div className="col-lg-6">
+			<div>
+				<div className="col-lg-12">
 					<h3>Click <p onClick={() => this.toggleView()}>here</p> to create a new list</h3>
 				</div>
-			</div>
+				<div className="row">
+					<div className="col-lg-6">
+						<h3>Existing Lists</h3>
+						<ul className="list-group">
+							{renderList}
+						</ul>
+					</div>
+					<div className="col-lg-6">
+					</div>
+				</div>
+			<div>
 		)
 	}
 }
