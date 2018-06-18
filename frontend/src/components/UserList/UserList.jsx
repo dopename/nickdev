@@ -31,6 +31,7 @@ export default class UserList extends Component {
 		})
 		.then(response => response.json())
 		.then(json => {
+			console.log(json);
 			this.setState({user:json.user});
 		})
 
