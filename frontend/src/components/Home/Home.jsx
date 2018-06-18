@@ -71,13 +71,13 @@ export default class Home extends Component {
 						</NavItem>
 						<h3 className="mb-1">{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h3>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home'></i>}</Button>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home sz-30'></i>}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Test <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt'></i>}</Button>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Test <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt sz-30'></i>}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className="btn-block text-left" onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward'></i>}</Button>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
 						</NavItem>
 					</Nav>
 			)
