@@ -11,7 +11,7 @@ class CustomUser(models.Model):
 		return self.user.username
 
 class UserList(models.Model):
-	user_list_id = models.AutoField()
+	user_list_id = models.AutoField(primery_key=True)
 	custom_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="user_list")
 	list_title = models.CharField(max_length=64)
 
@@ -20,7 +20,7 @@ class UserList(models.Model):
 
 
 class ListItem(models.Model):
-	list_item_id = models.AutoField()
+	list_item_id = models.AutoField(primary_key=True)
 	user_list = models.ForeignKey(UserList, on_delete=models.CASCADE, related_name="list_item")
 	item_title = models.CharField(max_length=64)
 	description = models.TextField()
