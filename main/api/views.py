@@ -1,6 +1,6 @@
 from rest_framework import generics, mixins, status, permissions
 from django.contrib.auth.models import User
-from main.models import CustomUser
+from main.models import CustomUser, UserList, ListItem
 from .serializers  import *
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
@@ -20,3 +20,60 @@ class UserAPIView(generics.ListAPIView):
 
 	def get_queryset(self):
 		return CustomUser.objects.all()
+
+class UserListUpdateRetrieveView(generics.RetrieveUpdateView):
+	lookup_field = 'pk'
+	serializer_class = UserListSerializer
+	# queryset = Solution.objects.all()
+
+	def get_queryset(self):
+		qs = UserList.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
+
+class UserListCreateView(generics.CreateAPIView):
+	lookup_field = 'pk'
+	serializer_class = UserListSerializer
+	# queryset = Solution.objects.all()
+
+	def get_queryset(self):
+		qs = UserList.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+
+class ListItemUpdateRetrieveView(generics.RetrieveUpdateView):
+	lookup_field = 'pk'
+	serializer_class = ListItemSerializer
+	# queryset = Solution.objects.all()
+
+	def get_queryset(self):
+		qs = ListItem.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
+
+class ListItemCreateView(generics.CreateAPIView):
+	lookup_field = 'pk'
+	serializer_class = ListItemSerializer
+	# queryset = Solution.objects.all()
+
+	def get_queryset(self):
+		qs = ListItem.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)

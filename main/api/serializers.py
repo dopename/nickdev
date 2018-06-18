@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import CustomUser
+from main.models import CustomUser, UserList, ListItem
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,8 +12,50 @@ class UserSerializer(serializers.ModelSerializer):
 			'username'
 		]
 
+
 class UserLoginSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = User
 		fields = ['username', 'pk']
+
+
+class UserListSerializer(serializers.ModelSerializer):
+	list_items = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+	class Meta:
+		model = UserList
+		fields = [
+			"custom_user",
+		]
+
+
+class UserListSerializer(serializers.ModelSerializer):
+	list_items = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+	class Meta:
+		model = UserList
+		fields = [
+			"pk",
+			"list_items",
+		]
+
+class ListItemSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = ListItem
+		fields = [
+			"user_list",
+			"title",
+			"description"
+		]
+
+
+class ListItemCreateSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = ListItem
+		fields = [
+			"title",
+			"description"
+		]
