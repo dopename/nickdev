@@ -69,7 +69,7 @@ export default class Home extends Component {
 						<NavItem className="text-center">
 							<Button outline className="text-center" onClick={() => this.toggleSideNav()} color={this.state.sideNav ? "danger" : "success"}><i class={this.state.sideNav ? "fa fa-arrow-left" : "fa fa-arrow-right"}></i></Button>
 						</NavItem>
-						<h3 className="mb-1">{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h3>
+						<h4 className="mb-1">{this.state.sideNav ? "Nick's Dev Env" : "NDE"}</h4>
 						<NavItem>
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home sz-30'></i>}</Button>
 						</NavItem>
@@ -119,13 +119,13 @@ class TopNav extends Component {
 					<Collapse isOpen={!this.props.collapsed} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<h3 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('home')}>Home</h3>
+								<h4 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('home')}>Home</h4>
 							</NavItem>
 							<NavItem>
-								<h3 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('test')}>Test</h3>
+								<h4 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('test')}>Test</h4>
 							</NavItem>
 							<NavItem>
-								{this.props.logged_in ? <h3 className="list-inline-item mx-2 white-text pointer-hand" onClick={e => this.props.handleLogout(e)}>Logout</h3> : <h3 className="list-inline-item mx-2 white-text" onClick={() => this.props.changePage('login')}>Login</h3> }
+								{this.props.logged_in ? <h4 className="list-inline-item mx-2 white-text pointer-hand" onClick={e => this.props.handleLogout(e)}>Logout</h4> : <h4 className="list-inline-item mx-2 white-text" onClick={() => this.props.changePage('login')}>Login</h4> }
 							</NavItem>
 						</Nav>
 					</Collapse>
