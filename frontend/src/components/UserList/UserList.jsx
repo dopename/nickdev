@@ -50,7 +50,7 @@ export default class UserList extends Component {
 			})
 			.then(response => response.json())
 			.then(json => {
-				this.setState({user_list:[...this.state.user_list, json.user.user_list]});
+				this.setState({user_list:[...this.state.user_list, json]});
 			})
 		})
 	}
