@@ -91,9 +91,11 @@ export default class Home extends Component {
 							{!this.state.mobile ? sideNav : null}
 						</div>
 						<div className={this.state.sideNav ? "col-lg-10" : "col-lg-11 content-small-sidebar"}>
-							{this.state.activePage === 'home' ? <HomeContent /> : null}
-							{this.state.activePage === 'test' ? <TestContent /> : null}
-							{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+							<div className="container">
+								{this.state.activePage === 'home' ? <HomeContent /> : null}
+								{this.state.activePage === 'test' ? <TestContent /> : null}
+								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+							</div>
 						</div>
 					</div>
 				</div>
