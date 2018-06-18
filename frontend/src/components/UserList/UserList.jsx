@@ -33,9 +33,9 @@ export default class UserList extends Component {
 		.then(json => {
 			console.log(json);
 			this.setState({user:json.user});
+			this.fetchUserList();
 		})
 
-		this.fetchUserList()
 	}
 
 	fetchUserList() {
