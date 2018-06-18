@@ -39,6 +39,7 @@ class UserListSerializer(serializers.ModelSerializer):
 		fields = [
 			"pk",
 			"list_items",
+			"list_title",
 		]
 
 class ListItemSerializer(serializers.ModelSerializer):
