@@ -11,7 +11,6 @@ class CustomUser(models.Model):
 		return self.user.username
 
 class UserList(models.Model):
-	user_list_id = models.AutoField()
 	custom_user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -19,7 +18,6 @@ class UserList(models.Model):
 
 
 class ListItem(models.Model):
-	list_item_id = models.AutoField()
 	user_list = models.ForeignKey(UserList, on_delete=models.CASCADE, related_name="list_item")
 	title = models.CharField(max_length=64)
 	description = models.TextField()
