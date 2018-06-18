@@ -92,7 +92,8 @@ export default class UserList extends Component {
 					<div className="col-lg-6">
 					</div>
 				</div>
-			<div>
+			</div>
+
 		)
 	}
 }
