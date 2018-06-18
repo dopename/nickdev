@@ -74,7 +74,7 @@ export default class Home extends Component {
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('home')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Home <i className='fa fa-home'></i></p> : <i className='fa fa-home sz-30'></i>}</Button>
 						</NavItem>
 						<NavItem>
-							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('test')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Test <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt sz-30'></i>}</Button>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('user_list')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">User List <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt sz-30'></i>}</Button>
 						</NavItem>
 						<NavItem>
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
@@ -93,7 +93,7 @@ export default class Home extends Component {
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-11 content-small-sidebar"}>
 							<div className="container">
 								{this.state.activePage === 'home' ? <HomeContent /> : null}
-								{this.state.activePage === 'test' ? <TestContent /> : null}
+								{this.state.activePage === 'user_list' ? <UserList user_list_pk={this.state.user.user_list} /> : null}
 								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
 							</div>
 						</div>

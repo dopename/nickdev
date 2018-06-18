@@ -14,7 +14,7 @@ export default class ListItems extends Component {
 	}
 
 	fetchListItems() {
-		var url = "https://www.nicksdevenv.com/api/user_list/" + this.props.user_list + "/"
+		var url = "https://www.nicksdevenv.com/api/list_item/" + this.props.list_item_pk + "/"
 
 		fetch(url, {
 			headers: {
