@@ -42,7 +42,7 @@ export default class UserList extends Component {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
 		this.state.user.user_list.map((ul) => {
-			fetch(url + ul.pk + '/', {
+			fetch(url + ul + '/', {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
 					"Content-Type":"application/json",
