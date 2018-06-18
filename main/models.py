@@ -21,7 +21,7 @@ class UserList(models.Model):
 
 class ListItem(models.Model):
 	list_item_id = models.AutoField(primary_key=True, db_column="id")
-	user_list = models.ForeignKey(UserList, on_delete=models.CASCADE, related_name="list_item")
+	user_list = models.ForeignKey(UserList, on_delete=models.CASCADE, related_name="list_items")
 	item_title = models.CharField(max_length=64)
 	description = models.TextField()
 
