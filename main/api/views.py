@@ -21,7 +21,7 @@ class UserAPIView(generics.ListAPIView):
 	def get_queryset(self):
 		return CustomUser.objects.all()
 
-class UserListUpdateRetrieveView(generics.RetrieveUpdateView):
+class UserListUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 	lookup_field = 'pk'
 	serializer_class = UserListSerializer
 	# queryset = Solution.objects.all()
@@ -50,7 +50,7 @@ class UserListCreateView(generics.CreateAPIView):
 		return self.create(request, *args, **kwargs)
 
 
-class ListItemUpdateRetrieveView(generics.RetrieveUpdateView):
+class ListItemUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 	lookup_field = 'pk'
 	serializer_class = ListItemSerializer
 	# queryset = Solution.objects.all()
