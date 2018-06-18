@@ -64,7 +64,7 @@ export default class UserList extends Component {
 		var renderList = [];
 
 		this.state.user_list.map((ul) => {
-			renderList.push(<li>ul.list_title</li>);
+			renderList.push(<li>{ul.list_title}</li>);
 		});
 
 		return (
