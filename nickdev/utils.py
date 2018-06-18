@@ -18,6 +18,6 @@ def my_jwt_response_handler(token, user=None, request=None):
 	if current_user:
 		returnData['user']['pk'] = current_user.pk
 		returnData['user']['username'] = current_user.user.username
-		returnData['user']['user_list'] = current_user.user_list_set.all()
+		returnData['user']['user_list'] = current_user.user_list__set.all()
 
 	return returnData
