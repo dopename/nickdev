@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
-import TestContent from './TestContent/TestContent'
+import UserList from '../UserList/UserList'
 import './Home.css'
 import { Nav, NavItem, NavLink, Button, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
 
@@ -93,7 +93,7 @@ export default class Home extends Component {
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-11 content-small-sidebar"}>
 							<div className="container">
 								{this.state.activePage === 'home' ? <HomeContent /> : null}
-								{this.state.activePage === 'user_list' ? <UserList user_list_pk={this.state.user.user_list} /> : null}
+								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} /> : null}
 								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
 							</div>
 						</div>
