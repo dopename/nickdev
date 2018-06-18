@@ -27,6 +27,7 @@ class UserListSerializer(serializers.ModelSerializer):
 		model = UserList
 		fields = [
 			"custom_user",
+			"list_title",
 		]
 
 
@@ -46,7 +47,7 @@ class ListItemSerializer(serializers.ModelSerializer):
 		model = ListItem
 		fields = [
 			"user_list",
-			"title",
+			"item_title",
 			"description"
 		]
 
