@@ -80,7 +80,7 @@ export default class UserList extends Component {
 		return (
 			<div>
 				<div className="col-lg-12">
-					<h3>Click <p onClick={() => this.toggleView()}>here</p> to create a new list</h3>
+					<h3>Click </h3><h3 onClick={() => this.toggleView()}>here</h3><h3> to create a new list</h3>
 				</div>
 				<div className="row">
 					<div className="col-lg-6">
