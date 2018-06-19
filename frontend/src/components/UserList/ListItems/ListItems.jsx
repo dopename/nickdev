@@ -14,6 +14,7 @@ export default class ListItems extends Component {
 		this.addListItem = this.addListItem.bind(this);
 		this.deleteListItem = this.deleteListItem.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.toggleAccordianClick = this.toggleAccordianClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -93,11 +94,23 @@ export default class ListItems extends Component {
 		}
 	}
 
+	toggleAccordianClick(pk) {
+		if (this.state.accordianDisplay === pk) {
+			this.setState({accordianDisplay:false})
+		}
+		else {
+			this.setState({accordianDisplay:pk})
+		}
+	}
+
 	render() {
 		var renderItems = [];
 
 		this.state.items.map((item) => {
-			renderItems.push(<li key={item.pk} className="list-group-item pointer-hand">{item.item_title}</li>)
+			renderItems.push(
+				<li key={item.pk} onClick={this.toggleAccordianClick(item.pk)} className="list-group-item pointer-hand">{item.item_title}</li>
+				<li key={"accordian" + itme.pk} className={this.state.accordianDisplay === item.pk ? "d-none":"list-group-item d-block"}>{item.description}</li>
+				)
 		})
 		return (
 			<div>
