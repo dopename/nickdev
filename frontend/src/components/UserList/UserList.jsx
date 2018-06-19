@@ -248,10 +248,11 @@ class DeleteList extends Component {
 		return (
 			<div>
 				<h3>Delete List</h3>
+				<form onSubmit={this.submitDelete}>
 				<ul className="list-group">
 					{renderList}
 				</ul>
-				<Button color="secondary" size="lg" onClick={() => this.submitDelete()}>DELETE</Button>
+				<input type="submit" value="Submit" />
 			</div>
 		)
 	}
