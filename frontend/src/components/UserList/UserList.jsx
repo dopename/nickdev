@@ -23,6 +23,12 @@ export default class UserList extends Component {
 		}
 	}
 
+	// componentDidUpdate(prevProps) {
+	// 	if (this.props != prevProps) {
+	// 		this.infoFromTOken();
+	// 	}
+	// }
+
 	infoFromToken() {
 		var url = "https://www.nicksdevenv.com/token-verify/"
 
@@ -46,18 +52,16 @@ export default class UserList extends Component {
 	fetchUserList() {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
-		this.state.user.user_list.map((ul) => {
-			fetch(url + ul + '/', {
+		var queries = this.state.user.user_list.map((ul) => {
+			return fetch(url + ul + '/', {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
 					"Content-Type":"application/json",
 				}
 			})
 			.then(response => response.json())
-			.then(json => {
-				this.setState({user_list:[...this.state.user_list, json]});
-			})
 		})
+		Promise.all(queries).then( (data) => { this.setState({user_list:data}) })
 	}
 
 	toggleActiveList(pk) {
@@ -80,11 +84,8 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				return response.json()
+				this.infoFromToken()
 			}
-		})
-		.then(json => { 
-			this.setState({mode:'view'}) ;
 		})
 	}
 
@@ -101,11 +102,8 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				return response.json()
+				this.infoFromToken();
 			}
-		})
-		.then(json => {
-			this.setState({activeList:false, mode:'view'});
 		})
 	}
 
