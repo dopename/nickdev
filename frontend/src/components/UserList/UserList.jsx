@@ -82,8 +82,11 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.setState({activeList:false, mode:'view'})
+				return response.json()
 			}
+		})
+		.then(json => {
+			this.setState({activeList:false, mode:'view', user_list:[...this.state.user_list, ...json]});
 		})
 	}
 
@@ -94,12 +97,6 @@ export default class UserList extends Component {
 
 	render() {
 		var currentItemList = this.state.activeList ? this.state.user_list[this.state.user_list.map(e => e.pk).indexOf(this.state.activeList)].list_items : false
-
-		var renderList = [];
-
-		this.state.user_list.map((ul) => {
-			renderList.push(<li key={ul.pk} onClick={() => this.toggleActiveList(ul.pk)} className={this.state.activeList === ul.pk ? "list-group-item pointer-hand active" : "list-group-item pointer-hand"}>{ul.list_title}</li>);
-		});
 
 		return (
 			<div>
