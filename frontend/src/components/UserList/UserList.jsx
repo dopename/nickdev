@@ -24,11 +24,11 @@ export default class UserList extends Component {
 		}
 	}
 
-	// componentDidUpdate(prevProps) {
-	// 	if (this.props != prevProps) {
-	// 		this.infoFromTOken();
-	// 	}
-	// }
+	componentDidUpdate(prevProps) {
+		if (this.props != prevProps) {
+			this.fetchUserList(this.props.user);
+		}
+	}
 
 	infoFromToken() {
 		var url = "https://www.nicksdevenv.com/token-verify/"
@@ -45,15 +45,15 @@ export default class UserList extends Component {
 		.then(json => {
 			console.log(json);
 			this.setState({user:json.user});
-			this.fetchUserList();
+			this.fetchUserList(json.user);
 		})
 
 	}
 
-	fetchUserList() {
+	fetchUserList(user) {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
-		var queries = this.state.user.user_list.map((ul) => {
+		var queries = user.user_list.map((ul) => {
 			return fetch(url + ul + '/', {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -85,7 +85,7 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.infoFromToken()
+				this.props.verifyToken()
 			}
 		})
 	}
@@ -103,7 +103,7 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.infoFromToken();
+				this.props.verifyToken();
 			}
 		})
 	}
