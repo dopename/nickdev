@@ -202,6 +202,8 @@ class CreateList extends Component {
 			list_title:this.state.list_title,
 		}
 
+		this.setState({list_title:""});
+
 		this.props.onSubmit(newData);
 	}
 
