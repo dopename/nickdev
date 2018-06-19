@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'main',
     'rest_framework',
+    'rest_framework_jwt',
     'corsheaders',
 ]
 
