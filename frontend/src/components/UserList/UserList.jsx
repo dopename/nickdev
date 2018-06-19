@@ -83,6 +83,22 @@ export default class UserList extends Component {
 		}
 	}
 
+	submitDeleteList(data) {
+		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
+
+		fetch(url + data + "/", {
+			method:"delete", 
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			}
+		})
+		.then(response => {
+			if (response.ok) {
+				this.setState({mode:'view'});
+			}
+		})
+	}
+
 	submitCreateList(data) {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
@@ -101,22 +117,6 @@ export default class UserList extends Component {
 		})
 		.then(json => {
 			this.setState({activeList:false, mode:'view', user_list:[...this.state.user_list, ...json]});
-		})
-	}
-
-	submitDeleteList(data) {
-		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
-
-		fetch(url + data + "/", {
-			method:"delete", 
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			}
-		})
-		.then(response => {
-			if (response.ok) {
-				this.setState({mode:'view'});
-			}
 		})
 	}
 
@@ -234,9 +234,21 @@ class DeleteList extends Component {
 		this.setState({selected:pk})
 	}
 
+	// submitDelete(e) {
+	// 	e.preventDefault();
+	// 	this.props.onSubmit(this.state.selected);
+	// }
+
 	submitDelete(e) {
 		e.preventDefault();
-		this.props.onSubmit(this.state.selected);
+		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
+
+		fetch(url + this.state.selected + "/", {
+			method:"delete", 
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			}
+		})
 	}
 
 	render() {
@@ -253,7 +265,7 @@ class DeleteList extends Component {
 					<ul className="list-group">
 						{renderList}
 					</ul>
-					<input type="hidden" value={this.state.selected} />
+					<input type="hidden" name="pk" type="text" value={this.state.selected} />
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
