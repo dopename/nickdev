@@ -151,7 +151,7 @@ export default class UserList extends Component {
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
-						{ this.state.activeList ? <ListItems updateList={this.fetchUserList} items={currentItemList} /> : null }
+						{ this.state.activeList ? <ListItems updateList={this.fetchUserList} list={this.state.activeList} items={currentItemList} /> : null }
 					</div>
 				</div>
 			</div>

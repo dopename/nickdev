@@ -6,6 +6,9 @@ export default class ListItems extends Component {
 
 		this.state = {
 			items:[],
+			new_item_title:'',
+			new_item_description:'',
+
 		}
 
 		this.addListItem = this.addListItem.bind(this);
@@ -37,7 +40,15 @@ export default class ListItems extends Component {
 		Promise.all(queries).then( (data) => { this.setState({items:data}) })
 	}
 
-	addListItem(data) {
+	addListItem(e) {
+		e.preventDefault();
+
+		var data = {
+			user_list:this.props.list,
+			item_title:this.state.new_item_title,
+			description:this.state.new_item_description,
+		}
+
 		var url = "https://www.nicksdevenv.com/api/list_item/"
 
 		fetch(url, {
@@ -50,12 +61,13 @@ export default class ListItems extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.props.updateList();
+				this.props.updateList(false);
 			}
 		})
 	}
 
 	deleteListItem(e) {
+		e.prventDefault();
 		var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
 
 		fetch(url + e + "/", {
@@ -66,9 +78,13 @@ export default class ListItems extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.props.updateList();
+				this.props.updateList(false);
 			}
 		})
+	}
+
+	handleChange(e) {
+		this.setState({e.target.name:e.target.value});
 	}
 
 	render() {
@@ -82,6 +98,13 @@ export default class ListItems extends Component {
 				<ul className="list-group">
 					{renderItems}
 				</ul>
+				<br/>
+				<form onSubmit={this.cleanData}>
+					<input className="form-control" type="text" name="new_item_title" value={this.state.new_item_title} onChange={this.handleChange} />
+					<textarea className="form-control" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
+					<br/>
+					<input type="submit" className="form-control" value="Add Item" />
+				</form>
 			</div>
 		)
 	}
