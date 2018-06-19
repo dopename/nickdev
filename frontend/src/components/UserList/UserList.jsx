@@ -12,6 +12,8 @@ export default class UserList extends Component {
 			mode:'view',
 			activeList:false,
 		}
+
+		this.toggleActiveList = this.toggleActiveList.bind(this);
 	}
 
 	componentDidMount() {
