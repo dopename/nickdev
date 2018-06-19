@@ -105,7 +105,7 @@ export default class ListItems extends Component {
 					{renderItems}
 				</ul>
 				<br/>
-				<form onSubmit={this.cleanData}>
+				<form onSubmit={this.addListItem}>
 					<input className="form-control" type="text" name="new_item_title" value={this.state.new_item_title} onChange={this.handleChange} />
 					<textarea className="form-control" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
 					<br/>
