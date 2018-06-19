@@ -70,7 +70,7 @@ export default class UserList extends Component {
 			})
 			.then(response => response.json())
 		})
-		Promise.all(queries).then( (data) => { this.setState({user_list:data}) })
+		Promise.all(queries).then( (data) => { this.setState({user_list:data, activeList:false}) })
 	}
 
 	//toggleActiveList toggles which list is currently active
