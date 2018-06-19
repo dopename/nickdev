@@ -41,6 +41,14 @@ class UserListSerializer(serializers.ModelSerializer):
 			"list_title",
 		]
 
+class UserListDestroySerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = UserList
+		fields = [
+			"pk"
+		]
+
 class ListItemSerializer(serializers.ModelSerializer):
 
 	class Meta:
@@ -60,3 +68,9 @@ class ListItemCreateSerializer(serializers.ModelSerializer):
 			"title",
 			"description"
 		]
+
+class ListItemDestroySerializer(serializers.ModelSerializer):
+	model = ListItem
+	fields = [
+		"pk"
+	]

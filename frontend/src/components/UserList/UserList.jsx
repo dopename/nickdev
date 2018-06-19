@@ -43,6 +43,20 @@ export default class UserList extends Component {
 
 	}
 
+	refreshToken() {
+		fetch('https://www.nicksdevenv.com/refresh-token/', {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization:`JWT ${localStorage.getItem('token')}`
+			},
+			body:JSON.stringify(localStorage.getItem('token'))
+		})
+		.then(() => {
+			localStorage.setItem('token', json.token)
+		})
+	}
+
 	fetchUserList() {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
@@ -90,7 +104,23 @@ export default class UserList extends Component {
 		})
 	}
 
-	toggleView() {
+	submitDeleteList(data) {
+		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
+
+		fetch(url + data + "/", {
+			method:"delete", 
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			}
+		})
+		.then(response => {
+			if (response.ok) {
+				this.setState({mode:'view'});
+			}
+		})
+	}
+
+	toggleView(view) {
 		var newValue = this.state.mode === 'view' ? 'create' : 'view';
 		this.setState({mode:newValue, activeList:false});
 	}
@@ -100,12 +130,21 @@ export default class UserList extends Component {
 
 		return (
 			<div>
-				<div className="col-lg-12">
-					<Button outline color="success" size="lg" onClick={() => this.toggleView()}>Create new list</Button>
+				<div className="row">
+					<div class="col-lg-4 text-center">
+						<Button outline color="success" size="lg" onClick={() => this.toggleView('create')}>Create new list</Button>
+					</div>
+					<div class="col-lg-4 text-center">
+						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
+					</div>
+					<div class="col-lg-4 text-center">
+					</div>
 				</div>
 				<div className="row">
 					<div className="col-lg-6">
-						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:<CreateList user_id={this.state.user.pk} onSubmit={this.submitCreateList} />}
+						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:null}
+						{this.state.mode === 'create' ? <CreateList user_id={this.state.user.pk} onSubmit={this.submitCreateList} /> : null}
+						{this.state.mode === 'delete' ? <DeleteList onSubmit={this.submitDeleteList} /> : null}
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
@@ -127,7 +166,7 @@ class Lists extends Component {
 		var renderList = []
 
 		this.props.user_list.map((ul) => {
-			renderList.push(<li key={ul.pk} onClick={() => this.props.toggleActiveList(ul.pk)} className={this.props.activeList === ul.pk ? "list-group-item pointer-hand active" : "list-group-item pointer-hand"}>{ul.list_title}</li>);
+			renderList.push(<li key={ul.pk} onClick={() => this.props.toggleActiveList(ul.pk)} className={this.props.activeList === ul.pk ? "list-group-item pointer-hand btn-outline-info active" : "list-group-item btn-outline-info pointer-hand"}>{ul.list_title}</li>);
 		});
 		return (
 			<div>
@@ -172,6 +211,38 @@ class CreateList extends Component {
 				<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
 				<input type="submit" value="Submit" />
 			</form>
+		)
+	}
+}
+
+
+class DeleteList extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			selected:false,
+		}
+	}
+
+	toggleActive(e) {
+		this.setState({selecter:e})
+	}
+
+	render() {
+		var renderList = []
+
+		this.props.user_list.map((ul) => {
+			renderList.push(<li key={ul.pk} onClick={() => this.toggleActive(ul.pk)} className={this.state.selected === ul.pk ? "list-group-item pointer-hand btn-outline-danger active" : "list-group-item pointer-hand btn-outline-danger"}>{ul.list_title}</li>);
+		});
+
+		return (
+			<div>
+				<h3>Delete List</h3>
+				<ul className="list-group">
+					{renderList}
+				</ul>
+			</div>
 		)
 	}
 }

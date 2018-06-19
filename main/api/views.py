@@ -48,6 +48,10 @@ class UserListCreateView(generics.CreateAPIView):
 	def post(self, request, *args, **kwargs):
 		return self.create(request, *args, **kwargs)
 
+class UserListDestroyView(generics.DestroyAPIView):
+	lookup_field = 'pk'
+	serializer_class = UserListDestroySerializer
+
 
 class ListItemUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 	lookup_field = 'pk'
@@ -60,6 +64,10 @@ class ListItemUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 		if query is not None:
 			qs = qs.filter(pk=query)
 		return qs
+
+class ListItemDestroyView(generics.DestroyAPIView):
+	lookup_field = 'pk'
+	serializer_class = ListItemDestroySerializer
 
 
 class ListItemCreateView(generics.CreateAPIView):
