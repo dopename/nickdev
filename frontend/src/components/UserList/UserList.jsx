@@ -211,7 +211,7 @@ class CreateList extends Component {
 		return (
 			<form className="form-control" onSubmit={this.cleanData}>
 				<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
-				<input type="submit" value="Submit" />
+				<input type="submit" className="form-control" value="Submit" />
 			</form>
 		)
 	}
@@ -261,12 +261,12 @@ class DeleteList extends Component {
 		return (
 			<div>
 				<h3>Delete List</h3>
+				<ul className="list-group">
+					{renderList}
+				</ul>
 				<form onSubmit={this.submitDelete}>
-					<ul className="list-group">
-						{renderList}
-					</ul>
 					<input type="hidden" name="pk" value={this.state.selected} />
-					<input type="submit" value="Submit" />
+					<input type="submit" className="form-control" value="Submit" />
 				</form>
 			</div>
 		)
