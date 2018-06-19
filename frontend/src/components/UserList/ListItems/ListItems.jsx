@@ -13,6 +13,7 @@ export default class ListItems extends Component {
 
 		this.addListItem = this.addListItem.bind(this);
 		this.deleteListItem = this.deleteListItem.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount() {
