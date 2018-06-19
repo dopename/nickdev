@@ -11,7 +11,7 @@ export default class Home extends Component {
 
 		this.state = {
 			logged_in:localStorage.getItem('token') ? true : false,
-			user:localStorage.getItem('user') ? localStorage.getItem('user') : false,
+			user:false,
 			activePage:'home',
 			collapsed:true,
 			sideNav:true,
@@ -24,6 +24,7 @@ export default class Home extends Component {
 		this.toggleNavbar = this.toggleNavbar.bind(this);
 		this.toggleSideNav = this.toggleSideNav.bind(this);
 		this.refreshToken = this.refreshToken.bind(this);
+		this.verifyToken = this.verifyToken.bind(this);
 	}
 
 	componentDidMount() {
@@ -53,7 +54,7 @@ export default class Home extends Component {
 	}
 
 	refreshToken() {
-		fetch('https://www.nicksdevenv.com/refresh-token/', {
+		fetch('https://www.nicksdevenv.com/token-refresh/', {
 			method:'post',
 			headers: {
 				"content-type":"application/json",
@@ -61,8 +62,32 @@ export default class Home extends Component {
 			},
 			body:JSON.stringify(localStorage.getItem('token'))
 		})
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+			}
+		})
 		.then(json => {
 			localStorage.setItem('token', json.token)
+		})
+	}
+
+	verifyToken() {
+		fetch('https://www.nicksdevenv.com/token-verify/', {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization:`JWT ${localStorage.getItem('token')}`
+			},
+			body:JSON.stringify(localStorage.getItem('token'))
+		})
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+			}
+		})
+		.then(json => {
+			this.setState({user:json.user});
 		})
 	}
 
@@ -108,7 +133,7 @@ export default class Home extends Component {
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-11 content-small-sidebar"}>
 							<div className="container">
 								{this.state.activePage === 'home' ? <HomeContent /> : null}
-								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} refreshToken={this.refreshToken} /> : null}
+								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} refreshToken={this.refreshToken} verifyToken={this.verifyToken} /> : null}
 								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
 							</div>
 						</div>

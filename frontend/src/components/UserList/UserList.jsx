@@ -199,10 +199,13 @@ class CreateList extends Component {
 
 	render() {
 		return (
-			<form className="form-control" onSubmit={this.cleanData}>
-				<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
-				<input type="submit" className="form-control" value="Submit" />
-			</form>
+			<div>
+				<h3>Create a List</h3>
+				<form className="form-control" onSubmit={this.cleanData}>
+					<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
+					<input type="submit" className="form-control" value="Submit" />
+				</form>
+			</div>
 		)
 	}
 }
