@@ -128,7 +128,7 @@ export default class UserList extends Component {
 			<div>
 				<div className="row">
 					<div class="col-lg-3 text-center">
-						<Button outline {this.state.mode === "create" ? "active" : null} color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
+						<Button outline className={this.state.mode === "create" ? "active" : null} color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
 					</div>
 					<div class="col-lg-3 text-center">
 						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
