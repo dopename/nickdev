@@ -68,7 +68,7 @@ export default class UserList extends Component {
 
 	toggleView() {
 		var newValue = this.state.mode === 'view' ? 'create' : 'view';
-		this.setState({mode:newValue});
+		this.setState({mode:newValue, activeList:false});
 	}
 
 	render() {
@@ -88,9 +88,7 @@ export default class UserList extends Component {
 				<div className="row">
 					<div className="col-lg-6">
 						<h3>Lists</h3>
-						{this.state.mode === 'view' ? (<ul className="list-group">
-							{renderList}
-						</ul>) : null }
+						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:null}
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
@@ -103,5 +101,23 @@ export default class UserList extends Component {
 	}
 }
 
+class Lists extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		var renderList = []
+
+		this.props.user_list.map((ul) => {
+			renderList.push(<li key={ul.pk} onClick={() => this.props.toggleActiveList(ul.pk)} className={this.props.activeList === ul.pk ? "list-group-item pointer-hand active" : "list-group-item pointer-hand"}>{ul.list_title}</li>);
+		});
+		return (
+			<ul className="list-group">
+				{renderList}
+			</ul>
+		)
+	}
+}
 
 //`JWT ${localStorage.getItem('token')}`
