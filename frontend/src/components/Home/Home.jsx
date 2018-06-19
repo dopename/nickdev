@@ -123,7 +123,7 @@ class TopNav extends Component {
 								<h4 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('home')}>Home</h4>
 							</NavItem>
 							<NavItem>
-								<h4 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('test')}>Test</h4>
+								<h4 className="mx-2 white-text pointer-hand" onClick={() => this.props.changePage('user_list')}>User List</h4>
 							</NavItem>
 							<NavItem>
 								{this.props.logged_in ? <h4 className="list-inline-item mx-2 white-text pointer-hand" onClick={e => this.props.handleLogout(e)}>Logout</h4> : <h4 className="list-inline-item mx-2 white-text" onClick={() => this.props.changePage('login')}>Login</h4> }
