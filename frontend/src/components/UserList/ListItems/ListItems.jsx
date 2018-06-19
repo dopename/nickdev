@@ -13,6 +13,12 @@ export default class ListItems extends Component {
 		this.fetchListItems();
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props != prevProps) {
+			this.fetchListItems();
+		}
+	}
+
 	fetchListItems() {
 		var url = "https://www.nicksdevenv.com/api/list_item/"
 		var queries = this.props.items.map((item) => {
