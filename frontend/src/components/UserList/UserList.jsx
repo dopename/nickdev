@@ -253,6 +253,7 @@ class DeleteList extends Component {
 					<ul className="list-group">
 						{renderList}
 					</ul>
+					<input type="hidden" value={this.state.selected} />
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
