@@ -15,7 +15,7 @@ export default class ListItems extends Component {
 
 	fetchListItems() {
 		var url = "https://www.nicksdevenv.com/api/list_item/"
-		var queries = this.props.items.map((item) {
+		var queries = this.props.items.map((item) => {
 			return fetch(url + item + "/", {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
