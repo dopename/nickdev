@@ -225,10 +225,17 @@ class DeleteList extends Component {
 		this.state = {
 			selected:false,
 		}
+
+		this.toggleActive = this.toggleActive.bind(this);
+		this.submitDelete = this.submitDelete.bind(this);
 	}
 
 	toggleActive(e) {
 		this.setState({selecter:e})
+	}
+
+	submitDelete() {
+		this.props.onSubmit(this.state.selected);
 	}
 
 	render() {
@@ -244,6 +251,7 @@ class DeleteList extends Component {
 				<ul className="list-group">
 					{renderList}
 				</ul>
+				<Button color="secondary" size="lg" onClick={() => this.submitDelete()}>DELETE</Button>
 			</div>
 		)
 	}
