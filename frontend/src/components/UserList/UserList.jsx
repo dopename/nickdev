@@ -146,7 +146,7 @@ export default class UserList extends Component {
 					<div className="col-lg-6">
 						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:null}
 						{this.state.mode === 'create' ? <CreateList user_id={this.state.user.pk} onSubmit={this.submitCreateList} /> : null}
-						{this.state.mode === 'delete' ? <DeleteList onSubmit={this.submitDeleteList} /> : null}
+						{this.state.mode === 'delete' ? <DeleteList user_list={this.state.user_list} onSubmit={this.submitDeleteList} /> : null}
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
