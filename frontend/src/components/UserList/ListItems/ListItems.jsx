@@ -84,7 +84,7 @@ export default class ListItems extends Component {
 	}
 
 	handleChange(e) {
-		if (e.target.getAttribute('name') === 'description') {
+		if (e.target.name === 'description') {
 			this.setState({description:e.taget.value})
 		}
 		else {
