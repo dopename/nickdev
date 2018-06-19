@@ -23,6 +23,7 @@ export default class Home extends Component {
 		this.changePage = this.changePage.bind(this);
 		this.toggleNavbar = this.toggleNavbar.bind(this);
 		this.toggleSideNav = this.toggleSideNav.bind(this);
+		this.refreshToken = this.refreshToken.bind(this);
 	}
 
 	componentDidMount() {
@@ -47,7 +48,21 @@ export default class Home extends Component {
 		.then(json => {
 		  console.log(json);
 		  localStorage.setItem('token', json.token);
-		  this.setState({activePage:'home', logged_in:true});
+		  this.setState({activePage:'home', logged_in:true, user:json.user});
+		})
+	}
+
+	refreshToken() {
+		fetch('https://www.nicksdevenv.com/refresh-token/', {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization:`JWT ${localStorage.getItem('token')}`
+			},
+			body:JSON.stringify(localStorage.getItem('token'))
+		})
+		.then(json => {
+			localStorage.setItem('token', json.token)
 		})
 	}
 
@@ -93,7 +108,7 @@ export default class Home extends Component {
 						<div className={this.state.sideNav ? "col-lg-8" : "col-lg-11 content-small-sidebar"}>
 							<div className="container">
 								{this.state.activePage === 'home' ? <HomeContent /> : null}
-								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} /> : null}
+								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} refreshToken={this.refreshToken} /> : null}
 								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
 							</div>
 						</div>

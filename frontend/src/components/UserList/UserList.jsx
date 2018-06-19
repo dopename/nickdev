@@ -43,20 +43,6 @@ export default class UserList extends Component {
 
 	}
 
-	refreshToken() {
-		fetch('https://www.nicksdevenv.com/refresh-token/', {
-			method:'post',
-			headers: {
-				"content-type":"application/json",
-				Authorization:`JWT ${localStorage.getItem('token')}`
-			},
-			body:JSON.stringify(localStorage.getItem('token'))
-		})
-		.then(json => {
-			localStorage.setItem('token', json.token)
-		})
-	}
-
 	fetchUserList() {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
@@ -94,8 +80,11 @@ export default class UserList extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.setState({mode:'view'});
+				return response.json()
 			}
+		})
+		.then(json => { 
+			this.setState({mode:'view'}) ;
 		})
 	}
 
@@ -116,7 +105,7 @@ export default class UserList extends Component {
 			}
 		})
 		.then(json => {
-			this.setState({activeList:false, mode:'view', user_list:[...this.state.user_list, ...json]});
+			this.setState({activeList:false, mode:'view'});
 		})
 	}
 
@@ -234,21 +223,9 @@ class DeleteList extends Component {
 		this.setState({selected:pk})
 	}
 
-	// submitDelete(e) {
-	// 	e.preventDefault();
-	// 	this.props.onSubmit(this.state.selected);
-	// }
-
 	submitDelete(e) {
 		e.preventDefault();
-		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
-
-		fetch(url + this.state.selected + "/", {
-			method:"delete", 
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			}
-		})
+		this.props.onSubmit(this.state.selected);
 	}
 
 	render() {
