@@ -54,6 +54,7 @@ class ListItemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ListItem
 		fields = [
+			"pk",
 			"user_list",
 			"item_title",
 			"description"
