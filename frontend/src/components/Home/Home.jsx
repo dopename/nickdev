@@ -60,9 +60,7 @@ export default class Home extends Component {
 				"content-type":"application/json",
 				Authorization:`JWT ${localStorage.getItem('token')}`
 			},
-			body: {
-				token:JSON.stringify(localStorage.getItem('token'))
-			}
+			body: JSON.stringify({token:localStorage.getItem('token')})
 		})
 		.then(response => {
 			if (response.ok) {
@@ -81,9 +79,7 @@ export default class Home extends Component {
 				"content-type":"application/json",
 				Authorization:`JWT ${localStorage.getItem('token')}`
 			},
-			body: {
-				token: JSON.stringify(localStorage.getItem('token'))
-			}
+			body: JSON.stringify({token:localStorage.getItem('token')})
 		})
 		.then(response => {
 			if (response.ok) {
