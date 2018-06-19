@@ -15,6 +15,7 @@ export default class UserList extends Component {
 
 		this.toggleActiveList = this.toggleActiveList.bind(this);
 		this.submitCreateList = this.submitCreateList.bind(this);
+		this.infoFromToken = this.infoFromToken.bind(this)
 	}
 
 	componentDidMount() {
