@@ -73,7 +73,7 @@ export default class UserList extends Component {
 	}
 
 	render() {
-		var currentItemList = this.state.activeList ? this.state.user_list[this.state.user_list.findIndex((elem) { elem.pk === this.state.activeList })].list_items : false
+		var currentItemList = this.state.activeList ? this.state.user_list[this.state.user_list.findIndex((elem) => { elem.pk === this.state.activeList })].list_items : false
 
 		var renderList = [];
 
