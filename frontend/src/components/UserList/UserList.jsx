@@ -18,6 +18,7 @@ export default class UserList extends Component {
 		this.infoFromToken = this.infoFromToken.bind(this)
 		this.submitDeleteList = this.submitDeleteList.bind(this);
 		this.submitCreateList = this.submitCreateList.bind(this);
+		this.fetchUserList = this.fetchUserList.bind(this);
 	}
 
 	componentDidMount() {
