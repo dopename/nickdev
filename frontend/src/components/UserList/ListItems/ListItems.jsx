@@ -58,7 +58,7 @@ export default class ListItems extends Component {
 				"content-type":"application/json",
 				Authorization: `JWT ${localStorage.getItem('token')}`,
 			},
-			body: JSON.stringify({data})
+			body: JSON.stringify(data)
 		})
 		.then(response => {
 			if (response.ok) {
