@@ -68,6 +68,24 @@ export default class UserList extends Component {
 		}
 	}
 
+	submitCreateList(data) {
+		var url = "https://www.nicksdevenv.com/api/user_list/"
+
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify(data);
+		})
+		.then(response => {
+			if (response.ok) {
+				this.setState({activeList:false, mode:'view'})
+			}
+		})
+	}
+
 	toggleView() {
 		var newValue = this.state.mode === 'view' ? 'create' : 'view';
 		this.setState({mode:newValue, activeList:false});
@@ -89,8 +107,7 @@ export default class UserList extends Component {
 				</div>
 				<div className="row">
 					<div className="col-lg-6">
-						<h3>Lists</h3>
-						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:null}
+						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:<CreateList user_id={this.state.user.pk} onSubmit={this.submitCreateList} />}
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
@@ -115,9 +132,44 @@ class Lists extends Component {
 			renderList.push(<li key={ul.pk} onClick={() => this.props.toggleActiveList(ul.pk)} className={this.props.activeList === ul.pk ? "list-group-item pointer-hand active" : "list-group-item pointer-hand"}>{ul.list_title}</li>);
 		});
 		return (
-			<ul className="list-group">
-				{renderList}
-			</ul>
+			<div>
+				<h3>Lists</h3>
+				<ul className="list-group">
+					{renderList}
+				</ul>
+			</div>
+		)
+	}
+}
+
+class CreateList extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			list_title:""
+		}
+	}
+
+	cleanData(data) {
+		var newData = {
+			custom_user:this.props.user_id,
+			list_title:this.state.list_title,
+		}
+
+		this.props.onSubmit(newData);
+	}
+
+	handleChange(e) {
+		this.setState({list_title:e.target.value});
+	}
+
+	render() {
+		return (
+			<form className="form-control" onSubmit={this.cleanData}>
+				<input className="form-control" type="text" name="name" value={this.state.list_title} onChange={this.handleChange} />
+				<input type="submit" value="Submit" />
+			</form>
 		)
 	}
 }
