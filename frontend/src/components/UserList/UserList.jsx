@@ -127,6 +127,7 @@ export default class UserList extends Component {
 						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
 					</div>
 					<div class="col-lg-3 text-center">
+						<Button outline color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
 					</div>
 					<div class="col-lg-3 text-center">
 					</div>
