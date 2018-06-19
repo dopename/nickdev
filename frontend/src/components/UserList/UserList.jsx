@@ -55,6 +55,9 @@ export default class UserList extends Component {
 
 	//fetchUserList obtains the information for each userList item that a user has
 	fetchUserList(user) {
+		if (user === false) {
+			user = this.state.user
+		}
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
 		var queries = user.user_list.map((ul) => {
@@ -131,10 +134,10 @@ export default class UserList extends Component {
 						<Button outline className={this.state.mode === "create" ? "active" : null} color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
 					</div>
 					<div class="col-lg-3 text-center">
-						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
+						<Button outline className={this.state.mode === "delete" ? "active" : null} color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
 					</div>
 					<div class="col-lg-3 text-center">
-						<Button outline color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
+						<Button outline className={this.state.mode === "view" ? "active" : null} color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
 					</div>
 					<div class="col-lg-3 text-center">
 					</div>
@@ -147,7 +150,7 @@ export default class UserList extends Component {
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
-						{ this.state.activeList ? <ListItems items={currentItemList} /> : null }
+						{ this.state.activeList ? <ListItems updateList={this.fetchUserList} items={currentItemList} /> : null }
 					</div>
 				</div>
 			</div>

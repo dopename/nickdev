@@ -7,6 +7,9 @@ export default class ListItems extends Component {
 		this.state = {
 			items:[],
 		}
+
+		this.addListItem = this.addListItem.bind(this);
+		this.deleteListItem = this.deleteListItem.bind(this);
 	}
 
 	componentDidMount() {
@@ -32,6 +35,40 @@ export default class ListItems extends Component {
 		})
 
 		Promise.all(queries).then( (data) => { this.setState({items:data}) })
+	}
+
+	addListItem(data) {
+		var url = "https://www.nicksdevenv.com/api/list_item/"
+
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify({data})
+		})
+		.then(response => {
+			if (response.ok) {
+				this.props.updateList();
+			}
+		})
+	}
+
+	deleteListItem(e) {
+		var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
+
+		fetch(url + e + "/" {
+			method: "delete",
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			}
+		})
+		.then(response => {
+			if (response.ok) {
+				this.props.updateList();
+			}
+		})
 	}
 
 	render() {
