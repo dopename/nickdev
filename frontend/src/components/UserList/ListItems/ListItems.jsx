@@ -71,11 +71,10 @@ export default class ListItems extends Component {
 
 	}
 
-	deleteListItem(e) {
-		e.prventDefault();
+	deleteListItem(pk) {
 		var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
 
-		fetch(url + e + "/", {
+		fetch(url + pk + "/", {
 			method: "delete",
 			headers: {
 				Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -113,7 +112,7 @@ export default class ListItems extends Component {
 			renderItems.push(
 				<li className="list-group-item">
 					<h4 key={item.pk}>
-						<i onClick={() => this.toggleAccordianClick(item.pk)} className="text-info float-left fa fa-arrows pointer-hand"></i>{item.item_title}<i className="fa fa-close text-danger float-right"></i>
+						<i onClick={() => this.toggleAccordianClick(item.pk)} className="text-info float-left fa fa-arrows pointer-hand"></i>{item.item_title}<i onClick={() => this.deleteListItem(item.pk)} className="fa fa-close text-danger float-right"></i>
 					</h4>
 					<h4 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-block text-left" : "d-none"}>{item.description}</h4>
 				</li>
