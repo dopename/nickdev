@@ -52,7 +52,7 @@ export default class UserList extends Component {
 			},
 			body:JSON.stringify(localStorage.getItem('token'))
 		})
-		.then(() => {
+		.then(json => {
 			localStorage.setItem('token', json.token)
 		})
 	}
