@@ -52,6 +52,13 @@ class UserListDestroyView(generics.DestroyAPIView):
 	lookup_field = 'pk'
 	serializer_class = UserListDestroySerializer
 
+	def get_queryset(self):
+		qs = UserList.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
 
 class ListItemUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 	lookup_field = 'pk'
@@ -68,6 +75,13 @@ class ListItemUpdateRetrieveView(generics.RetrieveUpdateAPIView):
 class ListItemDestroyView(generics.DestroyAPIView):
 	lookup_field = 'pk'
 	serializer_class = ListItemDestroySerializer
+
+	def get_queryset(self):
+		qs = ListItem.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
 
 
 class ListItemCreateView(generics.CreateAPIView):
