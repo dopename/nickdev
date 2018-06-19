@@ -66,7 +66,7 @@ class ListItemCreateSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ListItem
 		fields = [
-			"title",
+			"item_title",
 			"description"
 		]
 

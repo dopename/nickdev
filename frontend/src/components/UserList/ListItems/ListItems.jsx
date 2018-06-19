@@ -9,6 +9,7 @@ export default class ListItems extends Component {
 			new_item_title:'',
 			description:'',
 			accordianDisplay:false,
+			editActive:false,
 
 		}
 
@@ -46,28 +47,55 @@ export default class ListItems extends Component {
 	addListItem(e) {
 		e.preventDefault();
 
-		var data = {
-			user_list:this.props.list,
-			item_title:this.state.new_item_title,
-			description:this.state.description,
-		}
-
-		var url = "https://www.nicksdevenv.com/api/list_item/"
-
-		fetch(url, {
-			method:'post',
-			headers: {
-				"content-type":"application/json",
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			},
-			body: JSON.stringify(data)
-		})
-		.then(response => {
-			if (response.ok) {
-				this.setState({new_item_title:'', description:''})
-				this.props.updateList();
+		if (!this.state.editActive) {
+			var data = {
+				user_list:this.props.list,
+				item_title:this.state.new_item_title,
+				description:this.state.description,
 			}
-		})
+
+			var url = "https://www.nicksdevenv.com/api/list_item/"
+
+			fetch(url, {
+				method:'post',
+				headers: {
+					"content-type":"application/json",
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => {
+				if (response.ok) {
+					this.setState({new_item_title:'', description:'', editActive:false})
+					this.props.updateList();
+				}
+			})
+		}
+		else {
+			var data = {
+				pk:this.state.editActive,
+				user_list:this.state.items[this.state.items.map(e => e.pk).indexOf(this.state.accordianDisplay)].custom_user,
+				item_title:this.state.new_item_title,
+				description:this.state.description,
+			}
+
+			var url = "https://www.nicksdevenv.com/api/list_item/"
+
+			fetch(url + data.pk + "/", {
+				method:'put',
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+					"content-type":"application/json",
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => {
+				if (response.ok) {
+					this.setState({editActive:false});
+					this.fetchListItems();
+				}
+			})
+		}
 
 	}
 
@@ -85,6 +113,11 @@ export default class ListItems extends Component {
 				this.props.updateList();
 			}
 		})
+	}
+
+	toggleEdit(pk) {
+		var item = this.state.items[this.state.items.map(e => e.pk).indexOf(this.state.accordianDisplay)]
+		this.setState({editActive:pk, new_item_title:item.item_title, description:item.description});
 	}
 
 	handleChange(e) {

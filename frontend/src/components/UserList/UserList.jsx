@@ -270,4 +270,5 @@ class DeleteList extends Component {
 	}
 }
 
+
 //`JWT ${localStorage.getItem('token')}`
