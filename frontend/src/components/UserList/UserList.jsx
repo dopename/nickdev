@@ -7,7 +7,6 @@ export default class UserList extends Component {
 		super(props)
 
 		this.state = {
-			default:false,
 			user_list:[],
 			user:false,
 			mode:'view',
@@ -89,9 +88,9 @@ export default class UserList extends Component {
 				<div className="row">
 					<div className="col-lg-6">
 						<h3>Lists</h3>
-						<ul className="list-group">
+						{this.state.mode === 'view' ? (<ul className="list-group">
 							{renderList}
-						</ul>
+						</ul>) : null }
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
