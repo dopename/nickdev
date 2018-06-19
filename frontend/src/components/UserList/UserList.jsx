@@ -234,7 +234,8 @@ class DeleteList extends Component {
 		this.setState({selected:pk})
 	}
 
-	submitDelete() {
+	submitDelete(e) {
+		e.preventDefault();
 		this.props.onSubmit(this.state.selected);
 	}
 
