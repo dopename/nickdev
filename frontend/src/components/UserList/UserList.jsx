@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import ListItems from './ListItems/ListItems'
 
 export default class UserList extends Component {
 	constructor(props) {
@@ -72,6 +73,8 @@ export default class UserList extends Component {
 	}
 
 	render() {
+		var currentItemList = this.state.activeList ? this.state.user_list[this.state.user_list.findIndex((elem) { elem.pk === this.state.activeList })].list_items : false
+
 		var renderList = [];
 
 		this.state.user_list.map((ul) => {
@@ -85,12 +88,14 @@ export default class UserList extends Component {
 				</div>
 				<div className="row">
 					<div className="col-lg-6">
-						<h3>Existing Lists</h3>
+						<h3>Lists</h3>
 						<ul className="list-group">
 							{renderList}
 						</ul>
 					</div>
 					<div className="col-lg-6">
+						<h3>Items</h3>
+						{ this.state.activeList ? <ListItems items={currentItemList} /> : null }
 					</div>
 				</div>
 			</div>
