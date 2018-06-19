@@ -109,9 +109,9 @@ export default class ListItems extends Component {
 
 		this.state.items.map((item) => {
 			renderItems.push(
-				<li>
-					<h4 key={item.pk} onClick={() => this.toggleAccordianClick(item.pk)} className="list-group-item pointer-hand">{item.item_title}</h4>
-					<h4 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-none":"list-group-item d-block"}>{item.description}</h4>
+				<li className="list-group-item">
+					<h4 key={item.pk} onClick={() => this.toggleAccordianClick(item.pk)} className="pointer-hand">{item.item_title}</h4>
+					<h4 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-none":"d-block"}>{item.description}</h4>
 				</li>
 				)
 		})
