@@ -58,7 +58,7 @@ export default class ListItems extends Component {
 	deleteListItem(e) {
 		var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
 
-		fetch(url + e + "/" {
+		fetch(url + e + "/", {
 			method: "delete",
 			headers: {
 				Authorization: `JWT ${localStorage.getItem('token')}`,
