@@ -70,7 +70,7 @@ export default class UserList extends Component {
 			})
 			.then(response => response.json())
 		})
-		Promise.all(queries).then( (data) => { this.setState({user_list:data, activeList:false}) })
+		Promise.all(queries).then( (data) => { this.setState({user_list:data}) })
 	}
 
 	//toggleActiveList toggles which list is currently active
@@ -152,7 +152,7 @@ export default class UserList extends Component {
 					</div>
 					<div className="col-lg-6">
 						<h3>Items</h3>
-						{ this.state.activeList ? <ListItems updateList={this.fetchUserList} list={this.state.activeList} items={currentItemList} /> : null }
+						{ this.state.activeList ? <ListItems updateList={this.infoFromToken} list={this.state.activeList} items={currentItemList} /> : null }
 					</div>
 				</div>
 			</div>

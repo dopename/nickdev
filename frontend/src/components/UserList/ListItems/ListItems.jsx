@@ -62,7 +62,7 @@ export default class ListItems extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.props.updateList(false);
+				this.props.updateList();
 			}
 		})
 	}
@@ -79,7 +79,7 @@ export default class ListItems extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.props.updateList(false);
+				this.props.updateList();
 			}
 		})
 	}
