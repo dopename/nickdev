@@ -14,6 +14,7 @@ export default class UserList extends Component {
 		}
 
 		this.toggleActiveList = this.toggleActiveList.bind(this);
+		this.submitCreateList = this.submitCreateList.bind(this);
 	}
 
 	componentDidMount() {
@@ -149,6 +150,9 @@ class CreateList extends Component {
 		this.state = {
 			list_title:""
 		}
+
+		this.cleanData = this.cleanData.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	cleanData(data) {
@@ -167,7 +171,7 @@ class CreateList extends Component {
 	render() {
 		return (
 			<form className="form-control" onSubmit={this.cleanData}>
-				<input className="form-control" type="text" name="name" value={this.state.list_title} onChange={this.handleChange} />
+				<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
 				<input type="submit" value="Submit" />
 			</form>
 		)
