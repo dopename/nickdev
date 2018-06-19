@@ -64,6 +64,7 @@ export default class ListItems extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
+				this.setState({new_item_title:'', description:''})
 				this.props.updateList();
 			}
 		})
