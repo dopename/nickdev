@@ -121,7 +121,7 @@ export default class UserList extends Component {
 	}
 
 	toggleView(view) {
-		var newValue = this.state.mode === 'view' ? 'create' : 'view';
+		var newValue = this.state.mode === view ? 'view' : view;
 		this.setState({mode:newValue, activeList:false});
 	}
 
@@ -131,13 +131,15 @@ export default class UserList extends Component {
 		return (
 			<div>
 				<div className="row">
-					<div class="col-lg-4 text-center">
-						<Button outline color="success" size="lg" onClick={() => this.toggleView('create')}>Create new list</Button>
+					<div class="col-lg-3 text-center">
+						<Button outline color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
 					</div>
-					<div class="col-lg-4 text-center">
+					<div class="col-lg-3 text-center">
 						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
 					</div>
-					<div class="col-lg-4 text-center">
+					<div class="col-lg-3 text-center">
+					</div>
+					<div class="col-lg-3 text-center">
 					</div>
 				</div>
 				<div className="row">
