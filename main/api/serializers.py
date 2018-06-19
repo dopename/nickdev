@@ -21,7 +21,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
 
 class UserListCreateSerializer(serializers.ModelSerializer):
-	list_items = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
 	class Meta:
 		model = UserList
