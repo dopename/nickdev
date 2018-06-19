@@ -155,7 +155,8 @@ class CreateList extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	cleanData(data) {
+	cleanData(e) {
+		e.preventDefault();
 		var newData = {
 			custom_user:this.props.user_id,
 			list_title:this.state.list_title,
