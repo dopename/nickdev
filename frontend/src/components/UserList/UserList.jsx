@@ -230,8 +230,8 @@ class DeleteList extends Component {
 		this.submitDelete = this.submitDelete.bind(this);
 	}
 
-	toggleActive(e) {
-		this.setState({selecter:e})
+	toggleActive(pk) {
+		this.setState({selected:pk})
 	}
 
 	submitDelete() {
