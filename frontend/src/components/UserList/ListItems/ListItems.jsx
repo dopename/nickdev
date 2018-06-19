@@ -7,7 +7,7 @@ export default class ListItems extends Component {
 		this.state = {
 			items:[],
 			new_item_title:'',
-			new_item_description:'',
+			description:'',
 			accordianDisplay:false,
 
 		}
@@ -67,6 +67,7 @@ export default class ListItems extends Component {
 				this.props.updateList();
 			}
 		})
+
 	}
 
 	deleteListItem(e) {
