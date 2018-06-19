@@ -32,6 +32,7 @@ export default class UserList extends Component {
 		}
 	}
 
+	//infoFromToken queries the token-verify endpoint and sets state with the use object
 	infoFromToken() {
 		var url = "https://www.nicksdevenv.com/token-verify/"
 
@@ -52,6 +53,7 @@ export default class UserList extends Component {
 
 	}
 
+	//fetchUserList obtains the information for each userList item that a user has
 	fetchUserList(user) {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
@@ -67,6 +69,7 @@ export default class UserList extends Component {
 		Promise.all(queries).then( (data) => { this.setState({user_list:data}) })
 	}
 
+	//toggleActiveList toggles which list is currently active
 	toggleActiveList(pk) {
 		if (this.state.activeList === pk) {
 			this.setState({activeList:false});
@@ -76,6 +79,7 @@ export default class UserList extends Component {
 		}
 	}
 
+	//submitDeleteList deletes a list item and calls upon the verifyToken prop to update values
 	submitDeleteList(data) {
 		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
 
@@ -92,6 +96,7 @@ export default class UserList extends Component {
 		})
 	}
 
+	//submitCreateList creates a list item and calls upon the verifyToken prop to update values
 	submitCreateList(data) {
 		var url = "https://www.nicksdevenv.com/api/user_list/"
 
@@ -110,6 +115,7 @@ export default class UserList extends Component {
 		})
 	}
 
+
 	toggleView(view) {
 		var newValue = this.state.mode === view ? 'view' : view;
 		this.setState({mode:newValue, activeList:false});
@@ -122,7 +128,7 @@ export default class UserList extends Component {
 			<div>
 				<div className="row">
 					<div class="col-lg-3 text-center">
-						<Button outline color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
+						<Button outline {this.state.mode === "create" ? "active" : null} color="success" size="lg" onClick={() => this.toggleView('create')}>Create a list</Button>
 					</div>
 					<div class="col-lg-3 text-center">
 						<Button outline color="danger" size="lg" onClick={() => this.toggleView('delete')}>Delete a list</Button>
