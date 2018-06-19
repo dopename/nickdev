@@ -47,7 +47,7 @@ export default class ListItems extends Component {
 		var data = {
 			user_list:this.props.list,
 			item_title:this.state.new_item_title,
-			description:this.state.new_item_description,
+			description:this.description,
 		}
 
 		var url = "https://www.nicksdevenv.com/api/list_item/"
