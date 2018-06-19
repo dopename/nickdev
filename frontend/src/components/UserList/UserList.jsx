@@ -140,6 +140,7 @@ export default class UserList extends Component {
 						<Button outline className={this.state.mode === "view" ? "active" : null} color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
 					</div>
 					<div class="col-lg-3 text-center">
+						<Button outline className={this.state.mode === "edit" ? "active" : null} color="warning" size="lg" onClick={() => this.toggleView('edit')}>Edit a list</Button>
 					</div>
 				</div>
 				<div className="row">
@@ -211,8 +212,9 @@ class CreateList extends Component {
 		return (
 			<div>
 				<h3>Create a List</h3>
-				<form className="form-control" onSubmit={this.cleanData}>
+				<form onSubmit={this.cleanData}>
 					<input className="form-control" type="text" name="list_title" value={this.state.list_title} onChange={this.handleChange} />
+					<br/>
 					<input type="submit" className="form-control" value="Submit" />
 				</form>
 			</div>
@@ -257,6 +259,7 @@ class DeleteList extends Component {
 				</ul>
 				<form onSubmit={this.submitDelete}>
 					<input type="hidden" name="pk" value={this.state.selected} />
+					<br/>
 					<input type="submit" className="form-control" value="Submit" />
 				</form>
 			</div>
