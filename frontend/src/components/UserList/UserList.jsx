@@ -249,10 +249,11 @@ class DeleteList extends Component {
 			<div>
 				<h3>Delete List</h3>
 				<form onSubmit={this.submitDelete}>
-				<ul className="list-group">
-					{renderList}
-				</ul>
-				<input type="submit" value="Submit" />
+					<ul className="list-group">
+						{renderList}
+					</ul>
+					<input type="submit" value="Submit" />
+				</form>
 			</div>
 		)
 	}
