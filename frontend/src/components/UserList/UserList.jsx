@@ -85,19 +85,23 @@ export default class UserList extends Component {
 
 	//submitDeleteList deletes a list item and calls upon the verifyToken prop to update values
 	submitDeleteList(data) {
-		var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
+		var confirmed = window.confirm("Are you sure you want to delete?");
 
-		fetch(url + data + "/", {
-			method:"delete", 
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			}
-		})
-		.then(response => {
-			if (response.ok) {
-				this.props.verifyToken()
-			}
-		})
+		if (confirmed) {
+			var url = "https://www.nicksdevenv.com/api/destroy/user_list/"
+
+			fetch(url + data + "/", {
+				method:"delete", 
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					this.props.verifyToken()
+				}
+			})
+		}
 	}
 
 	//submitCreateList creates a list item and calls upon the verifyToken prop to update values

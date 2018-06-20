@@ -103,19 +103,23 @@ export default class ListItems extends Component {
 	}
 
 	deleteListItem(pk) {
-		var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
+		var confirmed = window.confirm("Are you sure you want to delete?");
 
-		fetch(url + pk + "/", {
-			method: "delete",
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			}
-		})
-		.then(response => {
-			if (response.ok) {
-				this.props.updateList();
-			}
-		})
+		if (confirmed) {
+			var url = "https://www.nicksdevenv.com/api/destroy/list_item/"
+
+			fetch(url + pk + "/", {
+				method: "delete",
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					this.props.updateList();
+				}
+			})
+		}
 	}
 
 	toggleEdit(pk) {
