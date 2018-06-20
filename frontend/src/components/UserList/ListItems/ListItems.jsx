@@ -169,7 +169,7 @@ export default class ListItems extends Component {
 					<textarea className="form-control" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
 					<br/>
 					<input type="submit" className="form-control" value={!this.state.editActive ? "Add Item" : "Update Item"} />
-					<Button outline color="danger" size="lg" onClick={() => this.cancelEdit()}>Cancel</Button>
+					<Button outline color="danger" className="btn-block" size="md" onClick={() => this.cancelEdit()}>Cancel</Button>
 				</form>
 			</div>
 		)
