@@ -18,6 +18,7 @@ export default class ListItems extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.toggleAccordianClick = this.toggleAccordianClick.bind(this);
 		this.toggleEdit = this.toggleEdit.bind(this);
+		this.cancelEdit = this.cancelEdit.bind(this);
 	}
 
 	componentDidMount() {
@@ -121,6 +122,10 @@ export default class ListItems extends Component {
 		this.setState({editActive:pk, new_item_title:item.item_title, description:item.description});
 	}
 
+	cancelEdit() {
+		this.setState({editActive:false, new_item_title:"", description:""})
+	}
+
 	handleChange(e) {
 		if (e.target.name === 'description') {
 			this.setState({description:e.target.value})
@@ -163,6 +168,7 @@ export default class ListItems extends Component {
 					<textarea className="form-control" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
 					<br/>
 					<input type="submit" className="form-control" value={!this.state.editActive ? "Add Item" : "Update Item"} />
+					<Button outline color="danger" size="lg" onClick={() => this.cancelEdit()}>Cancel</Button>
 				</form>
 			</div>
 		)
