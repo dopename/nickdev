@@ -165,8 +165,10 @@ export default class ListItems extends Component {
 				</ul>
 				<br/>
 				<form onSubmit={this.addListItem}>
-					<input className="form-control" type="text" name="new_item_title" value={this.state.new_item_title} onChange={this.handleChange} />
-					<textarea className="form-control" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
+					<h4 className="text-center mt-2">New Item Title</h4>
+					<input className="form-control my-1" type="text" name="new_item_title" value={this.state.new_item_title} onChange={this.handleChange} />
+					<h4 className="text-center">New Item Description</h4>
+					<textarea className="form-control mt-1" type="textarea" name="description" value={this.state.description} onChange={this.handleChange} />
 					<br/>
 					<input type="submit" className="form-control" value={!this.state.editActive ? "Add Item" : "Update Item"} />
 					<Button outline color="danger" className="btn-block" size="md" onClick={() => this.cancelEdit()}>Cancel</Button>
