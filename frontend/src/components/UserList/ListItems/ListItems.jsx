@@ -158,7 +158,7 @@ export default class ListItems extends Component {
 					<h4 key={item.pk}>
 						<i onClick={() => this.toggleAccordianClick(item.pk)} className="text-info float-left fa fa-arrows pointer-hand"></i><i onClick={() => this.toggleEdit(item.pk)} className="fa fa-pencil text-warning pointer-hand float-left ml-1"></i>{item.item_title}<i onClick={() => this.deleteListItem(item.pk)} className="fa fa-close text-danger pointer-hand float-right"></i>
 					</h4>
-					<h4 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-block text-left border-top border-dark" : "d-none"}>{item.description}</h4>
+					<h5 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-block text-left border-top border-dark" : "d-none"}>{item.description}</h5>
 				</li>
 				)
 		}, this)
