@@ -145,7 +145,7 @@ export default class UserList extends Component {
 						<Button outline className={this.state.mode === "view" ? "active" : null} color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row mt-2">
 					<div className="col-lg-6">
 						{this.state.mode === 'view' ? <Lists user_list={this.state.user_list} activeList={this.state.activeList} toggleActiveList={this.toggleActiveList} />:null}
 						{this.state.mode === 'create' ? <CreateList user_id={this.state.user.pk} onSubmit={this.submitCreateList} /> : null}
