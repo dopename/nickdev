@@ -22,9 +22,7 @@ export default class UserList extends Component {
 	}
 
 	componentDidMount() {
-		if (!this.props.user) {
-			this.infoFromToken();
-		}
+		this.infoFromToken();
 	}
 
 	componentDidUpdate(prevProps) {
