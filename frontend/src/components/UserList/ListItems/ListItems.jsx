@@ -75,7 +75,7 @@ export default class ListItems extends Component {
 		else {
 			var data = {
 				pk:this.state.editActive,
-				user_list:this.state.items[this.state.items.map(e => e.pk).indexOf(this.state.accordianDisplay)].custom_user,
+				user_list:this.state.items[this.state.items.map(e => e.pk).indexOf(this.state.editActive)].custom_user,
 				item_title:this.state.new_item_title,
 				description:this.state.description,
 			}
