@@ -144,6 +144,7 @@ export default class UserList extends Component {
 					<div class="col-lg-4 text-center mt-1">
 						<Button outline className={this.state.mode === "view" ? "active" : null} color="info" size="lg" onClick={() => this.toggleView('view')}>View lists</Button>
 					</div>
+					<hr/>
 				</div>
 				<div className="row">
 					<div className="col-lg-6">
