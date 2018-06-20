@@ -117,7 +117,7 @@ export default class ListItems extends Component {
 	}
 
 	toggleEdit(pk) {
-		var item = this.state.items[this.state.items.map(e => e.pk).indexOf(this.state.accordianDisplay)]
+		var item = this.state.items[this.state.items.map(e => e.pk).indexOf(pk)]
 		this.setState({editActive:pk, new_item_title:item.item_title, description:item.description});
 	}
 
@@ -146,7 +146,7 @@ export default class ListItems extends Component {
 			renderItems.push(
 				<li className="list-group-item">
 					<h4 key={item.pk}>
-						<i onClick={() => this.toggleAccordianClick(item.pk)} className="text-info float-left fa fa-arrows pointer-hand"></i>{item.item_title}<i onClick={() => this.toggleEdit(item.pk)} className="fa fa-pencil text-warning pointer-hand float-right"></i><i onClick={() => this.deleteListItem(item.pk)} className="fa fa-close text-danger pointer-hand float-right"></i>
+						<i onClick={() => this.toggleAccordianClick(item.pk)} className="text-info float-left fa fa-arrows pointer-hand"></i>{item.item_title}<i onClick={() => this.deleteListItem(item.pk)} className="fa fa-close text-danger pointer-hand float-right ml-1"></i><i onClick={() => this.toggleEdit(item.pk)} className="fa fa-pencil text-warning pointer-hand float-right"></i>
 					</h4>
 					<h4 key={"accordian" + item.pk} className={this.state.accordianDisplay === item.pk ? "d-block text-left" : "d-none"}>{item.description}</h4>
 				</li>
