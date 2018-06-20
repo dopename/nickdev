@@ -94,7 +94,7 @@ export default class ListItems extends Component {
 			})
 			.then(response => {
 				if (response.ok) {
-					this.setState({editActive:false});
+					this.setState({editActive:false, new_item_title:"", description:""});
 					this.fetchListItems();
 				}
 			})
