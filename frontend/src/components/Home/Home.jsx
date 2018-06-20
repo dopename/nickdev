@@ -27,10 +27,6 @@ export default class Home extends Component {
 		this.verifyToken = this.verifyToken.bind(this);
 	}
 
-	componentDidMount() {
-		return null
-	}
-
 	handleLogout(e) {
 		localStorage.removeItem('token');
 		this.setState({activePage:'home',logged_in:false});
