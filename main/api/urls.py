@@ -21,7 +21,7 @@ urlpatterns = [
 	path('phase/<int:pk>/', PhaseUpdateRetrieveView.as_view(), name="phase-update-retrieve-view"),
 	path('phase/', PhaseCreateView.as_view(), name="phase-create-view"),
 
-	path('destroy/objective/<int:pk>/', ObjectivemDestroyView.as_view(), name="objective-destroy-view"),
+	path('destroy/objective/<int:pk>/', ObjectiveDestroyView.as_view(), name="objective-destroy-view"),
 	path('objective/<int:pk>/', ObjectiveUpdateRetrieveView.as_view(), name="objective-update-retrieve-view"),
 	path('objective/', ObjectiveCreateView.as_view(), name="objective-create-view"),
 ]
