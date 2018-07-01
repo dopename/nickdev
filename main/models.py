@@ -51,7 +51,7 @@ class Objective(models.Model):
 	priority = models.IntegerField(blank=True, null=True)
 	completed = models.BooleanField(default=False)
 	file = models.FileField(blank=True, null=True)
-	due_date = mdoels.DateField()
+	due_date = models.DateField()
 	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
 
 
