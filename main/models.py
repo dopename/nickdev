@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 import os
 
 from rest_framework.reverse import reverse as api_reverse
@@ -50,6 +51,7 @@ class Objective(models.Model):
 	priority = models.IntegerField(blank=True, null=True)
 	completed = models.BooleanField(default=False)
 	file = models.FileField(blank=True, null=True)
+	due_date = mdoels.DateField()
 	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
 
 
