@@ -1,6 +1,6 @@
 from rest_framework import generics, mixins, status, permissions
 from django.contrib.auth.models import User
-from main.models import CustomUser, UserList, ListItem, Project, Phase, Objective
+from main.models import CustomUser, UserList, ListItem#, Project, Phase, Objective
 from .serializers  import *
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
@@ -101,107 +101,107 @@ class ListItemCreateView(generics.CreateAPIView):
 
 #####################################################################
 
-class ProjectUpdateRetrieveView(generics.RetrieveUpdateAPIView):
-	lookup_field = 'pk'
-	serializer_class = ProjectSerializer
-	# queryset = Solution.objects.all()
+# class ProjectUpdateRetrieveView(generics.RetrieveUpdateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ProjectSerializer
+# 	# queryset = Solution.objects.all()
 
-	def get_queryset(self):
-		qs = Project.objects.all()
-		query = self.request.GET.get('q')
-		if query is not None:
-			qs = qs.filter(pk=query)
-		return qs
+# 	def get_queryset(self):
+# 		qs = Project.objects.all()
+# 		query = self.request.GET.get('q')
+# 		if query is not None:
+# 			qs = qs.filter(pk=query)
+# 		return qs
 
-class ProjectDestroyView(generics.DestroyAPIView):
-	lookup_field = 'pk'
-	serializer_class = ProjectDestroySerializer
+# class ProjectDestroyView(generics.DestroyAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ProjectDestroySerializer
 
-	def get_queryset(self):
-		qs = Project.objects.all()
-		return qs
-
-
-class ProjectCreateView(generics.CreateAPIView):
-	lookup_field = 'pk'
-	serializer_class = ProjectSerializer
-	# queryset = Solution.objects.all()
-
-	def get_queryset(self):
-		qs = Project.objects.all()
-		return qs
-
-	def post(self, request, *args, **kwargs):
-		return self.create(request, *args, **kwargs)
-
-######################################################################
-
-class PhaseUpdateRetrieveView(generics.RetrieveUpdateAPIView):
-	lookup_field = 'pk'
-	serializer_class = PhaseSerializer
-	# queryset = Solution.objects.all()
-
-	def get_queryset(self):
-		qs = Phase.objects.all()
-		query = self.request.GET.get('q')
-		if query is not None:
-			qs = qs.filter(pk=query)
-		return qs
-
-class PhaseDestroyView(generics.DestroyAPIView):
-	lookup_field = 'pk'
-	serializer_class = PhaseDestroySerializer
-
-	def get_queryset(self):
-		qs = Phase.objects.all()
-		return qs
+# 	def get_queryset(self):
+# 		qs = Project.objects.all()
+# 		return qs
 
 
-class PhaseCreateView(generics.CreateAPIView):
-	lookup_field = 'pk'
-	serializer_class = PhaseSerializer
-	# queryset = Solution.objects.all()
+# class ProjectCreateView(generics.CreateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ProjectSerializer
+# 	# queryset = Solution.objects.all()
 
-	def get_queryset(self):
-		qs = Phase.objects.all()
-		return qs
+# 	def get_queryset(self):
+# 		qs = Project.objects.all()
+# 		return qs
 
-	def post(self, request, *args, **kwargs):
-		return self.create(request, *args, **kwargs)
+# 	def post(self, request, *args, **kwargs):
+# 		return self.create(request, *args, **kwargs)
 
-####################################################################
+# ######################################################################
 
-class ObjectiveUpdateRetrieveView(generics.RetrieveUpdateAPIView):
-	lookup_field = 'pk'
-	serializer_class = ObjectiveSerializer
-	# queryset = Solution.objects.all()
+# class PhaseUpdateRetrieveView(generics.RetrieveUpdateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = PhaseSerializer
+# 	# queryset = Solution.objects.all()
 
-	def get_queryset(self):
-		qs = Objective.objects.all()
-		query = self.request.GET.get('q')
-		if query is not None:
-			qs = qs.filter(pk=query)
-		return qs
+# 	def get_queryset(self):
+# 		qs = Phase.objects.all()
+# 		query = self.request.GET.get('q')
+# 		if query is not None:
+# 			qs = qs.filter(pk=query)
+# 		return qs
 
-class ObjectiveDestroyView(generics.DestroyAPIView):
-	lookup_field = 'pk'
-	serializer_class = ObjectiveDestroySerializer
+# class PhaseDestroyView(generics.DestroyAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = PhaseDestroySerializer
 
-	def get_queryset(self):
-		qs = Objective.objects.all()
-		return qs
+# 	def get_queryset(self):
+# 		qs = Phase.objects.all()
+# 		return qs
 
 
-class ObjectiveCreateView(generics.CreateAPIView):
-	lookup_field = 'pk'
-	serializer_class = ObjectiveSerializer
-	# queryset = Solution.objects.all()
+# class PhaseCreateView(generics.CreateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = PhaseSerializer
+# 	# queryset = Solution.objects.all()
 
-	def get_queryset(self):
-		qs = Objective.objects.all()
-		return qs
+# 	def get_queryset(self):
+# 		qs = Phase.objects.all()
+# 		return qs
 
-	def post(self, request, *args, **kwargs):
-		return self.create(request, *args, **kwargs)
+# 	def post(self, request, *args, **kwargs):
+# 		return self.create(request, *args, **kwargs)
+
+# ####################################################################
+
+# class ObjectiveUpdateRetrieveView(generics.RetrieveUpdateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ObjectiveSerializer
+# 	# queryset = Solution.objects.all()
+
+# 	def get_queryset(self):
+# 		qs = Objective.objects.all()
+# 		query = self.request.GET.get('q')
+# 		if query is not None:
+# 			qs = qs.filter(pk=query)
+# 		return qs
+
+# class ObjectiveDestroyView(generics.DestroyAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ObjectiveDestroySerializer
+
+# 	def get_queryset(self):
+# 		qs = Objective.objects.all()
+# 		return qs
+
+
+# class ObjectiveCreateView(generics.CreateAPIView):
+# 	lookup_field = 'pk'
+# 	serializer_class = ObjectiveSerializer
+# 	# queryset = Solution.objects.all()
+
+# 	def get_queryset(self):
+# 		qs = Objective.objects.all()
+# 		return qs
+
+# 	def post(self, request, *args, **kwargs):
+# 		return self.create(request, *args, **kwargs)
 
 

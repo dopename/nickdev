@@ -29,27 +29,27 @@ class ListItem(models.Model):
 		return str(self.list_item_id)
 
 
-class Project(models.Model):
-	project_id = models.AutoField(primary_key=True)
-	title = models.CharField(max_length=64)
-	members = models.ManyToManyField(CustomUser, related_name="projects")
+# class Project(models.Model):
+# 	project_id = models.AutoField(primary_key=True)
+# 	title = models.CharField(max_length=64)
+# 	members = models.ManyToManyField(CustomUser, related_name="projects")
 
 
-class Phase(models.Model):
-	phase_id = models.AutoField(primary_key=True)
-	title = models.CharField(max_length=64)
-	order = models.IntegerField()
-	project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="phases")
+# class Phase(models.Model):
+# 	phase_id = models.AutoField(primary_key=True)
+# 	title = models.CharField(max_length=64)
+# 	order = models.IntegerField()
+# 	project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="phases")
 
-class Objective(models.Model):
-	objective_id = models.AutoField(primary_key=True)
-	title = models.CharField(max_length=64)
-	order = models.IntegerField()
-	description = models.TextField()
-	notes = models.TextField()
-	priority = models.IntegerField(blank=True, null=True)
-	completed = models.BooleanField(default=False)
-	file = models.FileField(blank=True, null=True)
-	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
+# class Objective(models.Model):
+# 	objective_id = models.AutoField(primary_key=True)
+# 	title = models.CharField(max_length=64)
+# 	order = models.IntegerField()
+# 	description = models.TextField()
+# 	notes = models.TextField()
+# 	priority = models.IntegerField(blank=True, null=True)
+# 	completed = models.BooleanField(default=False)
+# 	file = models.FileField(blank=True, null=True)
+# 	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
 
 
