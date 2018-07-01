@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import CustomUser, UserList, ListItem
+from main.models import CustomUser, UserList, ListItem, Project, Phase, Objective
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -72,6 +72,109 @@ class ListItemCreateSerializer(serializers.ModelSerializer):
 
 class ListItemDestroySerializer(serializers.ModelSerializer):
 	model = ListItem
+	fields = [
+		"pk"
+	]
+
+#Serializers for the PROJECT MODEL
+
+class ProjectSerializer(serializers.ModelSerializer):
+	phases = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+	class Meta:
+		model = Project
+		fields = [
+			"pk",
+			"title",
+			"members",
+			"phases"
+		]
+
+
+class ProjectCreateSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Project
+		fields = [
+			"title",
+			"members"
+		]
+
+class ProjectDestroySerializer(serializers.ModelSerializer):
+	model = Project
+	fields = [
+		"pk"
+	]
+
+
+################################
+
+class PhaseSerializer(serializers.ModelSerializer):
+	objectives = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+	class Meta:
+		model = Phase
+		fields = [
+			"pk",
+			"title",
+			"order",
+			"project"
+		]
+
+
+class PhaseCreateSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Phase
+		fields = [
+			"title",
+			"order",
+			"project"
+		]
+
+class PhaseDestroySerializer(serializers.ModelSerializer):
+	model = Phase
+	fields = [
+		"pk"
+	]
+
+########################################
+
+
+class ObjectiveSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Objective
+		fields = [
+			"pk",
+			"title",
+			"order",
+			"description",
+			"notes",
+			"priority",
+			"completed",
+			"phase",
+			"created_ts",
+			"completed_ts"
+		]
+
+
+class ObjectiveCreateSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Objective
+		fields = [
+			"pk",
+			"title",
+			"order",
+			"description",
+			"notes",
+			"priority",
+			"phase",
+		]
+
+class ObjectiveDestroySerializer(serializers.ModelSerializer):
+	model = Objective
 	fields = [
 		"pk"
 	]
