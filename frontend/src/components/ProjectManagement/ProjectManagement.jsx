@@ -115,7 +115,7 @@ class ExistingProjects extends Component {
 			<div>
 				<TransitionGroup transitionName="test" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
 					{this.props.projects.length < 1 ? noProjects : null }
-					{this.props.projects.length > 0 && !this.state.activeProject > 0 ? <NormalList selectProject={this.selectProject} projects={this.state.projects} /> : null }
+					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList selectProject={this.selectProject} projects={this.state.projects} /> : null }
 					{this.state.activeProject ? <CoolList selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> : null }
 				</TransitionGroup>
 			</div>
