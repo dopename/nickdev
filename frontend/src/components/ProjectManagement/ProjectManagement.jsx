@@ -42,7 +42,7 @@ export default class ProjectManagement extends Component {
 }
 
 
-class ExitstingProjects extends Component {
+class ExistingProjects extends Component {
 	constructor(props) {
 		super(props)
 	}
