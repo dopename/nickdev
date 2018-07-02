@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage/LoginPage'
 import UserList from '../UserList/UserList'
+import ProjectManagement from '../ProjectManagement/ProjectManagement';
 import './Home.css'
 import { Nav, NavItem, NavLink, Button, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
 
