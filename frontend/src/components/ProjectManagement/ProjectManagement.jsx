@@ -11,6 +11,7 @@ export default class ProjectManagement extends Component {
 		}
 
 		this.changeView = this.changeView.bind(this);
+		this.fetchProjects = this.fetchProjects.bind(this);
 	}
 
 	componendDidMount() {
@@ -19,7 +20,7 @@ export default class ProjectManagement extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props != prevProps) {
-			this.fetchProjects();
+			this.fetchProjects(this.props.projects);
 		}
 	}
 
