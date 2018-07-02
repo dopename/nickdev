@@ -58,7 +58,7 @@ class ExistingProjects extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps != this.props) {
+		if (this.props != prevProps) {
 			this.fetchProjects();
 		}
 	}
@@ -79,7 +79,7 @@ class ExistingProjects extends Component {
 	}
 
 	render() {
-		console.log(this.props.projects);
+		console.log(this.state.projects);
 		const noProjects = (
 				<div>
 					<h3>It looks like you don't have any projects!</h3>
