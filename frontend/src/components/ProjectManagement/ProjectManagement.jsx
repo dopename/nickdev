@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+//import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './ProjectManagement.css';
 
 export default class ProjectManagement extends Component {
@@ -113,10 +114,10 @@ class ExistingProjects extends Component {
 
 		return (
 			<div>
-				<TransitionGroup>
+				<ReactCSSTransitionGroup transitionName="test" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
 					{this.props.projects.length < 1 ? noProjects : null }
-					{this.props.projects.length > 0 && !this.state.activeProject ? <CSSTransition classNames="fade" timeout={500}><NormalList selectProject={this.selectProject} projects={this.state.projects} /></CSSTransition> : <CSSTransition classNames="fade" timeout={500}><CoolList selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/></CSSTransition> }
-				</TransitionGroup>
+					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
+				</ReactCSSTransitionGroup>
 			</div>
 		)
 	}
