@@ -4,7 +4,7 @@
 
 .test-enter.test-enter-active {
   opacity: 1;
-  transition: 800ms;
+  transition: 1000ms;
 }
 
 .test-leave {
@@ -13,5 +13,5 @@
 
 .test-leave.test-leave-active {
   opacity: 0.01;
-  transition: 500ms;
+  transition: 100ms;
 }
