@@ -54,19 +54,19 @@ class ExistingProjects extends Component {
 	}
 
 	componendDidMount() {
-		this.fetchProjects();
+		this.fetchProjects(this.props.projects);
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props != prevProps) {
-			this.fetchProjects();
+			this.fetchProjects(this.props.projects);
 		}
 	}
 
-	fetchProjects() {
+	fetchProjects(projects) {
 		const url = "https://www.nicksdevenv.com/api/project/"
 
-		var queries = this.props.projects.map((project) => {
+		var queries = projects.map((project) => {
 			return fetch(url + project + '/', {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -90,7 +90,8 @@ class ExistingProjects extends Component {
 
 		return (
 			<div>
-				{this.props.projects.length > 0 ? <ViewProjects projects={this.state.projects} /> : noProjects }
+				{this.props.projects.length > 0 ? <ViewProjects projects={this.state.projects} /> : null }
+				{this.props.projects.length < 1 ? noProjects : null }
 			</div>
 		)
 	}
