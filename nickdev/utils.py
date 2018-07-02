@@ -11,7 +11,8 @@ def my_jwt_response_handler(token, user=None, request=None):
 		'user': {
 			'pk':False,
 			'username':False,
-			'user_list':False
+			'user_list':False, 
+			'projects':False
 		}
 	}
 
@@ -19,5 +20,6 @@ def my_jwt_response_handler(token, user=None, request=None):
 		returnData['user']['pk'] = current_user.pk
 		returnData['user']['username'] = current_user.user.username
 		returnData['user']['user_list'] = [x.pk for x in current_user.user_list.all()]
+		returnData['user']['projects'] = [y.pk for y in current_user.project.all()]
 
 	return returnData

@@ -27,6 +27,12 @@ export default class Home extends Component {
 		this.verifyToken = this.verifyToken.bind(this);
 	}
 
+	componentDidMount() {
+		if (this.state.logged_in) {
+			this.verifyToken()
+		}
+	}
+
 	handleLogout(e) {
 		localStorage.removeItem('token');
 		this.setState({activePage:'home',logged_in:false});
@@ -115,6 +121,9 @@ export default class Home extends Component {
 						<NavItem>
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
 						</NavItem>
+						<NavItem>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('pm')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Project Management <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
+						</NavItem>
 					</Nav>
 			)
 
@@ -131,6 +140,7 @@ export default class Home extends Component {
 								{this.state.activePage === 'home' ? <HomeContent /> : null}
 								{this.state.activePage === 'user_list' ? <UserList user={this.state.user} refreshToken={this.refreshToken} verifyToken={this.verifyToken} /> : null}
 								{this.state.activePage === 'login' ? <LoginPage handleLogin={this.handleLogin} /> : null}
+								{this.state.activePage === 'pm' ? <ProjectManagement /> : null }
 							</div>
 						</div>
 						{this.state.sideNav ? <div className="col-lg-2"></div> : null}
