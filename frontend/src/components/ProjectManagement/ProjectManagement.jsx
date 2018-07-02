@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button } from 'reactstrap';
+import { CSSTransition } from 'react-transition-group';
+import './ProjectManagement.css';
 
 export default class ProjectManagement extends Component {
 	constructor(props) {
@@ -47,10 +49,12 @@ class ExistingProjects extends Component {
 		super(props)
 
 		this.state = {
-			projects: []
+			projects: [],
+			activeProject: false,
 		}
 
 		this.fetchProjects = this.fetchProjects.bind(this);
+		this.selectProject = this.selectProject.bind(this);
 	}
 
 	componentDidMount() {
@@ -78,6 +82,15 @@ class ExistingProjects extends Component {
 		Promise.all(queries).then( (data) => { this.setState({projects:data}) })
 	}
 
+	selectProject(pk) {
+		if (this.state.activeProject === pk) {
+			this.setState({activeProject:false});
+		}
+		else {
+			this.setState({activeProject:pk});
+		}
+	}
+
 	render() {
 		console.log(this.props.projects);
 		const noProjects = (
@@ -88,19 +101,66 @@ class ExistingProjects extends Component {
 				</div>
 			)
 
-		const renderProjects = []
+		// const renderProjects = []
 
-		this.state.projects.map((project) => {
-			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
-		})
+		// this.state.projects.map((project) => {
+		// 	renderProjects.push(<li key={project.pk} 
+		// 							onClick={ () => {this.selectProject(project.pk)} } 
+		// 							className={this.state.activeProject === project.pk ? "list-group-item btn-outline-info pointer-hand active": "list-group-item btn-outline-info pointer-hand"}>
+		// 							{project.title}
+		// 							</li>)
+		// })
 
 		return (
 			<div>
-				{this.props.projects.length > 0 ? <ul className="list-group">{renderProjects}</ul> : noProjects }
+				<CSSTransition transitionName="test" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+					{this.props.projects.length && !this.state.activeProject > 0 ? <NormalList selectProject={this.selectProject} projects={this.state.projects} /> : noProjects }
+					{this.state.activeProject ? <CoolList selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> : null }
+				</CSSTransition>
 			</div>
 		)
 	}
 }
+
+class NormalList extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		const renderProjects = []
+
+		this.props.projects.map((project) => {
+			renderProjects.push(<li key={project.pk} 
+									onClick={ () => {this.selectProject(project.pk)} } 
+									className={this.state.activeProject === project.pk ? "list-group-item btn-outline-info pointer-hand active": "list-group-item btn-outline-info pointer-hand"}>
+									{project.title}
+									</li>)
+		})
+		return (
+			<ul className="list-group">
+				{renderProjects}
+			</ul>
+		)
+	}
+}
+
+class CoolList extends Componenet {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		const p = this.props.project
+		return (
+			<ul className="list-group">
+				<li key={p.pk} className="list-group-item btn-outline-info pointer-hand active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
+			</ul>
+		)
+	}
+}
+
+
 
 class NewProject extends Component {
 	constructor(props) {

@@ -1,0 +1,21 @@
+.test-enter {
+  opacity: 0.01;
+  width: 0px;
+}
+
+.test-enter.test-enter-active {
+  opacity: 1;
+  width: 100px;
+  transition: 700ms;
+}
+
+.test-leave {
+  opacity: 1;
+  width: 100px;
+}
+
+.test-leave.test-leave-active {
+  opacity: 0.01;
+  width: 0px;
+  transition: 700ms;
+}
