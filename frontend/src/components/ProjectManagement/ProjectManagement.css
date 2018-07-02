@@ -13,5 +13,5 @@
 
 .test-leave.test-leave-active {
   opacity: 0.01;
-  transition: 100ms ease-in-out;;
+  transition: 1000ms ease-in-out;;
 }
