@@ -54,7 +54,7 @@ class ExistingProjects extends Component {
 	}
 
 	render() {
-
+		console.log(this.props.projects);
 		const noProjects = (
 				<div>
 					<h3>It looks like you don't have any projects!</h3>
@@ -74,7 +74,7 @@ class ExistingProjects extends Component {
 
 		return (
 			<div>
-				{this.props.projects ? <ul className="list-group">renderProjects</ul> : noProjects }
+				{this.props.projects ? <ul className="list-group">{renderProjects}</ul> : noProjects }
 			</div>
 		)
 	}
