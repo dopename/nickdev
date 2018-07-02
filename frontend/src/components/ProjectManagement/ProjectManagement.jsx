@@ -132,7 +132,7 @@ class NormalList extends Component {
 
 		this.props.projects.map((project) => {
 			renderProjects.push(<li key={project.pk} 
-									onClick={ () => {this.selectProject(project.pk)} } 
+									onClick={ () => {this.props.selectProject(project.pk)} } 
 									className="list-group-item btn-outline-info pointer-hand">
 									{project.title}
 									</li>)
