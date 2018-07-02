@@ -217,17 +217,17 @@ class Phases extends Component {
 	}
 }
 
-class PhaseObjectives extends Component {
-	constructor(props) {
-		super(props)
-	}
+// class PhaseObjectives extends Component {
+// 	constructor(props) {
+// 		super(props)
+// 	}
 
-	render() {
-		return (
+// 	render() {
+// 		return (
 
-		)
-	}
-}
+// 		)
+// 	}
+// }
 
 
 class NewProject extends Component {
