@@ -1,21 +1,14 @@
-.test-enter {
+.fade-enter {
   opacity: 0.01;
-  width: 0px;
 }
-
-.test-enter.test-enter-active {
+.fade-enter-active {
   opacity: 1;
-  width: 100px;
-  transition: 700ms;
+  transition: opacity 500ms ease-in;
 }
-
-.test-leave {
+.fade-exit {
   opacity: 1;
-  width: 100px;
 }
-
-.test-leave.test-leave-active {
+.fade-exit-active {
   opacity: 0.01;
-  width: 0px;
-  transition: 700ms;
+  transition: opacity 500ms ease-in;
 }
