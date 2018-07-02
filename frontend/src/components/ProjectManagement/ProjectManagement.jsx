@@ -14,7 +14,7 @@ export default class ProjectManagement extends Component {
 		this.fetchProjects = this.fetchProjects.bind(this);
 	}
 
-	componendDidMount() {
+	componentDidMount() {
 		this.fetchProjects(this.props.projects);
 	}
 
@@ -88,7 +88,7 @@ class ViewProjects extends Component {
 		this.props.projects.map((project) => {
 			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
 		})
-		
+
 		return (
 			<ul className="list-group">
 				{renderProjects}
