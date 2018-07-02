@@ -88,19 +88,35 @@ class ExistingProjects extends Component {
 				</div>
 			)
 
-		const renderProjects = []
-
-		this.state.projects.map((project) => {
-			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
-		})
-
 		return (
 			<div>
-				{this.props.projects.length > 0 ? <ul className="list-group">{renderProjects}</ul> : noProjects }
+				{this.props.projects.length > 0 ? <ViewProjects projects={this.state.projects} /> : noProjects }
 			</div>
 		)
 	}
 }
+
+class ViewProjects extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+
+		var renderProjects = []
+
+		this.props.projects.map((project) => {
+			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
+		})
+
+		return (
+			<ul className="list-group">
+				{renderProjects}
+			</ul>
+		)
+	}
+}
+
 
 class NewProject extends Component {
 	constructor(props) {
