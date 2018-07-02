@@ -65,7 +65,7 @@ class ExistingProjects extends Component {
 
 		const renderProjects = []
 
-		if (this.props.projects) {
+		if (this.props.projects.length > 0) {
 			this.props.projects.map((project) => {
 				var result = this.fetchProject(project);
 				renderProjects.push(<li key={project} className="list-group-item btn-outline-info pointer-hand">{result.title}</li>)
@@ -74,7 +74,7 @@ class ExistingProjects extends Component {
 
 		return (
 			<div>
-				{this.props.projects ? <ul className="list-group">{renderProjects}</ul> : noProjects }
+				{this.props.projects.length > 0 ? <ul className="list-group">{renderProjects}</ul> : noProjects }
 			</div>
 		)
 	}
