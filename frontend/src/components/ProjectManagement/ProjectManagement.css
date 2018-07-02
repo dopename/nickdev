@@ -1,6 +1,5 @@
 .test-enter {
   opacity: 0.01;
-  width: 0px;
 }
 
 .test-enter.test-enter-active {
