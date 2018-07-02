@@ -156,13 +156,78 @@ class CoolList extends Component {
 	render() {
 		const p = this.props.project
 		return (
+			<div>
+				<ul className="list-group">
+					<li key={p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
+				</ul>
+				<br/>
+				<br/>
+				<Phases phases={p.phases} />
+			</div>
+		)
+	}
+}
+
+class Phases extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			phases:[],
+		}
+	}
+
+	componentDidMount() {
+		this.fetchPhases();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props != prevProps) {
+			this.fetchPhases();
+		}
+	}
+
+	fetchPhases() {
+		const url = "https://www.nicksdevenv.com/api/phase/"
+		var queries = this.props.phases.map((phase) => {
+			return fetch(url + phase + "/", {
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(repsonse => repsponse.json())
+		})
+
+		Promise.all(queries).then((data) => { this.setState({phases:data}) })
+	}
+
+	render() {
+
+		var renderPhases = [];
+
+		this.state.phases.map((phase) => {
+			renderPhases.push(<li key={phase.pk}>{phase.title}</li>)
+		})
+
+		return (
 			<ul className="list-group">
-				<li key={p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
+				{renderPhases}
 			</ul>
 		)
 	}
 }
 
+class PhaseObjectives extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+
+		)
+	}
+}
 
 
 class NewProject extends Component {
