@@ -78,9 +78,12 @@ class ExistingProjects extends Component {
 
 		const renderProjects = []
 
-		this.state.projects.map((project) => {
-			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
+		if (this.props.projects.length > 0) {
+			this.fetchProjects();
+			this.state.projects.map((project) => {
+				renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
 			})
+		}
 
 		return (
 			<div>
