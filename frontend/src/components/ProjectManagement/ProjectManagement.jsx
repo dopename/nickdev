@@ -88,17 +88,12 @@ class ViewProjects extends Component {
 		this.props.projects.map((project) => {
 			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
 		})
-
-		if (this.props.projects === []) {
-			return {noProjects}
-		}
-		else {
-			return (
-				<ul className="list-group">
-					{renderProjects}
-				</ul>
-			)
-		}
+		
+		return (
+			<ul className="list-group">
+				{renderProjects}
+			</ul>
+		)
 	}
 }
 
