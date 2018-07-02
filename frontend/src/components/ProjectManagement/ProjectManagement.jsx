@@ -195,7 +195,7 @@ class Phases extends Component {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
 				}
 			})
-			.then(repsonse => repsponse.json())
+			.then(repsonse => response.json())
 		})
 
 		Promise.all(queries).then((data) => { this.setState({phases:data}) })
