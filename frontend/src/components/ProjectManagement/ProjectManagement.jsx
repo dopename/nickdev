@@ -114,8 +114,10 @@ class ExistingProjects extends Component {
 		return (
 			<div>
 				<TransitionGroup transitionName="test" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
-					{this.props.projects.length < 1 ? noProjects : null }
-					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
+					<CSSTransition classNames="test">
+						{this.props.projects.length < 1 ? noProjects : null }
+						{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
+					</CSSTransition>	
 				</TransitionGroup>
 			</div>
 		)
@@ -156,7 +158,7 @@ class CoolList extends Component {
 		const p = this.props.project
 		return (
 			<ul className="list-group">
-				<li key={p.pk} className="list-group-item btn-outline-info pointer-hand active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
+				<li key={p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
 			</ul>
 		)
 	}
