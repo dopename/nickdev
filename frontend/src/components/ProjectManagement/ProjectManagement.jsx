@@ -49,7 +49,7 @@ class ExistingProjects extends Component {
 
 	fetchProject(pk) {
 		const url = "https://www.nicksdevenv.com/api/project/"
-		var query = return fetch(url + pk + '/')
+		var query = fetch(url + pk + '/')
 		.then(response => response.json())
 
 		Promise.all(query).then(data => { return data })
