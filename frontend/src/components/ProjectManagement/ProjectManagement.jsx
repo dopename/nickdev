@@ -145,7 +145,7 @@ class NormalList extends Component {
 	}
 }
 
-class CoolList extends Componenet {
+class CoolList extends Component {
 	constructor(props) {
 		super(props)
 	}
