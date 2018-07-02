@@ -34,7 +34,7 @@ export default class ProjectManagement extends Component {
 		return (
 			<div>
 				{this.state.view === 'home' ? homeScreen : null }
-				{this.state.view === 'existing' ? <ExistingProjects /> : null }
+				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
 				{this.state.view === 'new' ? <NewProject /> : null }
 			</div>
 		)
@@ -45,6 +45,38 @@ export default class ProjectManagement extends Component {
 class ExistingProjects extends Component {
 	constructor(props) {
 		super(props)
+	}
+
+	fetchProject(pk) {
+		const url = "https://www.nicksdevenv.com/api/project/"
+		fetch(url + pk + '/')
+		.then(response => response.json())
+	}
+
+	render() {
+
+		const noProjects = (
+				<div>
+					<h3>It looks like you don't have any projects!</h3>
+					<p>Click the button below to start one.</p>
+					<Button outline size="md" color="success" onClick={ () => this.props.changeview('new') }>Start Project</Button>
+				</div>
+			)
+
+		const renderProjects = []
+
+		if (this.props.projects) {
+			this.props.projects.map((project) => {
+				var result = this.fetchProject(project);
+				renderProjects.push(<li key={project} className="list-group-item btn-outline-info pointer-hand">{result.title}</li>)
+			})
+		}
+
+		return (
+			<div>
+				{this.props.projects ? <ul className="list-group">renderProjects</ul> : noProjects }
+			</div>
+		)
 	}
 }
 
