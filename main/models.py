@@ -45,9 +45,9 @@ class Phase(models.Model):
 class Objective(models.Model):
 	objective_id = models.AutoField(primary_key=True)
 	title = models.CharField(max_length=64)
-	order = models.IntegerField()
-	description = models.TextField()
-	notes = models.TextField()
+	order = models.IntegerField(blank=True, null=True)
+	description = models.TextField(blank=True, null=True)
+	notes = models.TextField(blank=True, null=True)
 	priority = models.IntegerField(blank=True, null=True)
 	completed = models.BooleanField(default=False)
 	file = models.FileField(blank=True, null=True)
