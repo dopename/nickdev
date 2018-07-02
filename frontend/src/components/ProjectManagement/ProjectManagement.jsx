@@ -45,18 +45,25 @@ export default class ProjectManagement extends Component {
 class ExistingProjects extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			projects: []
+		}
 	}
 
-	fetchProject(pk) {
-		var data
+	fetchProjects() {
 		const url = "https://www.nicksdevenv.com/api/project/"
-		fetch(url + pk + '/')
-		.then(response => response.json())
-		.then(json => {
-			data = json
-		})
 
-		return data
+		var queries = this.props.projects.map((project) => {
+			return fetch(url + project + '/', {
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+					"Content-Type":"application/json",
+				}
+			})
+			.then(response => response.json())
+		})
+		Promise.all(queries).then( (data) => { this.setState({projects:data}) })
 	}
 
 	render() {
@@ -72,9 +79,8 @@ class ExistingProjects extends Component {
 		const renderProjects = []
 
 		if (this.props.projects.length > 0) {
-			this.props.projects.map((project) => {
-				var result = this.fetchProject(project);
-				renderProjects.push(<li key={project} className="list-group-item btn-outline-info pointer-hand">{result.title}</li>)
+			this.state.projects.map((project) => {
+				renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
 			})
 		}
 
