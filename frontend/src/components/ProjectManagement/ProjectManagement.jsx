@@ -8,6 +8,8 @@ export default class ProjectManagement extends Component {
 		this.state = {
 			view:'home',
 		}
+
+		this.changeView = this.changeView.bind(this);
 	}
 
 	changeView(view) {
@@ -16,17 +18,7 @@ export default class ProjectManagement extends Component {
 
 	render() {
 
-		return (
-			<div>
-				{this.state.view === 'home' ? homeScreen : null }
-				{this.state.view === 'existing' ? existingProjects : null }
-				{this.state.view === 'new' ? newProject : null }
-			</div>
-		)
-	}
-}
-
-const homeScreen = ( 
+	const homeScreen = ( 
 				<div className="row">
 					<div className="col-6">
 						<h2>Working on an existing project?</h2>
@@ -37,8 +29,27 @@ const homeScreen = (
 						<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
 					</div>
 				</div>
-	)
+		
+		)
+		return (
+			<div>
+				{this.state.view === 'home' ? homeScreen : null }
+				{this.state.view === 'existing' ? <ExistingProjects /> : null }
+				{this.state.view === 'new' ? <NewProject /> : null }
+			</div>
+		)
+	}
+}
 
-const existingProjects = null
 
-const newProject = null
+class ExitstingProjects extends Component {
+	constructor(props) {
+		super(props)
+	}
+}
+
+class NewProject extends Component {
+	constructor(props) {
+		super(props)
+	}
+}
