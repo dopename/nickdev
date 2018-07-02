@@ -15,12 +15,12 @@ export default class ProjectManagement extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchProjects(this.props.projects);
+		this.fetchProjects(this.props.user.projects);
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props != prevProps) {
-			this.fetchProjects(this.props.projects);
+			this.fetchProjects(this.props.user.projects);
 		}
 	}
 
