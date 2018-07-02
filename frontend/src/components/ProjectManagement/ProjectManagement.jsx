@@ -38,3 +38,7 @@ const homeScreen = (
 					</div>
 				</div>
 	)
+
+const existingProjects = null
+
+const newProject = null
