@@ -7,40 +7,13 @@ export default class ProjectManagement extends Component {
 
 		this.state = {
 			view:'home',
-			projects:[],
 		}
 
 		this.changeView = this.changeView.bind(this);
-		this.fetchProjects = this.fetchProjects.bind(this);
-	}
-
-	componentDidMount() {
-		this.fetchProjects(this.props.user.projects);
-	}
-
-	componentDidUpdate(prevProps) {
-		if (this.props != prevProps) {
-			this.fetchProjects(this.props.user.projects);
-		}
 	}
 
 	changeView(view) {
 		this.setState({view:view});
-	}
-
-	fetchProjects(projects) {
-		const url = "https://www.nicksdevenv.com/api/project/"
-
-		var queries = projects.map((project) => {
-			return fetch(url + project + '/', {
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-					"Content-Type":"application/json",
-				}
-			})
-			.then(response => response.json())
-		})
-		Promise.all(queries).then( (data) => { this.setState({projects:data}) })
 	}
 
 	render() {
@@ -61,7 +34,7 @@ export default class ProjectManagement extends Component {
 		return (
 			<div>
 				{this.state.view === 'home' ? homeScreen : null }
-				{this.state.view === 'view' ? <ViewProjects projects={this.state.projects} /> : null }
+				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
 				{this.state.view === 'new' ? <NewProject /> : null }
 			</div>
 		)
@@ -69,12 +42,44 @@ export default class ProjectManagement extends Component {
 }
 
 
-class ViewProjects extends Component {
+class ExistingProjects extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			projects: []
+		}
+
+		this.fetchProjects = this.fetchProjects.bind(this);
+	}
+
+	componentDidMount() {
+		this.fetchProjects();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props != prevProps) {
+			this.fetchProjects();
+		}
+	}
+
+	fetchProjects() {
+		const url = "https://www.nicksdevenv.com/api/project/"
+
+		var queries = this.props.projects.map((project) => {
+			return fetch(url + project + '/', {
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+					"Content-Type":"application/json",
+				}
+			})
+			.then(response => response.json())
+		})
+		Promise.all(queries).then( (data) => { this.setState({projects:data}) })
 	}
 
 	render() {
+		console.log(this.props.projects);
 		const noProjects = (
 				<div>
 					<h3>It looks like you don't have any projects!</h3>
@@ -83,20 +88,19 @@ class ViewProjects extends Component {
 				</div>
 			)
 
-		var renderProjects = []
+		const renderProjects = []
 
-		this.props.projects.map((project) => {
+		this.state.projects.map((project) => {
 			renderProjects.push(<li key={project.pk} className="list-group-item btn-outline-info pointer-hand">{project.title}</li>)
 		})
 
 		return (
-			<ul className="list-group">
-				{renderProjects}
-			</ul>
+			<div>
+				{this.props.projects.length > 0 ? <ul className="list-group">{renderProjects}</ul> : noProjects }
+			</div>
 		)
 	}
 }
-
 
 class NewProject extends Component {
 	constructor(props) {
