@@ -8,7 +8,7 @@ export default class ProjectManagement extends Component {
 
 	render() {
 
-	const homeScreen = (
+		return (
 			<div>
 				<h1>This is your Project Management home screen</h1>
 				<div className="row">
@@ -22,10 +22,6 @@ export default class ProjectManagement extends Component {
 					</div>
 				</div>
 			</div>
-		)
-	
-		return (
-			{homeScreen}
 		)
 	}
 }
