@@ -18,7 +18,7 @@ export default class ProjectManagement extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props != prevprops) {
+		if (this.props != prevProps) {
 			this.fetchProjects();
 		}
 	}
