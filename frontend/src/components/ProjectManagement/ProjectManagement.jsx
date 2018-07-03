@@ -548,7 +548,7 @@ class PhaseObjectives extends Component {
 						<h5 className="my-1 text-center">Title:</h5>
 						<input className="form-control" required type="text" name="title" value={this.state.title} onChange={this.handleChange} />
 					</div>
-					<div className="col-lg-5">
+					<div className="col-lg-3">
 						<h5 className="my-1 text-center">Due Date:</h5>
 						<input className="form-control" type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
 					</div>
@@ -556,11 +556,21 @@ class PhaseObjectives extends Component {
 						<h5 className="my-1 text-center">Order</h5>
 						<input className="form-control" type="number" name="order" value={this.state.order} onChange={this.handleChange} />
 					</div>
+					<div className="col-lg-2">
+						<h5 className="my-1 text-center">Priority</h5>
+						<input className="form-control" type="number" name="priority" value={this.state.priority} onChange={this.handleChange} />
+					</div>
 				</div>
 				<div className="form-group row">
 					<div className="col-lg-12">
 						<h5 className="my-1 text-center">Description</h5>
 						<textarea className="form-control" required type="text" name="description" value={this.state.description} onChange={this.handleChange}></textarea>
+					</div>
+				</div>
+				<div className="form-group row">
+					<div className="col-lg-12">
+						<h5 className="my-1 text-center">Notes</h5>
+						<textarea className="form-control" required type="text" name="notes" value={this.state.notes} onChange={this.handleChange}></textarea>
 					</div>
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
@@ -601,6 +611,8 @@ class ObjectiveInfo extends Component {
 			notes:this.props.o.notes,
 			due_date:this.props.o.due_date,
 			mobile:window.screen.width > 540 ? false : true,
+			order:this.props.o.order,
+			priority:this.props.o.priority
 		}
 
 		this.toggleEditable = this.toggleEditable.bind(this);
@@ -616,6 +628,8 @@ class ObjectiveInfo extends Component {
 		obj.description = this.state.description
 		obj.notes = this.state.notes
 		obj.due_date = this.state.due_date
+		obj.order = this.state.order
+		obj.priority = this.state.priortiy
 
 		this.setState({editable:false});
 
@@ -649,6 +663,18 @@ class ObjectiveInfo extends Component {
 
 		var editDisplay = (
 			<form className="my-2" onSubmit={this.submitEdit}>
+				<div className="input-group">
+					<div className="input-group-prepend col-2">
+						<strong>Order:</strong>
+					</div>
+					<input type="number" className="form-control col-10" name="order" value={this.state.order} onChange={this.handleChange} />
+				</div>
+				<div className="input-group">
+					<div className="input-group-prepend col-2">
+						<strong>Priority:</strong>
+					</div>
+					<input type="number" className="form-control col-10" name="priority" value={this.state.priority} onChange={this.handleChange} />
+				</div>
 				<div className="input-group">
 					<div className="input-group-prepend col-2">
 						<strong>Description:</strong>
