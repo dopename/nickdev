@@ -410,7 +410,7 @@ class PhaseObjectives extends Component {
 					priority:null,
 					due_date:null,
 				})
-				this.refresh();
+				this.props.refresh();
 			}
 		})
 
