@@ -544,6 +544,8 @@ class ObjectiveInfo extends Component {
 		obj.notes = this.state.notes
 		obj.due_date = this.state.due_date
 
+		this.setState({editable:false});
+
 		this.props.completeObjective(obj, false);
 	}
 
