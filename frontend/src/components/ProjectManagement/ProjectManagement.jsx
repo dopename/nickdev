@@ -280,7 +280,7 @@ class PhaseObjectives extends Component {
 		})
 
 		return (
-			<ul className="list-group-flush">
+			<ul className="list-group-item">
 				{renderObjectives}
 			</ul>
 		)
