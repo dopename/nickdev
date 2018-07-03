@@ -379,7 +379,7 @@ class PhaseObjectives extends Component {
 				</div>
 				<div className="form-group row">
 					<div className="col-lg-12">
-						<input className="form-control" required type="text" name="title" value={this.state.submitData.description} onChange={this.handleChange} />
+						<textarea className="form-control" required type="text" name="description" value={this.state.submitData.description} onChange={this.handleChange}></textarea>
 					</div>
 				</div>
 				<input type="submit" className="form-control" value="Submit" />
