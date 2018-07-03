@@ -629,7 +629,7 @@ class ObjectiveInfo extends Component {
 		obj.notes = this.state.notes
 		obj.due_date = this.state.due_date
 		obj.order = this.state.order
-		obj.priority = this.state.priortiy
+		obj.priority = this.state.priority
 
 		this.setState({editable:false});
 
