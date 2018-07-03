@@ -244,6 +244,7 @@ class PhaseObjectives extends Component {
 
 		this.state = {
 			objectives:[],
+			activeObjective:false,
 		}
 	}
 
@@ -280,13 +281,37 @@ class PhaseObjectives extends Component {
 		var renderObjectives = [];
 
 		obj.map((o) => {
-			renderObjectives.push(<li className="list-group-item btn-outline-secondary"><span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}</li>)
+			renderObjectives.push(
+				<li>
+					<h5 className="list-group-item btn-outline-secondary">
+						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}
+					</h5>
+					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
+				</li>
+			)
 		})
 
 		return (
 			<ul className="list-group-item">
 				{renderObjectives}
 			</ul>
+		)
+	}
+}
+
+
+class ObjectiveInfo extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			<div>
+				<p>{this.props.o.description}</p>
+				<p>{this.props.o.notes}</p>
+				<p>{this.props.o.due_date}</p>
+			</div>
 		)
 	}
 }
