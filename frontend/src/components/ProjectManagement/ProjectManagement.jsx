@@ -444,6 +444,26 @@ class PhaseObjectives extends Component {
 		})
 	}
 
+	deleteObjective(pk, title) {
+		const url = "/api/objective/" + pk + "/"
+
+		var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
+
+		if (confirmed) {
+			fetch(url, {
+				method:"delete",
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					this.props.refresh();
+				}
+			})
+		}
+	}
+
 	handleChange(event) {
 		this.setState({[event.target.name] : event.target.value});
 	}
@@ -463,7 +483,7 @@ class PhaseObjectives extends Component {
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
 					</h5>
-					{this.state.activeObjective === o.pk ? <ObjectiveInfo completeObjective={this.completeObjective} o={o} /> : null }
+					{this.state.activeObjective === o.pk ? <ObjectiveInfo deleteObjective={this.deleteObjective} completeObjective={this.completeObjective} o={o} /> : null }
 				</li>
 			)
 		})
@@ -567,7 +587,8 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
 				<ButtonGroup className="mb-2">
 					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
-					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="danger">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
+					<Button outline size="md" color="danger" onclick={() => this.props.deleteObjective(o.pk, o.title)}>Delete Objective</Button>
+					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
 				</ButtonGroup>
 			</div>
 			)
@@ -584,13 +605,13 @@ class ObjectiveInfo extends Component {
 					<div className="input-group-prepend col-2">
 						<strong>Notes:</strong>
 					</div>
-					<textarea required type="text" className="form-control col-10" name="notes" value={this.state.notes} onChange={this.handleChange} />
+					<textarea type="text" className="form-control col-10" name="notes" value={this.state.notes} onChange={this.handleChange} />
 				</div>
 				<div className="input-group">
 					<div className="input-group-prepend col-2">
 						<strong>Due Date:</strong>
 					</div>
-					<input required type="date" className="form-control col-10" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
+					<input type="date" className="form-control col-10" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit Edits" />
 				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleEditable()}>Cancel</Button>
