@@ -155,8 +155,7 @@ class ObjectiveSerializer(serializers.ModelSerializer):
 			"priority",
 			"completed",
 			"phase",
-			"created_ts",
-			"completed_ts"
+			"due_date"
 		]
 
 
