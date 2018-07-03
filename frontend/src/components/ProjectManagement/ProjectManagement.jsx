@@ -382,7 +382,7 @@ class PhaseObjectives extends Component {
 						<textarea className="form-control" required type="text" name="description" value={this.state.submitData.description} onChange={this.handleChange}></textarea>
 					</div>
 				</div>
-				<input type="submit" className="form-control" value="Submit" />
+				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
 				<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
 			</form>
 		)
