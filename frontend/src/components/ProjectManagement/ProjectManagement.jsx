@@ -567,7 +567,7 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
 				<ButtonGroup className="mb-2">
 					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
-					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="danger">Mark Incomplete</Button> : <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
+					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="danger">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
 				</ButtonGroup>
 			</div>
 			)
