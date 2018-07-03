@@ -33,6 +33,7 @@ export default class ProjectManagement extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
+				this.setState({view:'home'});
 				this.props.refreshToken();
 			}
 		})
