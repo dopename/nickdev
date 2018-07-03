@@ -294,7 +294,9 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className="list-group-item btn-outline-secondary" onClick={ () => { this.toggleActiveObjective(o.pk) } }>
+					<h5 className={this.state.activeObjective === o.pk ? "list-group-item btn-outline-secondary pointer-hand active" : "list-group-item btn-outline-secondary pointer-hand"}
+					onClick={ () => { this.toggleActiveObjective(o.pk) } }
+					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}
 					</h5>
 					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
@@ -319,9 +321,9 @@ class ObjectiveInfo extends Component {
 	render() {
 		return (
 			<div>
-				<p>{this.props.o.description}</p>
-				<p>{this.props.o.notes}</p>
-				<p>{this.props.o.due_date}</p>
+				<p className="my-1">{this.props.o.description}</p>
+				<p className="my-1">{this.props.o.notes}</p>
+				<p className="my-1">{this.props.o.due_date}</p>
 			</div>
 		)
 	}
