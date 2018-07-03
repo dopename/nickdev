@@ -209,7 +209,7 @@ class Phases extends Component {
 				"content-type":"application/json",
 				Authorization: `JWT ${localStorage.getItem('token')}`,
 			},
-			body:JSON.stringify(formData);
+			body:JSON.stringify(formData)
 		})
 		.then(response => {
 			if (response.ok) {
