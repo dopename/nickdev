@@ -435,7 +435,7 @@ class PhaseObjectives extends Component {
 			body:JSON.stringify(obj)
 
 		})
-		.then(response -> {
+		.then(response => {
 			if (response.ok) {
 				this.fetchObjectives();
 			}
