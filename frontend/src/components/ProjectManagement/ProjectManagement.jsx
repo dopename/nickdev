@@ -155,7 +155,7 @@ class ExistingProjects extends Component {
 
 		return (
 			<div>
-				<ReactCSSTransitionGroup transitionName="test" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+				<ReactCSSTransitionGroup transitionName="test" transitionEnterTimeout={1000} transitionLeaveTimeout={500}>
 					{this.props.projects.length < 1 ? noProjects : null }
 					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" deleteProject={this.props.deleteProject} selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" refresh={this.fetchProjects} selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
 				</ReactCSSTransitionGroup>
