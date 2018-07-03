@@ -391,7 +391,7 @@ class PhaseObjectives extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.completeObjective = this.completeObjective.bind(this);
 		this.deleteObjective = this.deleteObjective.bind(this);
-		this.checkOrderDuplicate = this.checkOrderDuplicate.bind(this);
+		//this.checkOrderDuplicate = this.checkOrderDuplicate.bind(this);
 	}
 
 	componentDidMount() {
