@@ -219,8 +219,9 @@ class Phases extends Component {
 			renderPhases.push(
 					<li className="list-group-item btn-outline-success pointer-hand" onClick={ () => { this.toggleActivePhase(phase.pk) } } key={"phase" + phase.pk}>
 						<h4>{phase.title}</h4>
-						{this.state.activePhase === phase.pk ? <PhaseObjectives objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /> : null }
-					</li>)
+					</li>
+						{this.state.activePhase === phase.pk ? <li><PhaseObjectives objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></li> : null }
+						)
 		})
 
 		return (
