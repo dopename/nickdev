@@ -143,6 +143,7 @@ class PhaseDestroySerializer(serializers.ModelSerializer):
 
 
 class ObjectiveSerializer(serializers.ModelSerializer):
+	last_edit = serializers.DateTimeField(read_only=True)
 
 	class Meta:
 		model = Objective
@@ -155,7 +156,8 @@ class ObjectiveSerializer(serializers.ModelSerializer):
 			"priority",
 			"completed",
 			"phase",
-			"due_date"
+			"due_date",
+			"last_edit",
 		]
 
 

@@ -42,6 +42,7 @@ class Phase(models.Model):
 	order = models.IntegerField()
 	project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="phases")
 
+
 	class Meta:
 		unique_together = (("project", "order"),)
 
@@ -56,6 +57,8 @@ class Objective(models.Model):
 	file = models.FileField(blank=True, null=True)
 	due_date = models.DateField(blank=True, null=True)
 	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
+	last_edit = models.DateTimeField(default=datetime.now, blank=True)
+	last_editor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
 
 	class Meta:
 		unique_together = (("phase", "order"),)
