@@ -161,7 +161,6 @@ class CoolList extends Component {
 					<li key={"project" + p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
 				</ul>
 				<br/>
-				<br/>
 				<h3 className="text-center my-2">Phases</h3>
 				<Phases refresh={this.props.refresh} project={p.pk} phases={p.phases} />
 			</div>
