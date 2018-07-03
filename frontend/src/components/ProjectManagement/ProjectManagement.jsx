@@ -219,7 +219,7 @@ class Phases extends Component {
 			renderPhases.push(
 					<li>
 						<h4 
-						className={this.state.activePhase === phase.pk ? "list-group-item btn-outline-success pointer-hand" : "list-group-item btn-outline-success pointer-hand active" }
+						className={this.state.activePhase === phase.pk ? "list-group-item btn-outline-success pointer-hand active" : "list-group-item btn-outline-success pointer-hand" }
 						onClick={ () => { this.toggleActivePhase(phase.pk) } } 
 						key={"phase" + phase.pk}
 						>
