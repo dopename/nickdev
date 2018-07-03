@@ -206,7 +206,7 @@ class Phases extends Component {
 		var renderPhases = [];
 
 		this.state.phases.map((phase) => {
-			renderPhases.push(<li key={phase.pk}>{phase.title}</li>)
+			renderPhases.push(<li className="list-group-item btn-outline-success" key={phase.pk}>{phase.title}</li>)
 		})
 
 		return (
