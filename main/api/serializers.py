@@ -118,7 +118,8 @@ class PhaseSerializer(serializers.ModelSerializer):
 			"pk",
 			"title",
 			"order",
-			"project"
+			"project",
+			"objectives"
 		]
 
 
