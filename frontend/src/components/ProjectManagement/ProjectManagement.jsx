@@ -528,7 +528,7 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
-				{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="danger">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Mark Complete</Button>}
+				{this.props.o.completed ? <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="danger">Mark Incomplete</Button> : <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Mark Complete</Button>}
 			</div>
 		)
 	}
