@@ -42,6 +42,9 @@ class Phase(models.Model):
 	order = models.IntegerField()
 	project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="phases")
 
+	class Meta:
+		unique_together = (("project", "order"),)
+
 class Objective(models.Model):
 	objective_id = models.AutoField(primary_key=True)
 	title = models.CharField(max_length=64)
@@ -54,4 +57,5 @@ class Objective(models.Model):
 	due_date = models.DateField(blank=True, null=True)
 	phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name="objectives")
 
-
+	class Meta:
+		unique_together = (("phase", "order"),)
