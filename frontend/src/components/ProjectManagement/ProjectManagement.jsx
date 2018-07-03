@@ -294,7 +294,7 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className="list-group-item btn-outline-secondary" onClick={ () => { this.toggleActiveObjective(o.pk) }>
+					<h5 className="list-group-item btn-outline-secondary" onClick={ () => { this.toggleActiveObjective(o.pk) } }>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}
 					</h5>
 					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
