@@ -532,7 +532,7 @@ class PhaseObjectives extends Component {
 
 		obj.map((o) => {
 			renderObjectives.push(
-				<li>
+				<li className="mb-1">
 					<h5 className={"list-group-item pointer-hand active btn-outline-" + (o.completed ? "primary":"secondary")}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
