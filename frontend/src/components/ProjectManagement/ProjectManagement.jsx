@@ -372,7 +372,7 @@ class PhaseObjectives extends Component {
 
 		this.state = {
 			objectives:[],
-			orderError:false,
+			//orderError:false,
 			activeObjective:false,
 			createNew:false,
 			title:null,
@@ -446,47 +446,47 @@ class PhaseObjectives extends Component {
 			phase:this.props.phase
 		}
 
-		var duplicateOrder = this.checkOrderDuplicate(submitData['order'])
+		// var duplicateOrder = this.checkOrderDuplicate(submitData['order'])
 
-		if (!duplicateOrder) {
-			fetch(url, {
-				method:'post',
-				headers: {
-					"content-type":"application/json",
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				},
-				body: JSON.stringify(submitData)
-			})
-			.then(response => {
-				if (response.ok) {
-					this.setState({
-						createNew:false,
-						title:null,
-						order:null,
-						description:null,
-						notes:null,
-						priority:null,
-						due_date:null,
-						orderError:false
-					})
-					this.props.refresh();
-				}
-			})
-		}
-		else {
-			this.setState({orderError:true})
-		}
-
-	}
-
-	checkOrderDuplicate(num) {
-		this.state.objectives.map(obj => {
-			if (num === obj.order.toString()) {
-				return true
+		// if (!duplicateOrder) {
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify(submitData)
+		})
+		.then(response => {
+			if (response.ok) {
+				this.setState({
+					createNew:false,
+					title:null,
+					order:null,
+					description:null,
+					notes:null,
+					priority:null,
+					due_date:null,
+					orderError:false
+				})
+				this.props.refresh();
 			}
 		})
-		return false
+		// }
+		// else {
+		// 	this.setState({orderError:true})
+		// }
+
 	}
+
+	// checkOrderDuplicate(num) {
+	// 	this.state.objectives.map(obj => {
+	// 		if (num === obj.order.toString()) {
+	// 			return true
+	// 		}
+	// 	})
+	// 	return false
+	// }
 
 	completeObjective(obj, complete) {
 		const pk = obj.pk
@@ -559,9 +559,10 @@ class PhaseObjectives extends Component {
 			)
 		})
 
+//{this.state.orderError ? <h5 className="alert alert-danger" role="alert">Two objectives can't be done in the same order!</h5> : null}
+
 		const newForm = (
 			<form className="mt-3" onSubmit={this.submitNewObjective}>
-				{this.state.orderError ? <h5 className="alert alert-danger" role="alert">Two objectives can't be done in the same order!</h5> : null}
 				<h4 className="text-center">New Objective</h4>
 				<div className="form-group row">
 					<div className="col-lg-5">
