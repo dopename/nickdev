@@ -516,9 +516,6 @@ class PhaseObjectives extends Component {
 		}
 	}
 
-
-	//+ (this.state.activeObjective === o.pk ?  " active" : "")
-
 	handleChange(event) {
 		this.setState({[event.target.name] : event.target.value});
 	}
@@ -532,8 +529,8 @@ class PhaseObjectives extends Component {
 
 		obj.map((o) => {
 			renderObjectives.push(
-				<li className="mb-1">
-					<h5 className={"list-group-item pointer-hand active btn-outline-" + (o.completed ? "primary":"secondary")}
+				<li>
+					<h5 className={"list-group-item pointer-hand btn-outline-" + (o.completed ? "primary":"secondary") + (this.state.activeObjective === o.pk ?  " active" : "")}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
@@ -577,7 +574,7 @@ class PhaseObjectives extends Component {
 					</div>
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
-				<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
+				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
 			</form>
 		)
 
