@@ -162,7 +162,7 @@ class CoolList extends Component {
 				</ul>
 				<br/>
 				<br/>
-				<Phases project={p.pk} phases={p.phases} />
+				<Phases refresh={this.props.refresh} project={p.pk} phases={p.phases} />
 			</div>
 		)
 	}
