@@ -575,24 +575,24 @@ class ObjectiveInfo extends Component {
 		var editDisplay = (
 			<form className="my-2" onSubmit={this.submitEdit}>
 				<div className="input-group">
-					<div className="input-group-prepend">
+					<div className="input-group-prepend col-2">
 						<strong>Description:</strong>
 					</div>
-					<textarea required type="text" class="form-control" name="description" value={this.state.description} onChange={this.handleChange} />
+					<textarea required type="text" className="form-control col-10" name="description" value={this.state.description} onChange={this.handleChange} />
 				</div>
 				<div className="input-group">
-					<div className="input-group-prepend">
+					<div className="input-group-prepend col-2">
 						<strong>Notes:</strong>
 					</div>
-					<textarea required type="text" class="form-control" name="notes" value={this.state.notes} onChange={this.handleChange} />
+					<textarea required type="text" className="form-control col-10" name="notes" value={this.state.notes} onChange={this.handleChange} />
 				</div>
 				<div className="input-group">
-					<div className="input-group-prepend">
+					<div className="input-group-prepend col-2">
 						<strong>Due Date:</strong>
 					</div>
-					<input required type="date" class="form-control" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
+					<input required type="date" className="form-control col-10" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
 				</div>
-				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
+				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit Edits" />
 				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleEditable()}>Cancel</Button>
 			</form>
 			)
