@@ -341,19 +341,19 @@ class PhaseObjectives extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchObjectives(this.props.objectives);
+		this.fetchObjectives();
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props !== prevProps) {
-			this.fetchObjectives(this.props.objectives);
+			this.fetchObjectives();
 		}
 	}
 
 	fetchObjectives(objectives) {
 		const url = "https://www.nicksdevenv.com/api/objective/"
 
-		var queries = objectives.map((objective) => {
+		var queries = this.props.objectives.map((objective) => {
 			return fetch(url + objective + "/", {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -456,7 +456,7 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className={"list-group-item pointer-hand btn-outline-" + (o.completed ? "info":"secondary") + (this.state.activeObjective === o.pk ?  " active" : "")}
+					<h5 className={"list-group-item pointer-hand btn-outline-" + (o.completed ? "primary":"secondary") + (this.state.activeObjective === o.pk ?  " active" : "")}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
@@ -490,7 +490,7 @@ class PhaseObjectives extends Component {
 					</div>
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
-				<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
+				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
 			</form>
 		)
 
@@ -528,7 +528,7 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
-				<Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Complete Objective</Button>
+				{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="danger">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Mark Complete</Button>}
 			</div>
 		)
 	}
