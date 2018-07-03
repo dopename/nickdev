@@ -162,6 +162,7 @@ class CoolList extends Component {
 				</ul>
 				<br/>
 				<br/>
+				<h3 className="text-center my-2">Phases</h3>
 				<Phases refresh={this.props.refresh} project={p.pk} phases={p.phases} />
 			</div>
 		)
