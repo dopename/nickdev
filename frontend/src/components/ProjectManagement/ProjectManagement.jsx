@@ -281,17 +281,20 @@ class Phases extends Component {
 		})
 
 		if (!this.state.newPhase) {
-			renderPhases.push(<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.toggleNewPhase() } }></i></h4></li>)
+			renderPhases.push(<AddButton onClick={this.toggleNewPhase} />)
 		}
 		else {
 			var newForm = (
 					<form className="mt-3" onSubmit={this.submitPhaseForm}>
+						<h4 className="text-center">New Phase</h4>
 						<div className="container">
 							<div className="form-group row">
 								<div className="col-lg-8">
+									<h5 className="my-1 text-center">Title:</h5>
 									<input required type="text" name="title" value={this.state.title} onChange={this.handleChange} className="form-control" />
 								</div>
 								<div className="col-lg-4">
+									<h5 className="my-1 text-center">Order:</h5>
 									<input required type="number" name="order" value={this.state.order} onChange={this.handleChange} className="form-control" />
 								</div>
 							</div>
@@ -439,6 +442,7 @@ class PhaseObjectives extends Component {
 
 		const newForm = (
 			<form className="mt-3" onSubmit={this.submitNewObjective}>
+				<h4 className="text-center">New Objective</h4>
 				<div className="form-group row">
 					<div className="col-lg-5">
 						<h5 className="my-1 text-center">Title:</h5>
