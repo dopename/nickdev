@@ -304,7 +304,7 @@ class PhaseObjectives extends Component {
 			)
 		})
 
-		renderObjectives.push(<li><h4><i className="fa fa-plus text-success text-center"></i></h4></li>)
+		renderObjectives.push(<li><h4><i className="fa fa-plus text-success text-center mt-2"></i></h4></li>)
 
 		return (
 			<div>
