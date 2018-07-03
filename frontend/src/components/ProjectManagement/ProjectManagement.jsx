@@ -321,9 +321,9 @@ class ObjectiveInfo extends Component {
 	render() {
 		return (
 			<div>
-				<p className="my-1">{this.props.o.description}</p>
-				<p className="my-1">{this.props.o.notes}</p>
-				<p className="my-1">{this.props.o.due_date}</p>
+				<p className="my-1 text-left">Description: {this.props.o.description}</p>
+				<p className="my-1 text-left">Notes: {this.props.o.notes}</p>
+				<p className="my-1 text-left">Due Date: {this.props.o.due_date}</p>
 			</div>
 		)
 	}
