@@ -246,6 +246,8 @@ class PhaseObjectives extends Component {
 			objectives:[],
 			activeObjective:false,
 		}
+
+		this.toggleActiveObjective = this.toggleActiveObjective.bind(this);
 	}
 
 	componentDidMount() {
@@ -273,6 +275,15 @@ class PhaseObjectives extends Component {
 		Promise.all(queries).then((data) => { this.setState({objectives:data}) } )
 	}
 
+	toggleActiveObjective(pk) {
+		if (this.state.activeObjective === pk) {
+			this.setState({activeObjective:false});
+		}
+		else {
+			this.setState({activeObjective:pk});
+		}
+	}
+
 	render() {
 		var obj = this.state.objectives.sort(function (a, b) {
 			return a.pk - b.pk;
@@ -283,7 +294,7 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className="list-group-item btn-outline-secondary">
+					<h5 className="list-group-item btn-outline-secondary" onClick={ () => { this.toggleActiveObjective(o.pk) }>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}
 					</h5>
 					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
