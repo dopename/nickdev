@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 //import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './ProjectManagement.css';
@@ -417,12 +417,14 @@ class PhaseObjectives extends Component {
 
 	}
 
-	completeObjective(obj) {
+	completeObjective(obj, complete) {
 		const pk = obj.pk
 
 		delete obj.pk
 
-		obj.completed = !obj.completed
+		if (complete) {
+			obj.completed = !obj.completed
+		}
 
 		const url = "https://www.nicksdevenv.com/api/objective/"
 
@@ -520,15 +522,82 @@ class PhaseObjectives extends Component {
 class ObjectiveInfo extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			editable:false,
+			description:this.props.o.description,
+			notes:this.props.o.notes,
+			due_date:this.props.o.due_date
+		}
+
+		this.toggleEditable = this.toggleEditable.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.submitEdit = this.submitEdit.bind(this);
 	}
 
+	submitEdit(e) {
+		e.preventDefault();
+
+		var obj = this.props.o
+
+		obj.description = this.state.description
+		obj.notes = this.state.notes
+		obj.due_date = this.state.due_date
+
+		this.props.completeObjective(obj, false);
+	}
+
+
+	toggleEditable() {
+		this.setState({editable:!this.state.editable});
+	}
+
+	handleChange(e) {
+		this.setState({[e.target.name]:e.target.value})
+	}
+
+
 	render() {
-		return (
-			<div className="border border-dark">
+		const normalDisplay = (
+			<div>
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
-				{this.props.o.completed ? <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="danger">Mark Incomplete</Button> : <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Mark Complete</Button>}
+				<ButtonGroup className="mb-2">
+					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
+					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="danger">Mark Incomplete</Button> : <Button className="mb-2" outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
+				</ButtonGroup>
+			</div>
+			)
+
+		var editDisplay = (
+			<form className="my-2" onSubmit={this.submitEdit}>
+				<div className="input-group">
+					<div className="input-group-prepend">
+						<strong>Description:</strong>
+					</div>
+					<textarea required type="text" class="form-control" name="description" value={this.state.description} onChange={this.handleChange} />
+				</div>
+				<div className="input-group">
+					<div className="input-group-prepend">
+						<strong>Notes:</strong>
+					</div>
+					<textarea required type="text" class="form-control" name="notes" value={this.state.notes} onChange={this.handleChange} />
+				</div>
+				<div className="input-group">
+					<div className="input-group-prepend">
+						<strong>Due Date:</strong>
+					</div>
+					<input required type="date" class="form-control" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
+				</div>
+				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
+				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleEditable()}>Cancel</Button>
+			</form>
+			)
+
+		return (
+			<div className="border border-dark">
+				{this.state.editable ? editDisplay : normalDisplay }
 			</div>
 		)
 	}
