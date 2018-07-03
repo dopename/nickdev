@@ -57,7 +57,7 @@ export default class ProjectManagement extends Component {
 			<div>
 				{this.state.view === 'home' ? homeScreen : null }
 				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
-				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onSubmit={this.submtiNewProject} /> : null }
+				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onSubmit={this.submitNewProject} /> : null }
 			</div>
 		)
 	}
@@ -728,10 +728,16 @@ class NewProject extends Component {
 				<h3 className="text-center my-2">Add New Project</h3>
 				<form onSubmit={this.cleanData}>
 					<div className="form-group row">
-						<input className="col-lg-6" name="title" type="text" value={this.state.title} onChange={this.handleChange} />
-						<select multiple="multiple" className="col-lg-6" name="members" value={this.state.members} onChange={this.handleSelectChange}>{options}</select>
+						<div className="col-lg-6">
+							<h4 className="text-center">Title:</h4>
+							<input className="form-control" name="title" type="text" value={this.state.title} onChange={this.handleChange} />
+						</div>
+						<div className="col-lg-6">
+							<h4 className="text-center">Members:</h4>
+							<select multiple="multiple" className="form-control" name="members" value={this.state.members} onChange={this.handleSelectChange}>{options}</select>
+						</div>
 					</div>
-					<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit Edits" />
+					<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
 					<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.props.changeView('home')}>Cancel</Button>
 				</form>
 			</div>
