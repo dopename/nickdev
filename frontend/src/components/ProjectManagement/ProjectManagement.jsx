@@ -180,12 +180,12 @@ class NormalList extends Component {
 					<div className="row">
 						<h4 key={"project" + project.pk} 
 							onClick={ () => {this.props.selectProject(project.pk)} } 
-							className="btn-outline-info pointer-hand col-10">
+							className="list-group-item btn-outline-info pointer-hand col-10">
 							{project.title}
 						</h4>
 						<h4 key={"projectd" + project.pk}
 							onClick={() => {this.props.deleteProject(project.pk, project.title)} }
-							className="btn-outline-danger pointer-hand col-2">
+							className="list-group-item btn-outline-danger pointer-hand col-2">
 							Delete
 						</h4>
 					</div>
