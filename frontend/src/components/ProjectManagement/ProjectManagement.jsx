@@ -302,7 +302,8 @@ class PhaseObjectives extends Component {
 		this.setState({createNew:!this.state.createNew});
 	}
 
-	submitNewObjective() {
+	submitNewObjective(e) {
+		e.preventDefault();
 		const url = "https://www.nicksdevenv.com/api/objective/"
 
 		var submitData = {
