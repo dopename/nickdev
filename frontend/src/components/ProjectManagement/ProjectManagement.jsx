@@ -14,6 +14,7 @@ export default class ProjectManagement extends Component {
 
 		this.changeView = this.changeView.bind(this);
 		this.submitNewProject = this.submitNewProject.bind(this);
+		this.deleteProject = this.deleteProject.bind(this);
 	}
 
 	changeView(view) {
@@ -39,8 +40,23 @@ export default class ProjectManagement extends Component {
 		})
 	}
 
-	deleteProject(pk) {
-		return null
+	deleteProject(pk, title) {
+		const url = "/api/destroy/project/" + pk + "/"
+
+		var confirmed = window.confirm("Are you sure you want to delete the following project: " + title +"?");
+		if (confirmed) {
+			fetch(url, {
+				method:"delete",
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					this.props.verifyToken();
+				}
+			})
+		}
 	}
 
 	render() {
@@ -62,7 +78,7 @@ export default class ProjectManagement extends Component {
 			<div>
 				<Button outline className="text-center mb-3" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
 				{this.state.view === 'home' ? homeScreen : null }
-				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
+				{this.state.view === 'existing' ? <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> : null }
 				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.submitNewProject} /> : null }
 			</div>
 		)
@@ -141,7 +157,7 @@ class ExistingProjects extends Component {
 			<div>
 				<ReactCSSTransitionGroup transitionName="test" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
 					{this.props.projects.length < 1 ? noProjects : null }
-					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" refresh={this.fetchProjects} selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
+					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" deleteProject={this.props.deleteProject} selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" refresh={this.fetchProjects} selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
 				</ReactCSSTransitionGroup>
 			</div>
 		)
@@ -159,11 +175,21 @@ class NormalList extends Component {
 		const renderProjects = []
 
 		this.props.projects.map((project) => {
-			renderProjects.push(<li key={"project" + project.pk} 
-									onClick={ () => {this.props.selectProject(project.pk)} } 
-									className="list-group-item btn-outline-info pointer-hand">
-									{project.title}
-									</li>)
+			renderProjects.push(
+				<li>
+					<div className="row">
+						<h4 key={"project" + project.pk} 
+							onClick={ () => {this.props.selectProject(project.pk)} } 
+							className="btn-outline-info pointer-hand col-10">
+							{project.title}
+						</h4>
+						<h4 key={"projectd" + project.pk}
+							onClick={() => {this.props.deleteProject(project.pk, project.title)} }
+							className="btn-outline-danger pointer-hand col-2">
+							Delete
+						</h4>
+					</div>
+				</li>)
 		})
 		return (
 			<ul className="list-group">
