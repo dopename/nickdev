@@ -289,10 +289,10 @@ class Phases extends Component {
 						<div className="container">
 							<div className="form-group row">
 								<div className="col-lg-8">
-									<input required type="text" value={this.state.title} onChange={this.handleChange} className="form-control" />
+									<input required type="text" name="title" value={this.state.title} onChange={this.handleChange} className="form-control" />
 								</div>
 								<div className="col-lg-4">
-									<input required type="number" value={this.state.order} onChange={this.handleChange} className="form-control" />
+									<input required type="number" name="order" value={this.state.order} onChange={this.handleChange} className="form-control" />
 								</div>
 							</div>
 							<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
