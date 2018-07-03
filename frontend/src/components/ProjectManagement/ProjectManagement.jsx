@@ -587,7 +587,7 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
-				<ButtonGroup className={"mb-2" + (this.state.mobile ? " btn-block" : "")}>
+				<ButtonGroup className={"mb-2" + (this.state.mobile ? " btn-block btn-group-vertical" : "")}>
 					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
 					<Button outline size="md" color="danger" onClick={() => this.props.deleteObjective(this.props.o.pk, this.props.o.title)}>Delete Objective</Button>
 					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
