@@ -284,7 +284,7 @@ class PhaseObjectives extends Component {
 			.then(response => response.json())
 		})
 
-		Promise.all(queries).then((data) => { this.setState({objectives:data, order:Math.max.apply(Math, data.map((o) => {return o.order })) +1 })
+		Promise.all(queries).then((data) => { this.setState({objectives:data, order:Math.max.apply(Math, data.map((o) => {return o.order })) +1 }) })
 	}
 
 	toggleActiveObjective(pk) {
