@@ -134,7 +134,7 @@ class NormalList extends Component {
 		const renderProjects = []
 
 		this.props.projects.map((project) => {
-			renderProjects.push(<li key={project.pk} 
+			renderProjects.push(<li key={"project" + project.pk} 
 									onClick={ () => {this.props.selectProject(project.pk)} } 
 									className="list-group-item btn-outline-info pointer-hand">
 									{project.title}
@@ -158,7 +158,7 @@ class CoolList extends Component {
 		return (
 			<div>
 				<ul className="list-group">
-					<li key={p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
+					<li key={"project" + p.pk} className="list-group-item btn-outline-info active">{p.title}<i onClick={ () => this.props.selectProject(p.pk) } className="fa fa-bars pointer-hand float-right"></i></li>
 				</ul>
 				<br/>
 				<br/>
@@ -174,6 +174,7 @@ class Phases extends Component {
 
 		this.state = {
 			phases:[],
+			activePhase:false,
 		}
 	}
 
@@ -201,12 +202,25 @@ class Phases extends Component {
 		Promise.all(queries).then((data) => { this.setState({phases:data}) })
 	}
 
+	toggleActivePhase(pk) {
+		if (this.state.activePhase === pk) {
+			this.setState({activePhase:false});
+		}
+		else {
+			this.setState({activePhase:pk});
+		}
+	}
+
 	render() {
 
 		var renderPhases = [];
 
 		this.state.phases.map((phase) => {
-			renderPhases.push(<li className="list-group-item btn-outline-success" key={phase.pk}>{phase.title}</li>)
+			renderPhases.push(
+					<li className="list-group-item btn-outline-success pointer-hand" onClick={ () => { this.toggleActivePhase(phase.pk) } } key={"phase" + phase.pk}>
+						<h4>{phase.title}</h4>
+						{this.state.activePhase === phase.pk ? <ul className="list-group"><PhaseObjectives objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></ul> : null }
+					</li>)
 		})
 
 		return (
@@ -217,17 +231,52 @@ class Phases extends Component {
 	}
 }
 
-// class PhaseObjectives extends Component {
-// 	constructor(props) {
-// 		super(props)
-// 	}
+class PhaseObjectives extends Component {
+	constructor(props) {
+		super(props)
+	}
 
-// 	render() {
-// 		return (
+	componentDidMount() {
+		this.fetchObjectives(this.props.objectives);
+	}
 
-// 		)
-// 	}
-// }
+	componentDidUpdate(prevProps) {
+		if (this.props !== prevProps) {
+			this.fetchObjectives(this.props.objectives);
+		}
+	}
+
+	fetchObjectives(objectives) {
+		const url = "htps://www.nicksdevenv.com/api/objective/"
+
+		var queries = objectives.map((objective) {
+			return fetch(url + objective + "/", {
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => response.json())
+		})
+
+		Promise.all(queries).then((data) => { this.setState({objectives:data}) } )
+	}
+
+	render() {
+		var obj = this.state.objectives.sort(function (a, b) {
+			return a.pk - b.pk;
+		});
+
+		var renderObjectives = [];
+
+		obj.map((o) => {
+			renderObjectives.push(<li className="list-group-item btn-outline-secondary">{o.title}</li>)
+		})
+
+		return (
+			{renderObjectives}
+		)
+	}
+}
 
 
 class NewProject extends Component {
