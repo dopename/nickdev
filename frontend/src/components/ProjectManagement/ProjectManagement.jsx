@@ -180,6 +180,12 @@ class Phases extends Component {
 			order:null,
 			project:this.props.project
 		}
+
+		this.submitPhaseForm = this.submitPhaseForm.bind(this);
+		this.fetchPhases = this.fetchPhases.bind(this);
+		this.toggleActivePhase = this.toggleActivePhase.bind(this);
+		this.toggleNewPhase = this.toggleNewPhase.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -279,7 +285,7 @@ class Phases extends Component {
 		}
 		else {
 			var newForm = (
-					<form onSubmit={this.submitPhaseForm}>
+					<form className="mt-3" onSubmit={this.submitPhaseForm}>
 						<div className="container">
 							<div className="form-group row">
 								<div className="col-lg-8">
