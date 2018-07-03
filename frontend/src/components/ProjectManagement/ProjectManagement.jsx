@@ -323,7 +323,7 @@ class PhaseObjectives extends Component {
 			},
 			body: JSON.stringify(submitData)
 		})
-		.then(repsonse => {
+		.then(response => {
 			if (response.ok) {
 				this.setState({
 					createNew:false,
