@@ -728,7 +728,7 @@ class NewProject extends Component {
 				<h3 className="text-center my-2">Add New Project</h3>
 				<form onSubmit={this.cleanData}>
 					<div className="form-group row">
-						<input className="col-lg-6" name="title" type"text" value={this.state.title} onChange={this.handleChange} />
+						<input className="col-lg-6" name="title" type="text" value={this.state.title} onChange={this.handleChange} />
 						<select multiple="multiple" className="col-lg-6" name="members" value={this.state.members} onChange={this.handleSelectChange}>{options}</select>
 					</div>
 					<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit Edits" />
