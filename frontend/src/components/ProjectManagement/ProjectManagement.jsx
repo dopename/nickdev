@@ -368,21 +368,21 @@ class PhaseObjectives extends Component {
 				<div className="form-group row">
 					<div className="col-lg-5">
 						<h5 className="my-1 text-center">Title:</h5>
-						<input className="form-control" required type="text" name="title" value={this.state.submitData.title} onChange={this.handleChange} />
+						<input className="form-control" required type="text" name="title" value={this.state.title} onChange={this.handleChange} />
 					</div>
 					<div className="col-lg-5">
 						<h5 className="my-1 text-center">Due Date:</h5>
-						<input className="form-control" type="date" name="due_date" value={this.state.submitData.due_date} onChange={this.handleChange} />
+						<input className="form-control" type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
 					</div>
 					<div className="col-lg-2">
 						<h5 className="my-1 text-center">Order</h5>
-						<input className="form-control" type="number" name="order" value={this.state.submitData.order} onChange={this.handleChange} />
+						<input className="form-control" type="number" name="order" value={this.state.order} onChange={this.handleChange} />
 					</div>
 				</div>
 				<div className="form-group row">
 					<div className="col-lg-12">
 						<h5 className="my-1 text-center">Description</h5>
-						<textarea className="form-control" required type="text" name="description" value={this.state.submitData.description} onChange={this.handleChange}></textarea>
+						<textarea className="form-control" required type="text" name="description" value={this.state.description} onChange={this.handleChange}></textarea>
 					</div>
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
