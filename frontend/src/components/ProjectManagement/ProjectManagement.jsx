@@ -446,7 +446,7 @@ class PhaseObjectives extends Component {
 			phase:this.props.phase
 		}
 
-		var duplicateOrder = this.checkOrderDuplicate(submitData.order)
+		var duplicateOrder = this.checkOrderDuplicate(submitData['order'])
 
 		if (!duplicateOrder) {
 			fetch(url, {
@@ -481,6 +481,7 @@ class PhaseObjectives extends Component {
 
 	checkOrderDuplicate(num) {
 		this.state.objectives.map(obj => {
+			console.log(obj, num);
 			if (num === obj.order) {
 				return true
 			}
