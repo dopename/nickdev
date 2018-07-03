@@ -247,7 +247,7 @@ class PhaseObjectives extends Component {
 	}
 
 	fetchObjectives(objectives) {
-		const url = "htps://www.nicksdevenv.com/api/objective/"
+		const url = "https://www.nicksdevenv.com/api/objective/"
 
 		var queries = objectives.map((objective) => {
 			return fetch(url + objective + "/", {
