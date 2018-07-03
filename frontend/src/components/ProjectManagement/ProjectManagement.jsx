@@ -262,7 +262,7 @@ class PhaseObjectives extends Component {
 	}
 
 	render() {
-		var obj = this.state.objectives.sort(function (a, b) {
+		var obj = this.props.objectives.sort(function (a, b) {
 			return a.pk - b.pk;
 		});
 
