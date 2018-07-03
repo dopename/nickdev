@@ -389,7 +389,7 @@ class PhaseObjectives extends Component {
 
 
 		if (!this.state.createNew) {
-			renderObjectives.push(<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center" onClick={() => { this.toggleNewObjective() } }></i></h4></li>)
+			renderObjectives.push(<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.toggleNewObjective() } }></i></h4></li>)
 		}
 		else {
 			renderObjectives.push(
