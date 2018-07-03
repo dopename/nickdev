@@ -13,10 +13,29 @@ export default class ProjectManagement extends Component {
 		}
 
 		this.changeView = this.changeView.bind(this);
+		this.submtiNewProject = this.submtiNewProject.bind(this);
 	}
 
 	changeView(view) {
 		this.setState({view:view});
+	}
+
+	submtiNewProject(data) {
+		const url = "/api/project/"
+
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body:JSON.stringify(data)
+		})
+		.then(response => {
+			if (response.ok) {
+				this.props.refreshToken();
+			}
+		})
 	}
 
 	render() {
@@ -38,7 +57,7 @@ export default class ProjectManagement extends Component {
 			<div>
 				{this.state.view === 'home' ? homeScreen : null }
 				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
-				{this.state.view === 'new' ? <NewProject /> : null }
+				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onSubmit={this.submtiNewProject} /> : null }
 			</div>
 		)
 	}
@@ -648,7 +667,85 @@ class NewProject extends Component {
 		super(props)
 
 		this.state = {
-			default:false,
+			userList:[],
+			title:"",
+			members:[],
 		}
+
+		this.cleanData = this.cleanData.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSelectChange = this.handleSelectChange.bind(this);
+	}
+	componentDidMount() {
+		const url = "/api/users/"
+
+		fetch(url, {
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			}
+		})
+		.then(response => response.json())
+		.then(json => {
+			this.setState({userList:json})
+		})
+	}
+
+	cleanData(e) {
+		e.preventDefault();
+
+		var data = {
+			title:this.state.title,
+			members:this.state.members
+		}
+
+		this.props.onSubmit(data)
+	}
+
+	handleChange(e) {
+		this.setState({[e.target.name]:e.target.value})
+	}
+
+	handleSelectChange(e) {
+		var options = e.target.options;
+		var value = [];
+		for (var i = 0, l = options.length; i < l; i++) {
+			if (options[i].selected) {
+				value.push(options[i].value);
+			}
+		}
+  		this.setState({members:value});
+	}
+
+	render() {
+		var options = []
+
+		this.state.userList.map((user) => {
+			options.push(<option key={"user_" + user.pk} value={user.pk}>{user.username}</option>)
+		})
+
+		return ( 
+			<div>
+				<h3 className="text-center my-2">Add New Project</h3>
+				<form onSubmit={this.cleanData}>
+					<div className="form-group row">
+						<input className="col-lg-6" name="title" type"text" value={this.state.title} onChange={this.handleChange} />
+						<select multiple="multiple" className="col-lg-6" name="members" value={this.state.members} onChange={this.handleSelectChange}>{options}</select>
+					</div>
+					<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit Edits" />
+					<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.props.changeView('home')}>Cancel</Button>
+				</form>
+			</div>
+		)
 	}
 }
+
+// handleChange: function(e) {
+//   var options = e.target.options;
+//   var value = [];
+//   for (var i = 0, l = options.length; i < l; i++) {
+//     if (options[i].selected) {
+//       value.push(options[i].value);
+//     }
+//   }
+//   this.props.someCallback(value);
+// }
