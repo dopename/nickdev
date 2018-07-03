@@ -338,6 +338,7 @@ class PhaseObjectives extends Component {
 		this.submitNewObjective = this.submitNewObjective.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.completeObjective = this.completeObjective.bind(this);
+		this.deleteObjective = this.deleteObjective.bind(this);
 	}
 
 	componentDidMount() {
