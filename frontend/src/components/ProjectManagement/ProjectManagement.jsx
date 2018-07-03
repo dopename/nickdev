@@ -162,7 +162,7 @@ class CoolList extends Component {
 				</ul>
 				<br/>
 				<br/>
-				<Phases phases={p.phases} />
+				<Phases project={p.pk} phases={p.phases} />
 			</div>
 		)
 	}
@@ -175,6 +175,10 @@ class Phases extends Component {
 		this.state = {
 			phases:[],
 			activePhase:false,
+			newPhase:false,
+			title:null,
+			order:null,
+			project:this.props.project
 		}
 	}
 
@@ -211,6 +215,14 @@ class Phases extends Component {
 		}
 	}
 
+	toggleNewPhase() {
+		this.setState({newPhase:!this.state.newPhase});
+	}
+
+	handleChange(e) {
+		this.setState({[e.target.name]:e.target.value})
+	}
+
 	render() {
 
 		var renderPhases = [];
@@ -229,6 +241,26 @@ class Phases extends Component {
 					</li>
 			)
 		})
+
+		if (!this.state.newPhase) {
+			renderPhases.push(<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.toggleNewPhase() } }></i></h4></li>)
+		}
+		else {
+			var newForm = (
+					<form onSubmit={this.submitPhaseForm}>
+						<div className="container">
+							<div className="form-group row">
+								<div className="col-lg-8">
+									<input type="text" value={this.state.title} onChange={this.handleChange} className="form-control" />
+								</div>
+								<div className="col-lg-4">
+									<input type="number" value={this.state.order} onChange={this.handleChange} className="form-control" />
+								</div>
+							</div>
+						</div>
+				)
+			renderPhases.push()
+		}
 
 		return (
 			<ul className="list-group">
@@ -437,31 +469,5 @@ class NewProject extends Component {
 		this.state = {
 			default:false,
 		}
-	}
-}
-
-class ObjectiveSubmitForm extends Component {
-	render() {
-		return (
-			<form onSubmit={this.submitNewObjective}>
-				<div className="form-group row">
-					<div className="col-lg-5">
-						<input className="form-control" required type="text" name="title" value={this.state.submitData.title} onChange={this.handleChange} />
-					</div>
-					<div className="col-lg-5">
-						<input className="form-control" type="date" name="due_date" value={this.state.submitData.due_date} onChange={this.handleChange} />
-					</div>
-					<div className="col-lg-2">
-						<input className="form-control" type="number" name="order" value={this.state.submitData.order} onChange={this.handleChange} />
-					</div>
-				</div>
-				<div className="form-group row">
-					<div className="col-lg-12">
-						<input className="form-control" required type="text" name="title" value={this.state.submitData.description} onChange={this.handleChange} />
-					</div>
-				</div>
-				<input type="submit" className="form-control" value="Submit" />
-			</form>
-		)
 	}
 }
