@@ -119,12 +119,12 @@ export default class Home extends Component {
 						{this.state.logged_in ? (<NavItem>
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('user_list')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">User List <i className='fa fa-bolt'></i></p> : <i className='fa fa-bolt sz-30'></i>}</Button>
 						</NavItem> ) : null }
+						{this.state.logged_in ? ( <NavItem>
+							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('pm')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Project Management <i className='fa fa-pie-chart'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
+						</NavItem> ) : null }
 						<NavItem>
 							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('login')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Login <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
 						</NavItem>
-						{this.state.logged_in ? ( <NavItem>
-							<Button outline className={ this.state.sideNav ? "btn-block text-left":"btn-block text-center"} onClick={() => this.changePage('pm')} color="info" size="lg">{this.state.sideNav ? <p className="m-0">Project Management <i className='fa fa-mail-forward'></i></p> : <i className='fa fa-mail-forward sz-30'></i>}</Button>
-						</NavItem> ) : null }
 					</Nav>
 			)
 
