@@ -548,7 +548,8 @@ class ObjectiveInfo extends Component {
 			editable:false,
 			description:this.props.o.description,
 			notes:this.props.o.notes,
-			due_date:this.props.o.due_date
+			due_date:this.props.o.due_date,
+			mobile:window.screen.width > 540 ? false : true,
 		}
 
 		this.toggleEditable = this.toggleEditable.bind(this);
@@ -587,9 +588,9 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
 				<ButtonGroup className="mb-2">
-					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
-					<Button outline size="md" color="danger" onClick={() => this.props.deleteObjective(this.props.o.pk, this.props.o.title)}>Delete Objective</Button>
-					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
+					<Button outline size="md" className={this.state.mobile ? "btn-block" : ""} color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
+					<Button outline size="md" className={this.state.mobile ? "btn-block" : ""} color="danger" onClick={() => this.props.deleteObjective(this.props.o.pk, this.props.o.title)}>Delete Objective</Button>
+					{this.props.o.completed ? <Button outline className={this.state.mobile ? "btn-block" : ""} size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="success">Mark Complete</Button>}
 				</ButtonGroup>
 			</div>
 			)
