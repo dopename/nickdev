@@ -305,26 +305,34 @@ class PhaseObjectives extends Component {
 	submitNewObjective() {
 		const url = "https://www.nicksdevenv.com/api/objective/"
 
+		var submitData = {
+			title:this.state.title,
+			order:this.state.order,
+			description:this.state.description,
+			notes:this.state.notes,
+			priority:this.state.priority,
+			due_date:this.state.due_date,
+			phase:this.props.phase
+		}
+
 		fetch(url, {
 			method:'post',
 			headers: {
 				"content-type":"application/json",
 				Authorization: `JWT ${localStorage.getItem('token')}`,
 			},
-			body: JSON.stringify(this.state.submitData)
+			body: JSON.stringify(submitData)
 		})
 		.then(repsonse => {
 			if (response.ok) {
 				this.setState({
 					createNew:false,
-					submitData:{
-						title:null,
-						order:null,
-						description:null,
-						notes:null,
-						priority:null,
-						due_date:null, 
-					}
+					title:null,
+					order:null,
+					description:null,
+					notes:null,
+					priority:null,
+					due_date:null, 
 				})
 				this.refresh();
 			}
