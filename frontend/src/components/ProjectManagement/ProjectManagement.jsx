@@ -516,6 +516,9 @@ class PhaseObjectives extends Component {
 		}
 	}
 
+
+	//+ (this.state.activeObjective === o.pk ?  " active" : "")
+
 	handleChange(event) {
 		this.setState({[event.target.name] : event.target.value});
 	}
@@ -530,7 +533,7 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className={"list-group-item pointer-hand btn-outline-" + (o.completed ? "primary":"secondary") + (this.state.activeObjective === o.pk ?  " active" : "")}
+					<h5 className={"list-group-item pointer-hand active btn-outline-" + (o.completed ? "primary":"secondary")}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
