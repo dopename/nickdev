@@ -356,7 +356,7 @@ class PhaseObjectives extends Component {
 					<h5 className={this.state.activeObjective === o.pk ? "list-group-item btn-outline-secondary pointer-hand active" : "list-group-item btn-outline-secondary pointer-hand"}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
-						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority}</span>
+						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "-"}</span>
 					</h5>
 					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
 				</li>
