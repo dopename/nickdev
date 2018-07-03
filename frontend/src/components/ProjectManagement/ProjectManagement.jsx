@@ -33,10 +33,14 @@ export default class ProjectManagement extends Component {
 		})
 		.then(response => {
 			if (response.ok) {
-				this.setState({view:'home'});
 				this.props.refreshToken();
+				this.setState({view:'home'});
 			}
 		})
+	}
+
+	deleteProject(pk) {
+		return null
 	}
 
 	render() {
