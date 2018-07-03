@@ -445,7 +445,9 @@ class PhaseObjectives extends Component {
 			phase:this.props.phase
 		}
 
-		if (!this.checkOrderDuplicate(submitData.order)) {
+		var duplicateOrder = this.checkOrderDuplicate(submitData.order)
+
+		if (!duplicateOrder) {
 			fetch(url, {
 				method:'post',
 				headers: {
