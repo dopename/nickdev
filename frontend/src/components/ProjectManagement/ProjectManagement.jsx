@@ -55,9 +55,10 @@ export default class ProjectManagement extends Component {
 		)
 		return (
 			<div>
+				<Button outline className="text-center" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
 				{this.state.view === 'home' ? homeScreen : null }
 				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
-				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onSubmit={this.submitNewProject} /> : null }
+				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.submitNewProject} /> : null }
 			</div>
 		)
 	}
@@ -676,6 +677,7 @@ class NewProject extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
+	
 	componentDidMount() {
 		const url = "/api/users/"
 
@@ -698,7 +700,7 @@ class NewProject extends Component {
 			members:this.state.members
 		}
 
-		this.props.onSubmit(data)
+		this.props.onFormSubmit(data)
 	}
 
 	handleChange(e) {
