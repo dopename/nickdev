@@ -13,14 +13,14 @@ export default class ProjectManagement extends Component {
 		}
 
 		this.changeView = this.changeView.bind(this);
-		this.submtiNewProject = this.submtiNewProject.bind(this);
+		this.submitNewProject = this.submitNewProject.bind(this);
 	}
 
 	changeView(view) {
 		this.setState({view:view});
 	}
 
-	submtiNewProject(data) {
+	submitNewProject(data) {
 		const url = "/api/project/"
 
 		fetch(url, {
@@ -42,11 +42,11 @@ export default class ProjectManagement extends Component {
 
 	const homeScreen = ( 
 				<div className="row">
-					<div className="col-6">
+					<div className="col-lg-6">
 						<h2>Working on an existing project?</h2>
 						<Button outline size="md" color="success" onClick={ () => this.changeView('existing') }>Click here</Button>
 					</div>
-					<div className="col-6">
+					<div className="col-lg-6">
 						<h2>Starting a new project?</h2>
 						<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
 					</div>
@@ -55,7 +55,7 @@ export default class ProjectManagement extends Component {
 		)
 		return (
 			<div>
-				<Button outline className="text-center" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
+				<Button outline className="text-center mb-3" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
 				{this.state.view === 'home' ? homeScreen : null }
 				{this.state.view === 'existing' ? <ExistingProjects projects={this.props.user.projects} /> : null }
 				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.submitNewProject} /> : null }
@@ -677,7 +677,7 @@ class NewProject extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
-	
+
 	componentDidMount() {
 		const url = "/api/users/"
 
