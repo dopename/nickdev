@@ -446,7 +446,7 @@ class PhaseObjectives extends Component {
 	}
 
 	deleteObjective(pk, title) {
-		const url = "/api/objective/" + pk + "/"
+		const url = "/api/destroy/objective/" + pk + "/"
 
 		var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
 
