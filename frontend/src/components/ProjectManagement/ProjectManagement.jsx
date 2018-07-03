@@ -511,7 +511,7 @@ class AddButton extends Component {
 
 	render() {
 		return (
-			<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.props.onclick() } }></i></h4></li>
+			<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.props.onClick() } }></i></h4></li>
 		)
 	}
 }
