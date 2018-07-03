@@ -337,6 +337,7 @@ class PhaseObjectives extends Component {
 		this.toggleNewObjective = this.toggleNewObjective.bind(this);
 		this.submitNewObjective = this.submitNewObjective.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.completeObjective = this.completeObjective.bind(this);
 	}
 
 	componentDidMount() {
@@ -416,6 +417,31 @@ class PhaseObjectives extends Component {
 
 	}
 
+	completeObjective(obj) {
+		const pk = obj.pk
+
+		delete obj.pk
+
+		obj.completed = !obj.completed
+
+		const url = "https://www.nicksdevenv.com/api/objective/"
+
+		fetch(url + pk + "/", {
+			method:'put',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body:JSON.stringify(obj)
+
+		})
+		.then(response -> {
+			if (response.ok) {
+				this.fetchObjectives();
+			}
+		})
+	}
+
 	handleChange(event) {
 		this.setState({[event.target.name] : event.target.value});
 	}
@@ -430,12 +456,12 @@ class PhaseObjectives extends Component {
 		obj.map((o) => {
 			renderObjectives.push(
 				<li>
-					<h5 className={this.state.activeObjective === o.pk ? "list-group-item btn-outline-secondary pointer-hand active" : "list-group-item btn-outline-secondary pointer-hand"}
+					<h5 className={"list-group-item pointer-hand btn-outline-" + (o.completed ? "info":"secondary") + (this.state.activeObjective === o.pk ?  " active" : "")}
 					onClick={ () => { this.toggleActiveObjective(o.pk) } }
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
 					</h5>
-					{this.state.activeObjective === o.pk ? <ObjectiveInfo o={o} /> : null }
+					{this.state.activeObjective === o.pk ? <ObjectiveInfo completeObjective={this.completeObjective} o={o} /> : null }
 				</li>
 			)
 		})
@@ -502,6 +528,7 @@ class ObjectiveInfo extends Component {
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
+				<Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o)} } color="success">Complete Objective</Button>
 			</div>
 		)
 	}
