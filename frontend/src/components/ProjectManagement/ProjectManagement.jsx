@@ -116,7 +116,7 @@ class ExistingProjects extends Component {
 			<div>
 				<ReactCSSTransitionGroup transitionName="test" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
 					{this.props.projects.length < 1 ? noProjects : null }
-					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
+					{this.props.projects.length > 0 && !this.state.activeProject ? <NormalList key="normal" selectProject={this.selectProject} projects={this.state.projects} /> : <CoolList key="cool" refresh={this.fetchProjects} selectProject={this.selectProject} project={this.state.projects[this.state.projects.map(e => e.pk).indexOf(this.state.activeProject)]}/> }
 				</ReactCSSTransitionGroup>
 			</div>
 		)
@@ -192,6 +192,38 @@ class Phases extends Component {
 		}
 	}
 
+	submitPhaseForm(e) {
+		e.preventDefault();
+
+		var formData = {
+			project:this.state.project,
+			title:this.state.title,
+			order:this.state.order,
+		}
+
+		const url = "/api/phase/"
+
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body:JSON.stringify(formData);
+		})
+		.then(response => {
+			if (response.ok) {
+				this.setState({
+					newPhase:false,
+					title:null,
+					order:null
+				});
+				this.props.refresh();
+
+			}
+		})
+	}
+
 	fetchPhases() {
 		const url = "https://www.nicksdevenv.com/api/phase/"
 		var queries = this.props.phases.map((phase) => {
@@ -251,15 +283,19 @@ class Phases extends Component {
 						<div className="container">
 							<div className="form-group row">
 								<div className="col-lg-8">
-									<input type="text" value={this.state.title} onChange={this.handleChange} className="form-control" />
+									<input required type="text" value={this.state.title} onChange={this.handleChange} className="form-control" />
 								</div>
 								<div className="col-lg-4">
-									<input type="number" value={this.state.order} onChange={this.handleChange} className="form-control" />
+									<input required type="number" value={this.state.order} onChange={this.handleChange} className="form-control" />
 								</div>
 							</div>
+							<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
+							<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewPhase()}>Cancel</Button>
 						</div>
-				)
-			renderPhases.push()
+					</form>
+				);
+
+			renderPhases.push(newForm)
 		}
 
 		return (
