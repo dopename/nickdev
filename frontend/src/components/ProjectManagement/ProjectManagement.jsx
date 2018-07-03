@@ -225,7 +225,7 @@ class Phases extends Component {
 						>
 							{phase.title}
 						</h4>
-						{this.state.activePhase === phase.pk ? <li><PhaseObjectives objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></li> : null }
+						{this.state.activePhase === phase.pk ? <li><PhaseObjectives refresh={this.fetchPhases} phase={this.state.activePhase} objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></li> : null }
 					</li>
 			)
 		})
@@ -245,9 +245,23 @@ class PhaseObjectives extends Component {
 		this.state = {
 			objectives:[],
 			activeObjective:false,
+			createNew:false,
+			submitData:{
+				title:null,
+				order:null,
+				description:null,
+				notes:null,
+				priority:null,
+				due_date:null, 
+				phase:this.props.phase
+			}
 		}
 
 		this.toggleActiveObjective = this.toggleActiveObjective.bind(this);
+		this.fetchObjectives = this.fetchObjectives.bind(this);
+		this.toggleNewObjective = this.toggleNewObjective.bind(this);
+		this.submitNewObjective = this.submitNewObjective.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -284,6 +298,44 @@ class PhaseObjectives extends Component {
 		}
 	}
 
+	toggleNewObjective() {
+		this.setState({createNew:!this.state.createNew});
+	}
+
+	submitNewObjective() {
+		const url = "https://www.nicksdevenv.com/api/objective/"
+
+		fetch(url, {
+			method:'post',
+			headers: {
+				"content-type":"application/json",
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
+			body: JSON.stringify(this.state.submitData)
+		})
+		.then(repsonse => {
+			if (response.ok) {
+				this.setState({
+					createNew:false,
+					submitData:{
+						title:null,
+						order:null,
+						description:null,
+						notes:null,
+						priority:null,
+						due_date:null, 
+					}
+				})
+				this.refresh();
+			}
+		})
+
+	}
+
+	handleChange(event) {
+		this.setState({submitData[event.target.name]:event.target.value})
+	}
+
 	render() {
 		var obj = this.state.objectives.sort(function (a, b) {
 			return a.pk - b.pk;
@@ -304,7 +356,40 @@ class PhaseObjectives extends Component {
 			)
 		})
 
-		renderObjectives.push(<li><h4><i className="fa fa-plus text-success text-center mt-2"></i></h4></li>)
+		const newForm = (
+			<form onSubmit={this.submitNewObjective}>
+				<div className="form-group row">
+					<div className="col-lg-5">
+						<input className="form-control" required type="text" name="title" value={this.state.submitData.title} onChange={this.handleChange} />
+					</div>
+					<div className="col-lg-5">
+						<input className="form-control" type="date" name="due_date" value={this.state.submitData.due_date} onChange={this.handleChange} />
+					</div>
+					<div className="col-lg-2">
+						<input className="form-control" type="number" name="order" value={this.state.submitData.order} onChange={this.handleChange} />
+					</div>
+				</div>
+				<div className="form-group row">
+					<div className="col-lg-12">
+						<input className="form-control" required type="text" name="title" value={this.state.submitData.description} onChange={this.handleChange} />
+					</div>
+				</div>
+				<input type="submit" className="form-control" value="Submit" />
+				<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
+			</form>
+		)
+
+
+		if (!this.state.createNew) {
+			renderObjectives.push(<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center" onClick={() => { this.toggleNewObjective() } }></i></h4></li>)
+		}
+		else {
+			renderObjectives.push(
+					<li>
+						{newForm}
+					</li>
+				)
+		}
 
 		return (
 			<div>
@@ -341,5 +426,31 @@ class NewProject extends Component {
 		this.state = {
 			default:false,
 		}
+	}
+}
+
+class ObjectiveSubmitForm extends Component {
+	render() {
+		return (
+			<form onSubmit={this.submitNewObjective}>
+				<div className="form-group row">
+					<div className="col-lg-5">
+						<input className="form-control" required type="text" name="title" value={this.state.submitData.title} onChange={this.handleChange} />
+					</div>
+					<div className="col-lg-5">
+						<input className="form-control" type="date" name="due_date" value={this.state.submitData.due_date} onChange={this.handleChange} />
+					</div>
+					<div className="col-lg-2">
+						<input className="form-control" type="number" name="order" value={this.state.submitData.order} onChange={this.handleChange} />
+					</div>
+				</div>
+				<div className="form-group row">
+					<div className="col-lg-12">
+						<input className="form-control" required type="text" name="title" value={this.state.submitData.description} onChange={this.handleChange} />
+					</div>
+				</div>
+				<input type="submit" className="form-control" value="Submit" />
+			</form>
+		)
 	}
 }

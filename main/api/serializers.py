@@ -164,7 +164,6 @@ class ObjectiveCreateSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Objective
 		fields = [
-			"pk",
 			"title",
 			"order",
 			"description",
