@@ -577,7 +577,7 @@ class PhaseObjectives extends Component {
 					</div>
 				</div>
 				<input type="submit" className="form-control pointer-hand btn-outline-secondary" value="Submit" />
-				<Button outline className="mb-2" color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
+				<Button outline color="danger" className="btn-block" size="md" onClick={() => this.toggleNewObjective()}>Cancel</Button>
 			</form>
 		)
 
