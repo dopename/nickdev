@@ -249,7 +249,7 @@ class PhaseObjectives extends Component {
 	fetchObjectives(objectives) {
 		const url = "htps://www.nicksdevenv.com/api/objective/"
 
-		var queries = objectives.map((objective), {
+		var queries = objectives.map((objective) => {
 			return fetch(url + objective + "/", {
 				headers: {
 					Authorization: `JWT ${localStorage.getItem('token')}`,
