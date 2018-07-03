@@ -524,7 +524,7 @@ class ObjectiveInfo extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="border border-dark">
 				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
 				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
 				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
