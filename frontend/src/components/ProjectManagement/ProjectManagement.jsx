@@ -308,6 +308,9 @@ class PhaseObjectives extends Component {
 			<ul className="list-group-item">
 				{renderObjectives}
 			</ul>
+			<div className="col-lg-12">
+				<h4><i className="fa fa-plus text-success text-center"></i></h4>
+			</div>
 		)
 	}
 }
@@ -321,9 +324,9 @@ class ObjectiveInfo extends Component {
 	render() {
 		return (
 			<div>
-				<p className="my-1 text-left"><strong>Description:</strong> {this.props.o.description}</p>
-				<p className="my-1 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
-				<p className="my-1 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
+				<p className="my-1 px-2 text-left"><strong>Description:</strong> {this.props.o.description}</p>
+				<p className="my-1 px-2 text-left"><strong>Notes:</strong> {this.props.o.notes}</p>
+				<p className="my-1 px-2 text-left"><strong>Due Date:</strong> {this.props.o.due_date}</p>
 			</div>
 		)
 	}
@@ -333,5 +336,9 @@ class ObjectiveInfo extends Component {
 class NewProject extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			default:false,
+		}
 	}
 }
