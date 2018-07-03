@@ -276,11 +276,11 @@ class PhaseObjectives extends Component {
 		var renderObjectives = [];
 
 		obj.map((o) => {
-			renderObjectives.push(<li className="list-group-item btn-outline-secondary">{o.title}</li>)
+			renderObjectives.push(<li className="list-group-item btn-outline-secondary"><span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}</li>)
 		})
 
 		return (
-			<ul className="list-group">
+			<ul className="list-group-flush">
 				{renderObjectives}
 			</ul>
 		)
