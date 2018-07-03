@@ -365,7 +365,7 @@ class PhaseObjectives extends Component {
 		})
 
 		const newForm = (
-			<form onSubmit={this.submitNewObjective}>
+			<form className="mt-3" onSubmit={this.submitNewObjective}>
 				<div className="form-group row">
 					<div className="col-lg-5">
 						<input className="form-control" required type="text" name="title" value={this.state.submitData.title} onChange={this.handleChange} />
