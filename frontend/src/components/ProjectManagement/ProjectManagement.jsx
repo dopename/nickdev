@@ -305,11 +305,13 @@ class PhaseObjectives extends Component {
 		})
 
 		return (
-			<ul className="list-group-item">
-				{renderObjectives}
-			</ul>
-			<div className="col-lg-12">
-				<h4><i className="fa fa-plus text-success text-center"></i></h4>
+			<div>
+				<ul className="list-group-item">
+					{renderObjectives}
+				</ul>
+				<div className="col-lg-12">
+					<h4><i className="fa fa-plus text-success text-center"></i></h4>
+				</div>
 			</div>
 		)
 	}
