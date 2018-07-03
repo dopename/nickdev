@@ -246,15 +246,13 @@ class PhaseObjectives extends Component {
 			objectives:[],
 			activeObjective:false,
 			createNew:false,
-			submitData:{
-				title:null,
-				order:null,
-				description:null,
-				notes:null,
-				priority:null,
-				due_date:null, 
-				phase:this.props.phase
-			}
+			title:null,
+			order:null,
+			description:null,
+			notes:null,
+			priority:null,
+			due_date:null, 
+			phase:this.props.phase
 		}
 
 		this.toggleActiveObjective = this.toggleActiveObjective.bind(this);
