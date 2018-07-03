@@ -481,7 +481,6 @@ class PhaseObjectives extends Component {
 
 	checkOrderDuplicate(num) {
 		this.state.objectives.map(obj => {
-			console.log(obj, num);
 			if (num === obj.order.toString()) {
 				return true
 			}
