@@ -234,6 +234,10 @@ class Phases extends Component {
 class PhaseObjectives extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			objectives:[],
+		}
 	}
 
 	componentDidMount() {
@@ -262,7 +266,7 @@ class PhaseObjectives extends Component {
 	}
 
 	render() {
-		var obj = this.props.objectives.sort(function (a, b) {
+		var obj = this.state.objectives.sort(function (a, b) {
 			return a.pk - b.pk;
 		});
 
