@@ -241,8 +241,6 @@ class Phases extends Component {
 		this.toggleActivePhase = this.toggleActivePhase.bind(this);
 		this.toggleNewPhase = this.toggleNewPhase.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.edit = this.edit.bind(this);
-		this.delete = this.delete.bind(this);
 	}
 
 	componentDidMount() {
@@ -318,14 +316,6 @@ class Phases extends Component {
 		this.setState({[e.target.name]:e.target.value})
 	}
 
-	edit() {
-		return null
-	}
-
-	delete() {
-		return null
-	}
-
 	render() {
 
 		var renderPhases = [];
@@ -346,21 +336,7 @@ class Phases extends Component {
 		})
 
 		if (!this.state.newPhase) {
-			renderPhases.push(
-				<li>
-					<div className="row">
-						<div className="col-4">
-							<AddButton position="center" onClick={this.toggleNewPhase} />
-						</div>
-						<div className="col-4">	
-							<EditButton position="center" onClick={this.edit} />
-						</div>
-						<div className="col-4">
-							<DeleteButton position="center" onClick={this.delete} />
-						</div>
-					</div>
-				</li>
-				)
+			renderPhases.push(<li><AddButton position="center" onClick={this.toggleNewPhase} /></li>)
 		}
 		else {
 			var newForm = (
