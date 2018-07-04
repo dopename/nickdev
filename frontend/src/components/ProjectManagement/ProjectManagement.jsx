@@ -256,35 +256,48 @@ class NormalList extends Component {
 			}
 			else {
 			renderProjects.push(
-				<li>
-					<form onSubmit={this.cleanData}>
-						<div className="row">
-							<h4 key={"projecte" + project.pk}
-								onClick={() => { this.toggleEditable(project.pk) } }
-								className="list-group-item btn-outline-warning pointer-hand col-1 p-1 active">
-								<i className="fa fa-pencil"></i>
-							</h4>
-							<input key={"project" + project.pk} 
-								value={this.state.title}
-								onChange={this.handleChange}
-								type="text"
-								name="title"
-								className="form-control col-9"
-								/>
-							<h4 onClick={() => {this.toggleEditable(project.pk)} }
-								className="btn btn-outline-danger pointer-hand col-1 p-1 m-0">
-								&#10005;
-							</h4>
-							<input type="submit" className="btn-block form-control pointer-hand btn-outline-success col-1" value="&#10004;" />
-						</div>
-					</form>
-				</li>)
+					<EditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} />
+				)
 			}
 		})
 		return (
 			<ul className="list-group">
 				{renderProjects}
 			</ul>
+		)
+	}
+}
+
+
+class EditDeleteListItem extends Component {
+	constructor(props) {
+		super(props)
+	}
+	render() {
+		return ( 
+				<li>
+					<form onSubmit={this.props.onSubmit}>
+						<div className="row">
+							<h4 key={"projecte" + this.props.pk}
+								onClick={() => { this.props.toggle(this.props.pk) } }
+								className="list-group-item btn-outline-warning pointer-hand col-1 p-1 active">
+								<i className="fa fa-pencil"></i>
+							</h4>
+							<input key={"project" + this.props.pk} 
+								value={this.props.title}
+								onChange={this.props.handleChange}
+								type="text"
+								name="title"
+								className="form-control col-9"
+								/>
+							<h4 onClick={() => {this.props.toggle(this.props.pk)} }
+								className="btn btn-outline-danger pointer-hand col-1 p-1 m-0">
+								&#10005;
+							</h4>
+							<input type="submit" className="btn-block form-control pointer-hand btn-outline-success col-1" value="&#10004;" />
+						</div>
+					</form>
+				</li>
 		)
 	}
 }
