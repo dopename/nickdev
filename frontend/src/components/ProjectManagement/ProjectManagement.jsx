@@ -241,6 +241,8 @@ class Phases extends Component {
 		this.toggleActivePhase = this.toggleActivePhase.bind(this);
 		this.toggleNewPhase = this.toggleNewPhase.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.edit = this.edit.bind(this);
+		this.delete = this.delete.binid(this);
 	}
 
 	componentDidMount() {
@@ -316,6 +318,14 @@ class Phases extends Component {
 		this.setState({[e.target.name]:e.target.value})
 	}
 
+	edit() {
+		return null
+	}
+
+	delete() {
+		return null
+	}
+
 	render() {
 
 		var renderPhases = [];
@@ -336,7 +346,21 @@ class Phases extends Component {
 		})
 
 		if (!this.state.newPhase) {
-			renderPhases.push(<AddButton onClick={this.toggleNewPhase} />)
+			renderPhases.push(
+				<li>
+					<div className="row">
+						<div clasName="col-4">
+							<AddButton position="center" onClick={this.toggleNewPhase} />
+						</div>
+						<div clasName="col-4">	
+							<EditButton position="center" onClick={this.edit} />
+						</div>
+						<div clasName="col-4">
+							<DeleteButton position="center" onClick={this.delete} />
+						</div>
+					</div>
+				</li>
+				)
 		}
 		else {
 			var newForm = (
@@ -605,7 +629,7 @@ class PhaseObjectives extends Component {
 
 
 		if (!this.state.createNew) {
-			renderObjectives.push(<AddButton onClick={this.toggleNewObjective} />)
+			renderObjectives.push(<li><AddButton position="center" onClick={this.toggleNewObjective} /></li>)
 		}
 		else {
 			renderObjectives.push(
@@ -739,7 +763,31 @@ class AddButton extends Component {
 
 	render() {
 		return (
-			<li><h4 className="mt-3"><i className="fa fa-plus text-success text-center pointer-hand" onClick={() => { this.props.onClick() } }></i></h4></li>
+			<h4 className="mt-3"><i className={"fa fa-plus text-success pointer-hand text-" + this.props.position} onClick={() => { this.props.onClick() } }></i></h4>
+		)
+	}
+}
+
+class DeleteButton extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			<h4 className="mt-3"><i className={"fa fa-trash text-danger pointer-hand text-" + this.props.position} onClick={() => { this.props.onClick() } }></i></h4>
+		)
+	}
+}
+
+class EditButton extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			<h4 className="mt-3"><i className={"fa fa-pencil text-warning pointer-hand text-" + this.props.position} onClick={() => { this.props.onClick() } }></i></h4>
 		)
 	}
 }
