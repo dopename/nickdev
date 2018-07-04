@@ -242,7 +242,7 @@ class Phases extends Component {
 		this.toggleNewPhase = this.toggleNewPhase.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.edit = this.edit.bind(this);
-		this.delete = this.delete.binid(this);
+		this.delete = this.delete.bind(this);
 	}
 
 	componentDidMount() {
