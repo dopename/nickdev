@@ -269,7 +269,7 @@ class NormalList extends Component {
 								onChange={this.handleChange}
 								type="text"
 								name="title"
-								className="form-control col-9"
+								className="form-control col-9 btn-outline-danger"
 								/>
 							<h4 onClick={() => {this.toggleEditable(project.pk)} }
 								className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
