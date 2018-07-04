@@ -233,31 +233,21 @@ class NormalList extends Component {
 		this.props.projects.map((project) => {
 
 			if (project.pk !== this.state.editableProject) {
-			renderProjects.push(
-				<li>
-					<div className="row">
-						<h4 key={"projecte" + project.pk}
-							onClick={() => { this.toggleEditable(project.pk) } }
-							className="list-group-item btn-outline-warning pointer-hand col-1 p-1">
-							<i className="fa fa-pencil"></i>
-						</h4>
-						<h4 key={"project" + project.pk} 
-							onClick={ () => {this.props.selectProject(project.pk)} } 
-							className="list-group-item btn-outline-info pointer-hand p-1 col-10">
-							{project.title}
-						</h4>
-						<h4 key={"projectd" + project.pk}
-							onClick={() => {this.props.deleteProject(project.pk, project.title)} }
-							className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
-							<i className="fa fa-trash"></i>
-						</h4>
-					</div>
-				</li>)
+				renderProjects.push(
+						<EditDeleteListItem 
+							edit={this.toggleEditable} 
+							select={this.props.selectProject} 
+							delete={this.props.deleteProject} 
+							color="info"
+							title={project.title}
+							pk={project.pk}
+							/>
+					)
 			}
 			else {
-			renderProjects.push(
-					<EditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} />
-				)
+				renderProjects.push(
+						<ActiveEditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} />
+					)
 			}
 		})
 		return (
@@ -270,6 +260,37 @@ class NormalList extends Component {
 
 
 class EditDeleteListItem extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+				<li>
+					<div className="row">
+						<h4 key={"projecte" + this.props.pk}
+							onClick={() => { this.props.edit(this.props.pk) } }
+							className="list-group-item btn-outline-warning pointer-hand col-1 p-1">
+							<i className="fa fa-pencil"></i>
+						</h4>
+						<h4 key={"project" + this.props.pk} 
+							onClick={ () => {this.props.select(this.props.pk)} } 
+							className={"list-group-item pointer-hand p-1 col-10 btn-outline-" + this.props.color}>
+							{this.props.title}
+						</h4>
+						<h4 key={"projectd" + this.props.pk}
+							onClick={() => {this.props.delete(this.props.pk, this.props.title)} }
+							className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
+							<i className="fa fa-trash"></i>
+						</h4>
+					</div>
+				</li>
+		)
+	}
+}
+
+
+class ActiveEditDeleteListItem extends Component {
 	constructor(props) {
 		super(props)
 	}
