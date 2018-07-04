@@ -272,7 +272,7 @@ class NormalList extends Component {
 								className="form-control col-9"
 								/>
 							<h4 onClick={() => {this.toggleEditable(project.pk)} }
-								className="btn btn-outline-danger pointer-hand col-1 p-1">
+								className="btn btn-outline-danger pointer-hand col-1 p-1 m-0">
 								&#10005;
 							</h4>
 							<input type="submit" className="btn-block form-control pointer-hand btn-outline-success col-1" value="&#10004;" />
