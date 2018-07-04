@@ -122,6 +122,14 @@ class PhaseSerializer(serializers.ModelSerializer):
 			"objectives"
 		]
 
+class PhaseUpdateSerializer(serializer.ModelSerializer):
+
+	class Meta:
+		model = Phase
+		fields = [
+			"title"
+		]
+
 
 class PhaseCreateSerializer(serializers.ModelSerializer):
 

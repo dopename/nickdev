@@ -234,19 +234,21 @@ class NormalList extends Component {
 
 			if (project.pk !== this.state.editableProject) {
 				renderProjects.push(
+					<li>
 						<EditDeleteListItem 
 							edit={this.toggleEditable} 
 							select={this.props.selectProject} 
-							delete={this.props.deleteProject} 
+							delete={this.cleanData} 
 							color="info"
 							title={project.title}
 							pk={project.pk}
 							/>
+						</li>
 					)
 			}
 			else {
 				renderProjects.push(
-						<ActiveEditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} />
+						<li><ActiveEditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} /></li>
 					)
 			}
 		})
@@ -266,7 +268,6 @@ class EditDeleteListItem extends Component {
 
 	render() {
 		return (
-				<li>
 					<div className="row">
 						<h4 key={"projecte" + this.props.pk}
 							onClick={() => { this.props.edit(this.props.pk) } }
@@ -284,7 +285,6 @@ class EditDeleteListItem extends Component {
 							<i className="fa fa-trash"></i>
 						</h4>
 					</div>
-				</li>
 		)
 	}
 }
@@ -296,7 +296,6 @@ class ActiveEditDeleteListItem extends Component {
 	}
 	render() {
 		return ( 
-				<li>
 					<form onSubmit={this.props.onSubmit}>
 						<div className="row">
 							<h4 key={"projecte" + this.props.pk}
@@ -318,7 +317,6 @@ class ActiveEditDeleteListItem extends Component {
 							<input type="submit" className="btn-block form-control pointer-hand btn-outline-success col-1" value="&#10004;" />
 						</div>
 					</form>
-				</li>
 		)
 	}
 }
@@ -351,6 +349,7 @@ class Phases extends Component {
 			phases:[],
 			activePhase:false,
 			newPhase:false,
+			editablePhase:false,
 			title:null,
 			order:null,
 			project:this.props.project
@@ -361,6 +360,10 @@ class Phases extends Component {
 		this.toggleActivePhase = this.toggleActivePhase.bind(this);
 		this.toggleNewPhase = this.toggleNewPhase.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.toggleEditablePhase = this.toggleEditablePhase.bind(this);
+		this.updatePhase = this.updatePhase.bind(this);
+		this.cleanData = this.cleanData.bind(this);
+		this.deletePhase = this.deletePhase.bind(this);
 	}
 
 	componentDidMount() {
@@ -405,6 +408,55 @@ class Phases extends Component {
 		})
 	}
 
+	deletePhase(pk, title) {
+		const url = "/api/destroy/phase/" + pk + "/"
+
+		var confirmed = window.confirm("Are you sure you want to delete the following phase: " + title +"?");
+		if (confirmed) {
+			fetch(url, {
+				method:"delete",
+				headers: {
+					Authorization: `JWT ${localStorage.getItem('token')}`,
+				}
+			})
+			.then(response => {
+				if (response.ok) {
+					this.props.refresh();
+				}
+			})
+		}
+	}
+
+	updatePhase(pk, data) {
+		const url = "https://www.nicksdevenv.com/api/update/phase/" + pk + "/"
+
+		fetch(url, {
+			method:'put',
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+				"Content-Type":"application/json",
+			},
+			body:JSON.stringify(data)
+		})
+		.then(response => {
+			if (response.ok) {
+				this.props.refresh();
+			}
+		})
+	}
+
+	cleanData(e) {
+		e.preventDefault();
+
+		var formData = {
+			title:this.state.title,
+		}
+
+		this.updatePhase(this.state.editablePhase, formData);
+		this.setState({editablePhase:false, title:null});
+	}
+
+
 	fetchPhases() {
 		const url = "https://www.nicksdevenv.com/api/phase/"
 		var queries = this.props.phases.map((phase) => {
@@ -428,6 +480,15 @@ class Phases extends Component {
 		}
 	}
 
+	toggleEditablePhase(pk) {
+		if (this.state.editablePhase === pk) {
+			this.setState({editablePhase:false});
+		}
+		else {
+			this.setState({editablePhase:pk});
+		}
+	}
+
 	toggleNewPhase() {
 		this.setState({newPhase:!this.state.newPhase});
 	}
@@ -437,22 +498,46 @@ class Phases extends Component {
 	}
 
 	render() {
+							// <h4 
+							// className={this.state.activePhase === phase.pk ? "list-group-item btn-outline-success pointer-hand active" : "list-group-item btn-outline-success pointer-hand" }
+							// onClick={ () => { this.toggleActivePhase(phase.pk) } } 
+							// key={"phase" + phase.pk}
+							// >
+							// 	{phase.title}
+							// </h4>
 
 		var renderPhases = [];
 
 		this.state.phases.map((phase) => {
-			renderPhases.push(
+
+			if (!this.state.editablePhase === phase.pk) {
+				renderPhases.push(
+						<li>
+							<EditDeleteListItem
+								edit={this.toggleEditablePhase} 
+								select={this.toggleActivePhase} 
+								delete={this.deletePhase} 
+								color="success"
+								title={phase.title}
+								pk={phase.pk}
+							/>
+							{this.state.activePhase === phase.pk ? <li><PhaseObjectives refresh={this.fetchPhases} phase={this.state.activePhase} objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></li> : null }
+						</li>
+				)
+			}
+			else {
+				renderPhases.push(
 					<li>
-						<h4 
-						className={this.state.activePhase === phase.pk ? "list-group-item btn-outline-success pointer-hand active" : "list-group-item btn-outline-success pointer-hand" }
-						onClick={ () => { this.toggleActivePhase(phase.pk) } } 
-						key={"phase" + phase.pk}
-						>
-							{phase.title}
-						</h4>
-						{this.state.activePhase === phase.pk ? <li><PhaseObjectives refresh={this.fetchPhases} phase={this.state.activePhase} objectives={this.state.phases[this.state.phases.map(e => e.pk).indexOf(this.state.activePhase)].objectives} /></li> : null }
+						<ActiveEditDeleteListItem 
+							toggle={this.toggleEditablePhase} 
+							pk={phase.pk} 
+							title={phase.title} 
+							onSubmit={this.cleanData} 
+							handleChange={this.handleChange} />
 					</li>
-			)
+
+					)
+			}
 		})
 
 		if (!this.state.newPhase) {

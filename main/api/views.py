@@ -156,6 +156,10 @@ class PhaseDestroyView(generics.DestroyAPIView):
 		qs = Phase.objects.all()
 		return qs
 
+class PhaseUpdateView(generics.UpdateAPIview):
+	lookup_field = "pk"
+	serializer_class = PhaseUpdateSerializer
+
 
 class PhaseCreateView(generics.CreateAPIView):
 	lookup_field = 'pk'
