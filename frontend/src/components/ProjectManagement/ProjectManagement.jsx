@@ -210,7 +210,7 @@ class NormalList extends Component {
 		}
 	}
 
-	cleanData() {
+	cleanData(e) {
 		e.preventDefault();
 
 		var formData = {
