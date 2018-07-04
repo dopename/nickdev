@@ -179,8 +179,8 @@ class NormalList extends Component {
 				<li>
 					<div className="row">
 						<h4 key={"projecte" + project.pk}
-							className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
-							<i className="fa fa-trash"></i>
+							className="list-group-item btn-outline-warning pointer-hand col-1 p-1">
+							<i className="fa fa-penicl"></i>
 						</h4>
 						<h4 key={"project" + project.pk} 
 							onClick={ () => {this.props.selectProject(project.pk)} } 
