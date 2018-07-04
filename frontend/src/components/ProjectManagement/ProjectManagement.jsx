@@ -197,6 +197,7 @@ class NormalList extends Component {
 
 		this.toggleEditable = this.toggleEditable.bind(this);
 		this.cleanData = this.cleanData.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	toggleEditable(pk) {
@@ -220,6 +221,10 @@ class NormalList extends Component {
 
 		this.props.updateProject(this.state.editableProject, formData);
 		this.setState({editableProject:false, title:false, members:[]});
+	}
+
+	handleChange(e) {
+		this.setState({[e.target.name]:e.target.value})
 	}
 
 	render() {
