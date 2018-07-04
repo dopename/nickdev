@@ -97,6 +97,7 @@ class ExistingProjects extends Component {
 
 		this.fetchProjects = this.fetchProjects.bind(this);
 		this.selectProject = this.selectProject.bind(this);
+		this.updateProject = this.updateProject.bind(this);
 	}
 
 	componentDidMount() {
@@ -131,6 +132,24 @@ class ExistingProjects extends Component {
 		else {
 			this.setState({activeProject:pk});
 		}
+	}
+
+	updateProject(pk, data) {
+		const url = "https://www.nicksdevenv.com/api/project/" + pk + "/"
+
+		fetch(url, {
+			method:'put',
+			headers: {
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+				"Content-Type":"application/json",
+			},
+			body:JSON.stringify(data)
+		})
+		.then(response => {
+			if (response.ok) {
+				this.fetchProjects();
+			}
+		})
 	}
 
 	render() {
@@ -169,22 +188,57 @@ class ExistingProjects extends Component {
 class NormalList extends Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			editableProject:false,
+			title:false,
+			members:[]
+		}
+
+		this.toggleEditable = this.toggleEditable.bind(this);
+		this.cleanData = this.cleanData.bind(this);
+	}
+
+	toggleEditable(pk) {
+		if (this.state.editableProject === pk) {
+			this.setState({editableProject:false});
+		}
+		else {
+			var title = this.props.projects[this.props.projects.map(e => e.pk).indexOf(pk)].title
+			var members = this.props.projects[this.props.projects.map(e => e.pk).indexOf(pk)].members
+			this.setState({editableProject:pk, title:title, members:members})
+		}
+	}
+
+	cleanData() {
+		e.preventDefault();
+
+		var formData = {
+			title:this.state.title,
+			members:this.state.members,
+		}
+
+		this.props.updateProject(this.state.editableProject, formData);
+		this.setState({editableProject:false, title:false, members:[]});
 	}
 
 	render() {
 		const renderProjects = []
 
 		this.props.projects.map((project) => {
+
+			if (project.pk !== this.state.editableProject) {}
 			renderProjects.push(
 				<li>
 					<div className="row">
 						<h4 key={"projecte" + project.pk}
+							onClick={() => { this.toggleEditable(project.pk) } }
 							className="list-group-item btn-outline-warning pointer-hand col-1 p-1">
 							<i className="fa fa-pencil"></i>
 						</h4>
 						<h4 key={"project" + project.pk} 
 							onClick={ () => {this.props.selectProject(project.pk)} } 
-							className="list-group-item btn-outline-info pointer-hand col-10 p-1">
+							className="list-group-item btn-outline-info pointer-hand p-1 col-10">
 							{project.title}
 						</h4>
 						<h4 key={"projectd" + project.pk}
@@ -194,6 +248,32 @@ class NormalList extends Component {
 						</h4>
 					</div>
 				</li>)
+			}
+			else {
+				<li>
+					<form onSubmit={this.cleanData}>
+						<div className="row">
+							<h4 key={"projecte" + project.pk}
+								onClick={() => { this.toggleEditable(project.pk) } }
+								className="list-group-item btn-outline-warning pointer-hand col-1 p-1 active">
+								<i className="fa fa-pencil"></i>
+							</h4>
+							<input key={"project" + project.pk} 
+								value={this.state.title}
+								onChange={this.handleChange}
+								type="text"
+								name="title"
+								className="form-control col-9"
+								/>
+							<h4 onClick={() => {this.toggleEditable(project.pk)} }
+								className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
+								&#10005;
+							</h4>
+							<input type="submit" className="btn-block form-control pointer-hand btn-outline-success col-1" value="&#10004;" />
+						</div>
+					</form>
+				</li>)
+			}
 		})
 		return (
 			<ul className="list-group">
@@ -852,14 +932,3 @@ class NewProject extends Component {
 		)
 	}
 }
-
-// handleChange: function(e) {
-//   var options = e.target.options;
-//   var value = [];
-//   for (var i = 0, l = options.length; i < l; i++) {
-//     if (options[i].selected) {
-//       value.push(options[i].value);
-//     }
-//   }
-//   this.props.someCallback(value);
-// }
