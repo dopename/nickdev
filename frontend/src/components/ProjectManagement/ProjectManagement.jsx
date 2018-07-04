@@ -178,9 +178,13 @@ class NormalList extends Component {
 			renderProjects.push(
 				<li>
 					<div className="row">
+						<h4 key={"projecte" + project.pk}
+							className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
+							<i className="fa fa-trash"></i>
+						</h4>
 						<h4 key={"project" + project.pk} 
 							onClick={ () => {this.props.selectProject(project.pk)} } 
-							className="list-group-item btn-outline-info pointer-hand col-11 p-1">
+							className="list-group-item btn-outline-info pointer-hand col-10 p-1">
 							{project.title}
 						</h4>
 						<h4 key={"projectd" + project.pk}
