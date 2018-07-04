@@ -122,7 +122,7 @@ class PhaseSerializer(serializers.ModelSerializer):
 			"objectives"
 		]
 
-class PhaseUpdateSerializer(serializer.ModelSerializer):
+class PhaseUpdateSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Phase
