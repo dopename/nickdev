@@ -227,7 +227,7 @@ class NormalList extends Component {
 
 		this.props.projects.map((project) => {
 
-			if (project.pk !== this.state.editableProject) {}
+			if (project.pk !== this.state.editableProject) {
 			renderProjects.push(
 				<li>
 					<div className="row">
