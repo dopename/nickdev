@@ -510,7 +510,7 @@ class Phases extends Component {
 
 		this.state.phases.map((phase) => {
 
-			if (!this.state.editablePhase === phase.pk) {
+			if (phase.pk !== this.state.editablePhase) {
 				renderPhases.push(
 						<li>
 							<EditDeleteListItem
