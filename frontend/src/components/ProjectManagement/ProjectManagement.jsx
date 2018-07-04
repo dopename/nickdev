@@ -349,13 +349,13 @@ class Phases extends Component {
 			renderPhases.push(
 				<li>
 					<div className="row">
-						<div clasName="col-4">
+						<div className="col-4">
 							<AddButton position="center" onClick={this.toggleNewPhase} />
 						</div>
-						<div clasName="col-4">	
+						<div className="col-4">	
 							<EditButton position="center" onClick={this.edit} />
 						</div>
-						<div clasName="col-4">
+						<div className="col-4">
 							<DeleteButton position="center" onClick={this.delete} />
 						</div>
 					</div>
