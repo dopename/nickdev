@@ -160,6 +160,13 @@ class PhaseUpdateView(generics.UpdateAPIView):
 	lookup_field = "pk"
 	serializer_class = PhaseUpdateSerializer
 
+	def get_queryset(self):
+		qs = Phase.objects.all()
+		query = self.request.GET.get('q')
+		if query is not None:
+			qs = qs.filter(pk=query)
+		return qs
+
 
 class PhaseCreateView(generics.CreateAPIView):
 	lookup_field = 'pk'
