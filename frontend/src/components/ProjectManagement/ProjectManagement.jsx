@@ -248,7 +248,7 @@ class NormalList extends Component {
 			}
 			else {
 				renderProjects.push(
-						<li><ActiveEditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={project.title} onSubmit={this.cleanData} handleChange={this.handleChange} /></li>
+						<li><ActiveEditDeleteListItem toggle={this.toggleEditable} pk={project.pk} title={this.state.title} onSubmit={this.cleanData} handleChange={this.handleChange} /></li>
 					)
 			}
 		})
@@ -482,10 +482,11 @@ class Phases extends Component {
 
 	toggleEditablePhase(pk) {
 		if (this.state.editablePhase === pk) {
-			this.setState({editablePhase:false});
+			this.setState({editablePhase:false, title:null});
 		}
 		else {
-			this.setState({editablePhase:pk});
+			var title = this.state.phases[this.state.phases.map(e => e.pk).indexOf(pk)].title
+			this.setState({editablePhase:pk, title:title});
 		}
 	}
 
@@ -531,9 +532,10 @@ class Phases extends Component {
 						<ActiveEditDeleteListItem 
 							toggle={this.toggleEditablePhase} 
 							pk={phase.pk} 
-							title={phase.title} 
+							title={this.state.title} 
 							onSubmit={this.cleanData} 
-							handleChange={this.handleChange} />
+							handleChange={this.handleChange} 
+							/>
 					</li>
 
 					)
