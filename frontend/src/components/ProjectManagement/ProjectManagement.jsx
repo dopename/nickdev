@@ -61,17 +61,17 @@ export default class ProjectManagement extends Component {
 
 	render() {
 
-	const homeScreen = ( 
-				<div className="row">
-					<div className="col-lg-6">
-						<h2>Working on an existing project?</h2>
-						<Button outline size="md" color="success" onClick={ () => this.changeView('existing') }>Click here</Button>
+		const homeScreen = ( 
+					<div className="row">
+						<div className="col-lg-6">
+							<h2>Working on an existing project?</h2>
+							<Button outline size="md" color="success" onClick={ () => this.changeView('existing') }>Click here</Button>
+						</div>
+						<div className="col-lg-6">
+							<h2>Starting a new project?</h2>
+							<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
+						</div>
 					</div>
-					<div className="col-lg-6">
-						<h2>Starting a new project?</h2>
-						<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
-					</div>
-				</div>
 		
 		)
 		return (
@@ -180,12 +180,12 @@ class NormalList extends Component {
 					<div className="row">
 						<h4 key={"project" + project.pk} 
 							onClick={ () => {this.props.selectProject(project.pk)} } 
-							className="list-group-item btn-outline-info pointer-hand col-11">
+							className="list-group-item btn-outline-info pointer-hand col-11 p-1">
 							{project.title}
 						</h4>
 						<h4 key={"projectd" + project.pk}
 							onClick={() => {this.props.deleteProject(project.pk, project.title)} }
-							className="list-group-item btn-outline-danger pointer-hand col-1">
+							className="list-group-item btn-outline-danger pointer-hand col-1 p-1">
 							<i className="fa fa-trash"></i>
 						</h4>
 					</div>
