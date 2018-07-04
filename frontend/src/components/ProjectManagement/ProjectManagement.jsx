@@ -250,6 +250,7 @@ class NormalList extends Component {
 				</li>)
 			}
 			else {
+			renderProjects.push(
 				<li>
 					<form onSubmit={this.cleanData}>
 						<div className="row">
