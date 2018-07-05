@@ -38,14 +38,14 @@ export function updateAPICall(pk, data, model, completeFunction) {
 	})
 }
 
-export function createAPICall(data, model, completeFunction) {
+export function createAPICall(data, model, token) {
 	const url = "/api/" + model + "/"
 
 	return fetch(url, {
 		method:'post',
 		headers: {
 			"content-type":"application/json",
-			Authorization: `JWT ${localStorage.getItem('token')}`,
+			Authorization: "JWT " + token,
 		},
 		body:JSON.stringify(data)
 	})
