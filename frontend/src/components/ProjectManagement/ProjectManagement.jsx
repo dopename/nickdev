@@ -3,6 +3,7 @@ import { Button, ButtonGroup } from 'reactstrap';
 //import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './ProjectManagement.css';
+import { deleteAPICall, updateAPICall, createAPICall, fetchListAPICall } from '../../helper/helper'
 
 export default class ProjectManagement extends Component {
 	constructor(props) {
@@ -22,16 +23,17 @@ export default class ProjectManagement extends Component {
 	}
 
 	submitNewProject(data) {
-		const url = "/api/project/"
+		// const url = "/api/project/"
 
-		fetch(url, {
-			method:'post',
-			headers: {
-				"content-type":"application/json",
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			},
-			body:JSON.stringify(data)
-		})
+		// fetch(url, {
+		// 	method:'post',
+		// 	headers: {
+		// 		"content-type":"application/json",
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 	},
+		// 	body:JSON.stringify(data)
+		// })
+		createAPICall(data, "projcet")
 		.then(response => {
 			if (response.ok) {
 				this.props.verifyToken();
