@@ -1,20 +1,15 @@
 
 
-export function deleteAPICall(pk, title, model, completeFunction) {
+export function deleteAPICall(pk, title, model, token) {
 	const url = "/api/destroy/" + model + "/" + pk + "/"
 
 	var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
 
 	if (confirmed) {
-		fetch(url, {
+		return fetch(url, {
 			method:"delete",
 			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			}
-		})
-		.then(response => {
-			if (response.ok) {
-				completeFunction();
+				Authorization: "JWT " + token,
 			}
 		})
 	}

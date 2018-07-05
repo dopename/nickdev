@@ -34,6 +34,7 @@ export default class ProjectManagement extends Component {
 		// 	body:JSON.stringify(data)
 		// })
 		var APIResponse = createAPICall(data, "project", localStorage.getItem('token'))
+
 		APIResponse
 		.then(response => {
 			if (response.ok) {
@@ -44,22 +45,24 @@ export default class ProjectManagement extends Component {
 	}
 
 	deleteProject(pk, title) {
-		const url = "/api/destroy/project/" + pk + "/"
+		// const url = "/api/destroy/project/" + pk + "/"
 
-		var confirmed = window.confirm("Are you sure you want to delete the following project: " + title +"?");
-		if (confirmed) {
-			fetch(url, {
-				method:"delete",
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				}
-			})
-			.then(response => {
-				if (response.ok) {
-					this.props.verifyToken();
-				}
-			})
-		}
+		// var confirmed = window.confirm("Are you sure you want to delete the following project: " + title +"?");
+		// if (confirmed) {
+		// 	fetch(url, {
+		// 		method:"delete",
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		}
+		// 	})
+		var APIResponse = deleteAPICall(pk, title, "project", localStorage.getItem('token'))
+		
+		APIResponse
+		.then(response => {
+			if (response.ok) {
+				this.props.verifyToken();
+			}
+		})
 	}
 
 	render() {
