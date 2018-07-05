@@ -4,7 +4,6 @@ import { Button, ButtonGroup } from 'reactstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './ProjectManagement.css';
 import { deleteAPICall, updateAPICall, createAPICall, fetchListAPICall } from '../../helper/helper'
-import { HashRouter, Switch, Route } from 'react-router-dom';
 
 export default class ProjectManagement extends Component {
 	constructor(props) {
@@ -46,47 +45,30 @@ export default class ProjectManagement extends Component {
 
 	render() {
 
-					// 		<div className="row">
-					// 	<div className="col-lg-6">
-					// 		<h2>Working on an existing project?</h2>
-					// 		<Button outline size="md" color="success" onClick={ () => this.changeView('existing') }>Click here</Button>
-					// 	</div>
-					// 	<div className="col-lg-6">
-					// 		<h2>Starting a new project?</h2>
-					// 		<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
-					// 	</div>
-					// </div>
-
 		const homeScreen = ( 
 					<div className="row">
 						<div className="col-lg-6">
 							<h2>Working on an existing project?</h2>
-							<Button outline size="md" color="success" onClick={ () => this.props.history.push('/existing') }>Click here</Button>
+							<Button outline size="md" color="success" onClick={ () => this.changeView('existing') }>Click here</Button>
 						</div>
 						<div className="col-lg-6">
 							<h2>Starting a new project?</h2>
-							<Button outline size="md" color="success" onClick={ () => this.props.history.push('/new') }>Click here</Button>
+							<Button outline size="md" color="success" onClick={ () => this.changeView('new') }>Click here</Button>
 						</div>
 					</div>
 		
 		)
 		return (
 			<div>
-				<HashRouter>
-					<Switch>
-						<Route path="/new" render={() => <NewProject changeView={this.changeView} onFormSubmit={this.createProject} /> } />
-						<Route path="/" render={() => homeScreen} />
-						<Route path="/existing" render={() => <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> } />
-					</Switch>
-				</HashRouter>
+				<Button outline className="text-center mb-3" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
+				{this.state.view === 'home' ? homeScreen : null }
+				{this.state.view === 'existing' ? <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> : null }
+				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.createProject} /> : null }
 			</div>
 		)
 	}
 }
-					//	<Button outline className="text-center mb-3" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
-				// {this.state.view === 'home' ? homeScreen : null }
-				// {this.state.view === 'existing' ? <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> : null }
-				// {this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.createProject} /> : null }
+
 
 class ExistingProjects extends Component {
 	constructor(props) {
