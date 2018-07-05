@@ -155,7 +155,7 @@ class ExistingProjects extends Component {
 		// })
 		var APIResponse = updateAPICall(pk, data, "project", localStorage.getItem('token'))
 
-		APIResponse
+		//APIResponse
 		.then(response => {
 			if (response.ok) {
 				this.fetchProjects();
