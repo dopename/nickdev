@@ -14,7 +14,7 @@ export default class ProjectManagement extends Component {
 		}
 
 		this.changeView = this.changeView.bind(this);
-		this.submitNewProject = this.submitNewProject.bind(this);
+		this.createProject = this.createProject.bind(this);
 		this.deleteProject = this.deleteProject.bind(this);
 	}
 
