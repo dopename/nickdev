@@ -244,7 +244,7 @@ class EditDeleteListItem extends Component {
 						</h4>
 						<h4 key={"project" + this.props.pk} 
 							onClick={ () => {this.props.select(this.props.pk)} } 
-							className={"list-group-item pointer-hand p-1 col-10 btn-outline-" + this.props.color}>
+							className={"list-group-item pointer-hand p-1 col-10 btn-outline-" + this.props.color + (this.props.selected && this.props.selected === this.props.pk ? " active" : "")}>
 							{this.props.title}
 						</h4>
 						<h4 key={"projectd" + this.props.pk}
@@ -454,6 +454,7 @@ class Phases extends Component {
 								select={this.toggleActivePhase} 
 								delete={this.deletePhase} 
 								color="success"
+								selected={this.props.activePhase}
 								title={phase.title}
 								pk={phase.pk}
 							/>
