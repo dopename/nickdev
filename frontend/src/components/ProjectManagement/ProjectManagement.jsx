@@ -23,17 +23,7 @@ export default class ProjectManagement extends Component {
 	}
 
 	createProject(data) {
-		// const url = "/api/project/"
-
-		// fetch(url, {
-		// 	method:'post',
-		// 	headers: {
-		// 		"content-type":"application/json",
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 	},
-		// 	body:JSON.stringify(data)
-		// })
-		var APIResponse = createAPICall(data, "project", localStorage.getItem('token'))
+		var APIResponse = createAPICall("project", data, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {
@@ -44,17 +34,7 @@ export default class ProjectManagement extends Component {
 	}
 
 	deleteProject(pk, title) {
-		// const url = "/api/destroy/project/" + pk + "/"
-
-		// var confirmed = window.confirm("Are you sure you want to delete the following project: " + title +"?");
-		// if (confirmed) {
-		// 	fetch(url, {
-		// 		method:"delete",
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		}
-		// 	})
-		var APIResponse = deleteAPICall(pk, title, "project", localStorage.getItem('token'))
+		var APIResponse = deleteAPICall("project", pk, title, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {
@@ -115,17 +95,6 @@ class ExistingProjects extends Component {
 	}
 
 	fetchProjects() {
-		// const url = "https://www.nicksdevenv.com/api/project/"
-
-		// var queries = this.props.projects.map((project) => {
-		// 	return fetch(url + project + '/', {
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 			"Content-Type":"application/json",
-		// 		}
-		// 	})
-		// 	.then(response => response.json())
-		// })
 		var APIResponse = fetchListAPICall("project", this.props.projects, localStorage.getItem('token'))
 
 		Promise.all(APIResponse).then( (data) => { this.setState({projects:data}) })
@@ -141,17 +110,7 @@ class ExistingProjects extends Component {
 	}
 
 	updateProject(pk, data) {
-		// const url = "https://www.nicksdevenv.com/api/project/" + pk + "/"
-
-		// fetch(url, {
-		// 	method:'put',
-		// 	headers: {
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		"Content-Type":"application/json",
-		// 	},
-		// 	body:JSON.stringify(data)
-		// })
-		var APIResponse = updateAPICall(pk, data, "project", localStorage.getItem('token'), false)
+		var APIResponse = updateAPICall("project", pk, data, localStorage.getItem('token'), false)
 
 		//APIResponse
 		.then(response => {
@@ -393,17 +352,8 @@ class Phases extends Component {
 			title:this.state.title,
 			order:this.state.order,
 		}
-		// const url = "/api/phase/"
 
-		// fetch(url, {
-		// 	method:'post',
-		// 	headers: {
-		// 		"content-type":"application/json",
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 	},
-		// 	body:JSON.stringify(formData)
-		// })
-		var APIResponse = createAPICall(formData, "phase", localStorage.getItem('token'))
+		var APIResponse = createAPICall("phase", formData, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {
@@ -419,17 +369,7 @@ class Phases extends Component {
 	}
 
 	deletePhase(pk, title) {
-		// const url = "/api/destroy/phase/" + pk + "/"
-
-		// var confirmed = window.confirm("Are you sure you want to delete the following phase: " + title +"?");
-		// if (confirmed) {
-		// 	fetch(url, {
-		// 		method:"delete",
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		}
-		// 	})
-		var APIResponse = deleteAPICall(pk, title, "phase", localStorage.getItem('token'))
+		var APIResponse = deleteAPICall("phase", pk, title, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {
@@ -439,17 +379,7 @@ class Phases extends Component {
 	}
 
 	updatePhase(pk, data) {
-		// const url = "https://www.nicksdevenv.com/api/update/phase/" + pk + "/"
-
-		// fetch(url, {
-		// 	method:'put',
-		// 	headers: {
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		"Content-Type":"application/json",
-		// 	},
-		// 	body:JSON.stringify(data)
-		// })
-		var APIResponse = updateAPICall(pk, data, "phase", localStorage.getItem('token'), true)
+		var APIResponse = updateAPICall("phase", pk, data, localStorage.getItem('token'), true)
 
 		.then(response => {
 			if (response.ok) {
@@ -471,15 +401,6 @@ class Phases extends Component {
 
 
 	fetchPhases() {
-		// const url = "https://www.nicksdevenv.com/api/phase/"
-		// var queries = this.props.phases.map((phase) => {
-		// 	return fetch(url + phase + "/", {
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		}
-		// 	})
-		// 	.then(response => response.json())
-		// })
 		var APIResponse = fetchListAPICall("phase", this.props.phases, localStorage.getItem('token'))
 
 		Promise.all(APIResponse).then((data) => { this.setState({phases:data}) })
@@ -630,16 +551,6 @@ class PhaseObjectives extends Component {
 	}
 
 	fetchObjectives(objectives) {
-		// const url = "https://www.nicksdevenv.com/api/objective/"
-
-		// var queries = this.props.objectives.map((objective) => {
-		// 	return fetch(url + objective + "/", {
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		}
-		// 	})
-		// 	.then(response => response.json())
-		// })
 		var APIResponse = fetchListAPICall("objective", this.props.objectives, localStorage.getItem('token'))
 
 		Promise.all(APIResponse).then((data) => { this.setState({objectives:data, order:Math.max.apply(Math, data.map((o) => {return o.order })) +1 }) })
@@ -675,15 +586,7 @@ class PhaseObjectives extends Component {
 		// var duplicateOrder = this.checkOrderDuplicate(submitData['order'])
 
 		// if (!duplicateOrder) {
-		// fetch(url, {
-		// 	method:'post',
-		// 	headers: {
-		// 		"content-type":"application/json",
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 	},
-		// 	body: JSON.stringify(submitData)
-		// })
-		var APIResponse = createAPICall(submitData, "objective", localStorage.getItem('token'))
+		var APIResponse = createAPICall("objective", submitData, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {
@@ -725,18 +628,7 @@ class PhaseObjectives extends Component {
 			obj.completed = !obj.completed
 		}
 
-		// const url = "https://www.nicksdevenv.com/api/objective/"
-
-		// fetch(url + pk + "/", {
-		// 	method:'put',
-		// 	headers: {
-		// 		"content-type":"application/json",
-		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 	},
-		// 	body:JSON.stringify(obj)
-
-		// })
-		var APIResponse = updateAPICall(pk, obj, "objective", localStorage.getItem('token'), false)
+		var APIResponse = updateAPICall("objective", pk, obj, localStorage.getItem('token'), false)
 
 		.then(response => {
 			if (response.ok) {
@@ -746,18 +638,7 @@ class PhaseObjectives extends Component {
 	}
 
 	deleteObjective(pk, title) {
-		// const url = "/api/destroy/objective/" + pk + "/"
-
-		// var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
-
-		// if (confirmed) {
-		// 	fetch(url, {
-		// 		method:"delete",
-		// 		headers: {
-		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
-		// 		}
-		// 	})
-		var APIResponse = deleteAPICall(pk, title, "objective", localStorage.getItem('token'))
+		var APIResponse = deleteAPICall("objective", pk, title, localStorage.getItem('token'))
 
 		.then(response => {
 			if (response.ok) {

@@ -1,6 +1,6 @@
 
 
-export function deleteAPICall(pk, title, model, token) {
+export function deleteAPICall(model, pk, title, token) {
 	const url = "/api/destroy/" + model + "/" + pk + "/"
 
 	var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
@@ -15,7 +15,7 @@ export function deleteAPICall(pk, title, model, token) {
 	}
 }
 
-export function updateAPICall(pk, data, model, token, updateInURL) {
+export function updateAPICall(model, pk, data, token, updateInURL) {
 	var url = "/api/" + model + "/" + pk + "/"
 
 	if (updateInURL) {
@@ -32,7 +32,7 @@ export function updateAPICall(pk, data, model, token, updateInURL) {
 	})
 }
 
-export function createAPICall(data, model, token) {
+export function createAPICall(model, data, token) {
 	const url = "/api/" + model + "/"
 
 	return fetch(url, {
