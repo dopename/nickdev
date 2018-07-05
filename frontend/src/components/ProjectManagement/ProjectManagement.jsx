@@ -241,7 +241,7 @@ class NormalList extends Component {
 						<EditDeleteListItem 
 							edit={this.toggleEditable} 
 							select={this.props.selectProject} 
-							delete={this.cleanData} 
+							delete={this.props.deleteProject} 
 							color="info"
 							title={project.title}
 							pk={project.pk}
