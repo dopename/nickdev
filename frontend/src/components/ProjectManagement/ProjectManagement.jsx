@@ -454,7 +454,7 @@ class Phases extends Component {
 								select={this.toggleActivePhase} 
 								delete={this.deletePhase} 
 								color="success"
-								selected={this.props.activePhase}
+								selected={this.state.activePhase}
 								title={phase.title}
 								pk={phase.pk}
 							/>
