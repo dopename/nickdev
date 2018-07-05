@@ -46,17 +46,18 @@ export function createAPICall(data, model, token) {
 	})
 }
 
-export function fetchListAPICall(model, list, completeFunction) {
+export function fetchListAPICall(model, list, token) {
 	const url = "https://www.nicksdevenv.com/api/" + model + "/"
 
 	var queries = list.map((pk) => {
 		return fetch(url + pk + '/', {
 			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
+				Authorization: "JWT " + token,
 				"Content-Type":"application/json",
 			}
 		})
 		.then(response => response.json())
 	})
-	Promise.all(queries).then( (data) => { completeFunction(data) })
+	
+	return queries
 }

@@ -22,7 +22,7 @@ export default class ProjectManagement extends Component {
 		this.setState({view:view});
 	}
 
-	submitNewProject(data) {
+	createProject(data) {
 		// const url = "/api/project/"
 
 		// fetch(url, {
@@ -56,7 +56,7 @@ export default class ProjectManagement extends Component {
 		// 		}
 		// 	})
 		var APIResponse = deleteAPICall(pk, title, "project", localStorage.getItem('token'))
-		
+
 		APIResponse
 		.then(response => {
 			if (response.ok) {
@@ -85,7 +85,7 @@ export default class ProjectManagement extends Component {
 				<Button outline className="text-center mb-3" size="lg" color="dark" onClick={() => {this.changeView('home')}}>Project Management Home</Button>
 				{this.state.view === 'home' ? homeScreen : null }
 				{this.state.view === 'existing' ? <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> : null }
-				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.submitNewProject} /> : null }
+				{this.state.view === 'new' ? <NewProject changeView={this.changeView} onFormSubmit={this.createProject} /> : null }
 			</div>
 		)
 	}
@@ -117,18 +117,20 @@ class ExistingProjects extends Component {
 	}
 
 	fetchProjects() {
-		const url = "https://www.nicksdevenv.com/api/project/"
+		// const url = "https://www.nicksdevenv.com/api/project/"
 
-		var queries = this.props.projects.map((project) => {
-			return fetch(url + project + '/', {
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-					"Content-Type":"application/json",
-				}
-			})
-			.then(response => response.json())
-		})
-		Promise.all(queries).then( (data) => { this.setState({projects:data}) })
+		// var queries = this.props.projects.map((project) => {
+		// 	return fetch(url + project + '/', {
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 			"Content-Type":"application/json",
+		// 		}
+		// 	})
+		// 	.then(response => response.json())
+		// })
+		var APIResponse = fetchListAPICall("project", this.props.projects, localStorage.getItem('token'))
+
+		Promise.all(APIResponse).then( (data) => { this.setState({projects:data}) })
 	}
 
 	selectProject(pk) {
