@@ -33,7 +33,7 @@ export default class ProjectManagement extends Component {
 		// 	},
 		// 	body:JSON.stringify(data)
 		// })
-		var APIResponse = createAPICall(data, "projcet", localStorage.getItem('token'))
+		var APIResponse = createAPICall(data, "project", localStorage.getItem('token'))
 		APIResponse
 		.then(response => {
 			if (response.ok) {
