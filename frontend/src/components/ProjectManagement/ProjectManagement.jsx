@@ -75,7 +75,7 @@ export default class ProjectManagement extends Component {
 				<HashRouter>
 					<Switch>
 						<Route path="/new" render={() => <NewProject changeView={this.changeView} onFormSubmit={this.createProject} /> } />
-						<Route path="/home" component={homeScreen} />
+						<Route path="/" render={() => homeScreen} />
 						<Route path="/existing" render={() => <ExistingProjects deleteProject={this.deleteProject} projects={this.props.user.projects} /> } />
 					</Switch>
 				</HashRouter>
