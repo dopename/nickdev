@@ -15,8 +15,13 @@ export function deleteAPICall(pk, title, model, token) {
 	}
 }
 
-export function updateAPICall(pk, data, model, token) {
-	const url = "/api/" + model + "/" + pk + "/"
+export function updateAPICall(pk, data, model, token, updateInURL) {
+	if (updateInURL) {
+		const url = "/api/update/" + model + "/" + pk + "/"
+	}
+	else {
+		const url = "/api/" + model + "/" + pk + "/"
+	}
 
 	return fetch(url, {
 		method:'put',

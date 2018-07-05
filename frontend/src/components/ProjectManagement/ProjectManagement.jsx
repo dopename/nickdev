@@ -35,7 +35,6 @@ export default class ProjectManagement extends Component {
 		// })
 		var APIResponse = createAPICall(data, "project", localStorage.getItem('token'))
 
-		APIResponse
 		.then(response => {
 			if (response.ok) {
 				this.props.verifyToken();
@@ -57,7 +56,6 @@ export default class ProjectManagement extends Component {
 		// 	})
 		var APIResponse = deleteAPICall(pk, title, "project", localStorage.getItem('token'))
 
-		APIResponse
 		.then(response => {
 			if (response.ok) {
 				this.props.verifyToken();
@@ -153,7 +151,7 @@ class ExistingProjects extends Component {
 		// 	},
 		// 	body:JSON.stringify(data)
 		// })
-		var APIResponse = updateAPICall(pk, data, "project", localStorage.getItem('token'))
+		var APIResponse = updateAPICall(pk, data, "project", localStorage.getItem('token'), false)
 
 		//APIResponse
 		.then(response => {
@@ -366,7 +364,7 @@ class Phases extends Component {
 			project:this.props.project
 		}
 
-		this.submitPhaseForm = this.submitPhaseForm.bind(this);
+		this.createPhase = this.createPhase.bind(this);
 		this.fetchPhases = this.fetchPhases.bind(this);
 		this.toggleActivePhase = this.toggleActivePhase.bind(this);
 		this.toggleNewPhase = this.toggleNewPhase.bind(this);
@@ -387,7 +385,7 @@ class Phases extends Component {
 		}
 	}
 
-	submitPhaseForm(e) {
+	createPhase(e) {
 		e.preventDefault();
 
 		var formData = {
@@ -395,17 +393,18 @@ class Phases extends Component {
 			title:this.state.title,
 			order:this.state.order,
 		}
+		// const url = "/api/phase/"
 
-		const url = "/api/phase/"
+		// fetch(url, {
+		// 	method:'post',
+		// 	headers: {
+		// 		"content-type":"application/json",
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 	},
+		// 	body:JSON.stringify(formData)
+		// })
+		var APIResponse = createAPICall(formData, "phase", localStorage.getItem('token'))
 
-		fetch(url, {
-			method:'post',
-			headers: {
-				"content-type":"application/json",
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			},
-			body:JSON.stringify(formData)
-		})
 		.then(response => {
 			if (response.ok) {
 				this.setState({
@@ -420,35 +419,38 @@ class Phases extends Component {
 	}
 
 	deletePhase(pk, title) {
-		const url = "/api/destroy/phase/" + pk + "/"
+		// const url = "/api/destroy/phase/" + pk + "/"
 
-		var confirmed = window.confirm("Are you sure you want to delete the following phase: " + title +"?");
-		if (confirmed) {
-			fetch(url, {
-				method:"delete",
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				}
-			})
-			.then(response => {
-				if (response.ok) {
-					this.props.refresh();
-				}
-			})
-		}
+		// var confirmed = window.confirm("Are you sure you want to delete the following phase: " + title +"?");
+		// if (confirmed) {
+		// 	fetch(url, {
+		// 		method:"delete",
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		}
+		// 	})
+		var APIResponse = deleteAPICall(pk, title, "phase", localStorage.getItem('token'))
+
+		.then(response => {
+			if (response.ok) {
+				this.props.refresh();
+			}
+		})
 	}
 
 	updatePhase(pk, data) {
-		const url = "https://www.nicksdevenv.com/api/update/phase/" + pk + "/"
+		// const url = "https://www.nicksdevenv.com/api/update/phase/" + pk + "/"
 
-		fetch(url, {
-			method:'put',
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-				"Content-Type":"application/json",
-			},
-			body:JSON.stringify(data)
-		})
+		// fetch(url, {
+		// 	method:'put',
+		// 	headers: {
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		"Content-Type":"application/json",
+		// 	},
+		// 	body:JSON.stringify(data)
+		// })
+		var APIResponse = updateAPICall(pk, data, "phase", localStorage.getItem('token'), true)
+
 		.then(response => {
 			if (response.ok) {
 				this.props.refresh();
@@ -469,17 +471,18 @@ class Phases extends Component {
 
 
 	fetchPhases() {
-		const url = "https://www.nicksdevenv.com/api/phase/"
-		var queries = this.props.phases.map((phase) => {
-			return fetch(url + phase + "/", {
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				}
-			})
-			.then(response => response.json())
-		})
+		// const url = "https://www.nicksdevenv.com/api/phase/"
+		// var queries = this.props.phases.map((phase) => {
+		// 	return fetch(url + phase + "/", {
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		}
+		// 	})
+		// 	.then(response => response.json())
+		// })
+		var APIResponse = fetchListAPICall("phase", this.props.phases, localStorage.getItem('token'))
 
-		Promise.all(queries).then((data) => { this.setState({phases:data}) })
+		Promise.all(APIResponse).then((data) => { this.setState({phases:data}) })
 	}
 
 	toggleActivePhase(pk) {
@@ -558,7 +561,7 @@ class Phases extends Component {
 		}
 		else {
 			var newForm = (
-					<form className="mt-3" onSubmit={this.submitPhaseForm}>
+					<form className="mt-3" onSubmit={this.createPhase}>
 						<h4 className="text-center">New Phase</h4>
 						<div className="container">
 							<div className="form-group row">
@@ -609,9 +612,9 @@ class PhaseObjectives extends Component {
 		this.toggleActiveObjective = this.toggleActiveObjective.bind(this);
 		this.fetchObjectives = this.fetchObjectives.bind(this);
 		this.toggleNewObjective = this.toggleNewObjective.bind(this);
-		this.submitNewObjective = this.submitNewObjective.bind(this);
+		this.createObjective = this.createObjective.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.completeObjective = this.completeObjective.bind(this);
+		this.updateObjective = this.updateObjective.bind(this);
 		this.deleteObjective = this.deleteObjective.bind(this);
 		//this.checkOrderDuplicate = this.checkOrderDuplicate.bind(this);
 	}
@@ -627,18 +630,19 @@ class PhaseObjectives extends Component {
 	}
 
 	fetchObjectives(objectives) {
-		const url = "https://www.nicksdevenv.com/api/objective/"
+		// const url = "https://www.nicksdevenv.com/api/objective/"
 
-		var queries = this.props.objectives.map((objective) => {
-			return fetch(url + objective + "/", {
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				}
-			})
-			.then(response => response.json())
-		})
+		// var queries = this.props.objectives.map((objective) => {
+		// 	return fetch(url + objective + "/", {
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		}
+		// 	})
+		// 	.then(response => response.json())
+		// })
+		var APIResponse = fetchListAPICall("objective", this.props.objectives, localStorage.getItem('token'))
 
-		Promise.all(queries).then((data) => { this.setState({objectives:data, order:Math.max.apply(Math, data.map((o) => {return o.order })) +1 }) })
+		Promise.all(APIResponse).then((data) => { this.setState({objectives:data, order:Math.max.apply(Math, data.map((o) => {return o.order })) +1 }) })
 	}
 
 	toggleActiveObjective(pk) {
@@ -654,9 +658,9 @@ class PhaseObjectives extends Component {
 		this.setState({createNew:!this.state.createNew});
 	}
 
-	submitNewObjective(e) {
+	createObjective(e) {
 		e.preventDefault();
-		const url = "https://www.nicksdevenv.com/api/objective/"
+		// const url = "https://www.nicksdevenv.com/api/objective/"
 
 		var submitData = {
 			title:this.state.title,
@@ -671,14 +675,16 @@ class PhaseObjectives extends Component {
 		// var duplicateOrder = this.checkOrderDuplicate(submitData['order'])
 
 		// if (!duplicateOrder) {
-		fetch(url, {
-			method:'post',
-			headers: {
-				"content-type":"application/json",
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			},
-			body: JSON.stringify(submitData)
-		})
+		// fetch(url, {
+		// 	method:'post',
+		// 	headers: {
+		// 		"content-type":"application/json",
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 	},
+		// 	body: JSON.stringify(submitData)
+		// })
+		var APIResponse = createAPICall(submitData, "objective", localStorage.getItem('token'))
+
 		.then(response => {
 			if (response.ok) {
 				this.setState({
@@ -710,7 +716,7 @@ class PhaseObjectives extends Component {
 	// 	return false
 	// }
 
-	completeObjective(obj, complete) {
+	updateObjective(obj, complete) {
 		const pk = obj.pk
 
 		delete obj.pk
@@ -719,17 +725,19 @@ class PhaseObjectives extends Component {
 			obj.completed = !obj.completed
 		}
 
-		const url = "https://www.nicksdevenv.com/api/objective/"
+		// const url = "https://www.nicksdevenv.com/api/objective/"
 
-		fetch(url + pk + "/", {
-			method:'put',
-			headers: {
-				"content-type":"application/json",
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-			},
-			body:JSON.stringify(obj)
+		// fetch(url + pk + "/", {
+		// 	method:'put',
+		// 	headers: {
+		// 		"content-type":"application/json",
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 	},
+		// 	body:JSON.stringify(obj)
 
-		})
+		// })
+		var APIResponse = updateAPICall(pk, obj, "objective", localStorage.getItem('token'), false)
+
 		.then(response => {
 			if (response.ok) {
 				this.fetchObjectives();
@@ -738,23 +746,25 @@ class PhaseObjectives extends Component {
 	}
 
 	deleteObjective(pk, title) {
-		const url = "/api/destroy/objective/" + pk + "/"
+		// const url = "/api/destroy/objective/" + pk + "/"
 
-		var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
+		// var confirmed = window.confirm("Are you sure you want to delete the following objective: " + title +"?");
 
-		if (confirmed) {
-			fetch(url, {
-				method:"delete",
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`,
-				}
-			})
-			.then(response => {
-				if (response.ok) {
-					this.props.refresh();
-				}
-			})
-		}
+		// if (confirmed) {
+		// 	fetch(url, {
+		// 		method:"delete",
+		// 		headers: {
+		// 			Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		}
+		// 	})
+		var APIResponse = deleteAPICall(pk, title, "objective", localStorage.getItem('token'))
+
+		.then(response => {
+			if (response.ok) {
+				this.props.refresh();
+			}
+		})
+		// }
 	}
 
 	handleChange(event) {
@@ -776,7 +786,7 @@ class PhaseObjectives extends Component {
 					>
 						<span class="badge badge-success badge-pill float-left">{o.order}</span>{o.title}<span class="badge badge-info badge-pill float-right">{o.priority ? o.priority : "N/A"}</span>
 					</h5>
-					{this.state.activeObjective === o.pk ? <ObjectiveInfo deleteObjective={this.deleteObjective} completeObjective={this.completeObjective} o={o} /> : null }
+					{this.state.activeObjective === o.pk ? <ObjectiveInfo deleteObjective={this.deleteObjective} updateObjective={this.updateObjective} o={o} /> : null }
 				</li>
 			)
 		})
@@ -784,7 +794,7 @@ class PhaseObjectives extends Component {
 //{this.state.orderError ? <h5 className="alert alert-danger" role="alert">Two objectives can't be done in the same order!</h5> : null}
 
 		const newForm = (
-			<form className="mt-3" onSubmit={this.submitNewObjective}>
+			<form className="mt-3" onSubmit={this.createObjective}>
 				<h4 className="text-center">New Objective</h4>
 				<div className="form-group row">
 					<div className="col-lg-5">
@@ -876,7 +886,7 @@ class ObjectiveInfo extends Component {
 
 		this.setState({editable:false});
 
-		this.props.completeObjective(obj, false);
+		this.props.updateObjective(obj, false);
 	}
 
 
@@ -899,7 +909,7 @@ class ObjectiveInfo extends Component {
 				<ButtonGroup className={"mb-2" + (this.state.mobile ? " btn-block btn-group-vertical" : "")}>
 					<Button outline size="md" color="warning" onClick={() => this.toggleEditable()}>Edit Objective</Button>
 					<Button outline size="md" color="danger" onClick={() => this.props.deleteObjective(this.props.o.pk, this.props.o.title)}>Delete Objective</Button>
-					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.completeObjective(this.props.o, true)} } color="primary">Mark Complete</Button>}
+					{this.props.o.completed ? <Button outline size="md" onClick={() => {this.props.updateObjective(this.props.o, true)} } color="secondary">Mark Incomplete</Button> : <Button outline size="md" onClick={() => {this.props.updateObjective(this.props.o, true)} } color="primary">Mark Complete</Button>}
 				</ButtonGroup>
 			</div>
 			)
