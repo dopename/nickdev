@@ -143,16 +143,18 @@ class ExistingProjects extends Component {
 	}
 
 	updateProject(pk, data) {
-		const url = "https://www.nicksdevenv.com/api/project/" + pk + "/"
+		// const url = "https://www.nicksdevenv.com/api/project/" + pk + "/"
 
-		fetch(url, {
-			method:'put',
-			headers: {
-				Authorization: `JWT ${localStorage.getItem('token')}`,
-				"Content-Type":"application/json",
-			},
-			body:JSON.stringify(data)
-		})
+		// fetch(url, {
+		// 	method:'put',
+		// 	headers: {
+		// 		Authorization: `JWT ${localStorage.getItem('token')}`,
+		// 		"Content-Type":"application/json",
+		// 	},
+		// 	body:JSON.stringify(data)
+		// })
+		var APIResponse = updateAPICall(pk, data, "project", localStorage.getItem('token'))
+		
 		.then(response => {
 			if (response.ok) {
 				this.fetchProjects();

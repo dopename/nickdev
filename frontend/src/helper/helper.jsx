@@ -15,21 +15,16 @@ export function deleteAPICall(pk, title, model, token) {
 	}
 }
 
-export function updateAPICall(pk, data, model, completeFunction) {
+export function updateAPICall(pk, data, model, token) {
 	const url = "/api/update/" + model + "/" + pk + "/"
 
-	fetch(url, {
+	return fetch(url, {
 		method:'put',
 		headers: {
-			Authorization: `JWT ${localStorage.getItem('token')}`,
+			Authorization: "JWT " + token,
 			"Content-Type":"application/json",
 		},
 		body:JSON.stringify(data)
-	})
-	.then(response => {
-		if (response.ok) {
-			completeFunction();
-		}
 	})
 }
 
