@@ -72,8 +72,8 @@ class BaseGoogle(object):
 			return self.create_google_url()
 
 
-class GoogleServices(BaseGoogle, LoginRequiredMixin):
-	login_url = '/login/'
+class GoogleServices(BaseGoogle):#, LoginRequiredMixin):
+	#login_url = '/login/'
 	
 	#https://www.googleapis.com/auth/drive
 	def get(self, request, *args, **kwargs):

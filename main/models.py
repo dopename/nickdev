@@ -4,7 +4,7 @@ from oauth2client.contrib.django_util.models import CredentialsField
 import datetime
 import os
 
-from rest_framework.reverse import reverse as api_reverse
+#from rest_framework.reverse import reverse as api_reverse
 
 class CustomUser(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
