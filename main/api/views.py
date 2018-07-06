@@ -16,7 +16,7 @@ from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 import datetime
 import dateutil.relativedelta
 
-from google_auth_oauthlib import Flow
+from google_auth_oauthlib.flow import Flow
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from google.auth.transport.requests import AuthorizedSession
 import google.auth.transport.requests
