@@ -20,7 +20,7 @@ from google_auth_oauthlib.flow import Flow
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from google.auth.transport.requests import AuthorizedSession
 import google.auth.transport.requests
-from ..nickdev import settings
+from nickdev import settings
 
 
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
