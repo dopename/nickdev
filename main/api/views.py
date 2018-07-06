@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from main.models import CustomUser, UserList, ListItem, Project, Phase, Objective
 from .serializers  import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
