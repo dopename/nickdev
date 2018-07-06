@@ -32,7 +32,7 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token),
     path('token-verify/', verify_jwt_token),
     path('token-refresh/', refresh_jwt_token),
-    path('oauth2/', APIVIEWS.GoogleServices.as_view()),
+    #path('oauth2/', APIVIEWS.GoogleServices.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
