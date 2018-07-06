@@ -163,3 +163,5 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH':True,
     #'JWT_AUTH_COOKIE': 'user'
 }
+
+GOOGLE_OAUTH2_CLIENT_SECRETS_JSON="/home/nick/client_secret.json"

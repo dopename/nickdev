@@ -22,6 +22,7 @@ from rest_framework import views, serializers, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
+from main.api import views as APIVIEWS
 
 
 urlpatterns = [
@@ -31,6 +32,7 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token),
     path('token-verify/', verify_jwt_token),
     path('token-refresh/', refresh_jwt_token),
+    path('oauth2/', APIVIEWS.GoogleServices.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

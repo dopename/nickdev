@@ -13,7 +13,90 @@ from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
 
+import datetime
+import dateutil.relativedelta
+
+from google_auth_oauthlib import Flow
+from oauth2client.contrib.django_util.storage import DjangoORMStorage
+from google.auth.transport.requests import AuthorizedSession
+import google.auth.transport.requests
+from ..nickdev import settings
+
+
 jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
+
+
+class BaseGoogle(object):
+	FLOW = Flow.from_client_secrets_file(
+		settings.GOOGLE_OAUTH2_CLIENT_SECRETS_JSON,
+		scopes=[
+			'https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/contacts',
+			 'https://mail.google.com/'
+			 ],
+		redirect_uri='https://www.nicksdevenv.com/oauth2')
+
+	def create_google_url(self):
+		authorize_url, _ = self.FLOW.authorization_url(prompt='consent')
+		return HttpResponseRedirect(authorize_url)
+		
+	def create_credential(self, access_token):
+		pass
+
+	def retrieve_credential(self, user_id, authorize=False, scope=[]):
+		storage = DjangoORMStorage(Staff, 'id', user_id.staff.id, 'credential')
+		credential = storage.get()
+		credential = self._check_credential(credential, scope)
+		if authorize:
+			credential = self._authorize_credential(credential)
+		return credential
+		
+	def auth(self, credential):
+		return self._authorize_credential(credential)
+
+	def _refresh_credential(self, credential):
+		request = google.auth.transport.requests.Request()
+		credential.refresh(request)
+		return credential
+
+	def _authorize_credential(self, credential):
+		http = AuthorizedSession(credential)
+		return http
+
+	def _check_credential(self, credential, scope):
+		if credential is not None and credential.has_scopes(scope):
+			if credential.expired or not credential.valid:
+				credential = self._refresh_credential(credential)
+			return credential
+		else:
+			return self.create_google_url()
+
+
+class GoogleServices(BaseGoogle, LoginRequiredMixin):
+	login_url = '/login/'
+	
+	#https://www.googleapis.com/auth/drive
+	def get(self, request, *args, **kwargs):
+		credential = self.retrieve_credential(request.user, authorize=False)
+		if 'oauth2' in request.path:
+			credential = self.FLOW.fetch_token(code=request.GET['code'])
+			credential = self.FLOW.credentials
+			storage = DjangoORMStorage(Staff, 'id', request.user.staff.id, 'credential')
+			storage.put(credential)
+		elif credential is None:
+			return self.create_google_url()
+
+	def post(self, request, *args, **kwargs):
+		pass
+
+
+def clean_datetime(dt):
+	if dt:
+		clean = dt[:len(data)-6]
+		formatted_dt = datetime.datetime.strptime(clean, '%Y-%m-%dT%H:%M:%S')
+		return formatted_dt
+	else:
+		return datetime.datetime.strptime('2025-01-01T00:00:00', '%Y-%m-%dT%H:%M:%S')
+
 
 class UserAPIView(generics.ListAPIView):
 	serializer_class = UserSerializer

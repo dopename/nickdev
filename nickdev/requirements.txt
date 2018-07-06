@@ -1,0 +1,8 @@
+django
+react 
+react-router-dom
+reactstrap
+create-react-app
+google-auth-oauthlib
+google-api-python-client
+oauth2client

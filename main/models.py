@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from oauth2client.contrib.django_util.models import CredentialsField
 import datetime
 import os
 
@@ -7,6 +8,7 @@ from rest_framework.reverse import reverse as api_reverse
 
 class CustomUser(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	credential = CredentialsField(blank=True, null=True)
 
 	def __str__(self):
 		return self.user.username
