@@ -28,7 +28,7 @@ from main.api.views import GoogleServices
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include("main.api.urls")),
-    path('oauth2/', GoogleServices.as_view()),
+    path('oauth2/', GoogleServices),
     path('', TemplateView.as_view(template_name="index.html")),
     path('token-auth/', obtain_jwt_token),
     path('token-verify/', verify_jwt_token),
