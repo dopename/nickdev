@@ -32,7 +32,7 @@ class Test extends Component {
 				  <tbody>
 					{this.props.list_items.map(note => (
 					  <tr>
-						<td>{note.text}</td>
+						<td>{note.text}, {note.id}</td>
 						<td><button>edit</button></td>
 						<td><button>delete</button></td>
 					  </tr>
@@ -46,7 +46,7 @@ class Test extends Component {
 
 const mapStateToProps = state => {
 	return {
-		list_items: state.list_items
+		list_items: state.test.list_items
 	}
 }
 
