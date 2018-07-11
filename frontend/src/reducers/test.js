@@ -5,9 +5,9 @@ const initialState = {
 export default function test(state = initialState, action) {
 	switch (action.type) {
 		case "ADD_ITEM":
-			var returnState = state
-			var addData = {id:action.id, text:action.text}
-			returnState.list_items = [...returnState.list_items, addData]
+			var returnState = state;
+			var addData = {id:action.id, text:action.text};
+			returnState.list_items.push(addData);
 			return returnState
 		default:
 			return state;
