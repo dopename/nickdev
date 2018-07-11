@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/Home'
-import Test from './components/test/Test'
+import Test from './components/Test/Test'
 
 import { Provider } from "react-redux";
 import nickApp from "./reducers/index";
