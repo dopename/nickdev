@@ -1,4 +1,4 @@
-import * from "./actionTypes.js";
+// import * from "./actionTypes.js";
 
 export const verifyToken = (token) => {
 	return {
