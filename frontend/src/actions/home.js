@@ -13,3 +13,10 @@ export const refreshToken = (token) => {
 		token,
 	}
 }
+
+export const authToken = (username, password) => {
+	return {
+		type: "AUTH_TOKEN",
+		data
+	}
+}

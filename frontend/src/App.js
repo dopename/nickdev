@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/Home'
-import Test from './components/Test/Test'
 
 import { Provider } from "react-redux";
 import nickApp from "./reducers/index";
@@ -15,12 +14,11 @@ class App extends Component {
     return (
       <div className="App">
       <Provider store={store}>
-       	<Test />
+        <Home />
       </Provider>
       </div>
     );
   }
 }
 
-// <Home />
 export default App;
